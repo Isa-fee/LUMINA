@@ -1,0 +1,199 @@
+from sqlmodel import select
+from models import Usuario, Livro, Emprestimo
+
+
+# =========================
+# USUARIOS
+# =========================
+
+def criar_usuario(session, usuario):
+
+    novo_usuario = Usuario(
+        nome=usuario.nome,
+        email=usuario.email
+    )
+
+    session.add(novo_usuario)
+
+    session.commit()
+
+    session.refresh(novo_usuario)
+
+    return novo_usuario
+
+
+def listar_usuarios(session):
+
+    usuarios = session.exec(select(Usuario)).all()
+
+    return usuarios
+
+
+def atualizar_usuario(session, usuario_id, dados):
+
+    usuario = session.get(Usuario, usuario_id)
+
+    if not usuario:
+        return {"mensagem": "Usuário não encontrado"}
+
+    for chave, valor in dados.dict().items():
+        setattr(usuario, chave, valor)
+
+    session.add(usuario)
+
+    session.commit()
+
+    session.refresh(usuario)
+
+    return usuario
+
+
+def deletar_usuario(session, usuario_id):
+
+    usuario = session.get(Usuario, usuario_id)
+
+    if not usuario:
+        return {"mensagem": "Usuário não encontrado"}
+
+    session.delete(usuario)
+
+    session.commit()
+
+    return {"mensagem": "Usuário deletado"}
+
+
+# =========================
+# LIVROS
+# =========================
+
+def criar_livro(session, livro):
+
+    novo_livro = Livro(
+        titulo=livro.titulo,
+        autor=livro.autor,
+        categoria=livro.categoria
+    )
+
+    session.add(novo_livro)
+
+    session.commit()
+
+    session.refresh(novo_livro)
+
+    return novo_livro
+
+
+def listar_livros(session):
+
+    livros = session.exec(select(Livro)).all()
+
+    return livros
+
+
+def atualizar_livro(session, livro_id, dados):
+
+    livro = session.get(Livro, livro_id)
+
+    if not livro:
+        return {"mensagem": "Livro não encontrado"}
+
+    for chave, valor in dados.dict().items():
+        setattr(livro, chave, valor)
+
+    session.add(livro)
+
+    session.commit()
+
+    session.refresh(livro)
+
+    return livro
+
+
+def deletar_livro(session, livro_id):
+
+    livro = session.get(Livro, livro_id)
+
+    if not livro:
+        return {"mensagem": "Livro não encontrado"}
+
+    session.delete(livro)
+
+    session.commit()
+
+    return {"mensagem": "Livro deletado"}
+
+
+# =========================
+# EMPRESTIMOS
+# =========================
+
+def criar_emprestimo(session, emprestimo):
+
+    livro = session.get(Livro, emprestimo.livro_id)
+
+    if not livro:
+        return {"mensagem": "Livro não encontrado"}
+
+    if livro.disponivel == False:
+        return {"mensagem": "Livro indisponível"}
+
+    novo_emprestimo = Emprestimo(
+        usuario_id=emprestimo.usuario_id,
+        livro_id=emprestimo.livro_id
+    )
+
+    livro.disponivel = False
+
+    session.add(novo_emprestimo)
+
+    session.add(livro)
+
+    session.commit()
+
+    session.refresh(novo_emprestimo)
+
+    return novo_emprestimo
+
+def atualizar_emprestimo(session, emprestimo_id, dados):
+
+    emprestimo = session.get(Emprestimo, emprestimo_id)
+
+    if not emprestimo:
+        return {"mensagem": "Empréstimo não encontrado"}
+
+    for chave, valor in dados.dict().items():
+        setattr(emprestimo, chave, valor)
+
+    session.add(emprestimo)
+
+    session.commit()
+
+    session.refresh(emprestimo)
+
+    return emprestimo
+    
+def listar_emprestimos(session):
+
+    emprestimos = session.exec(select(Emprestimo)).all()
+
+    return emprestimos
+
+
+def devolver_livro(session, emprestimo_id):
+
+    emprestimo = session.get(Emprestimo, emprestimo_id)
+
+    if not emprestimo:
+        return {"mensagem": "Empréstimo não encontrado"}
+
+    livro = session.get(Livro, emprestimo.livro_id)
+
+    livro.disponivel = True
+
+    session.add(livro)
+
+    session.delete(emprestimo)
+
+    session.commit()
+
+    return {"mensagem": "Livro devolvido"}
