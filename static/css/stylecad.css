@@ -1,0 +1,68 @@
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* LOGIN E CADASTRO */
+
+.auth-body{
+    
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#af6540;
+}
+
+form{
+    color: #6d412a;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+form > button{
+    background:#6d412a;
+    border-radius: 5px;
+    padding: 8px;
+    color: #fcf3dc;
+
+}
+
+input {
+  border: 1px solid #6d412a;
+  background-color: transparent; 
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.auth-container{
+    font-family:sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    width:220px;
+}
+
+.auth-card{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #6d412a;
+    background:#fcf3dc;
+
+    width:380px;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}

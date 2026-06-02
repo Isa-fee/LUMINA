@@ -2,17 +2,44 @@
 
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}LUMINA{% endblock %}</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <main>
-        {% block content %}
+    <title>
+        {% block title %}
+        LUMINA
         {% endblock %}
-    </main>
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', path='css/stylecad.css') }}">
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-container">
+
+        <div class="logo-container">
+
+            <img
+                src="/static/img/logo.png"
+                alt="Logo Lumina"
+                class="logo">
+
+        </div>
+
+        <div class="auth-card">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </div>
 
 </body>
+
 </html>
