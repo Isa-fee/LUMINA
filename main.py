@@ -45,7 +45,7 @@ app.mount(
 # PÁGINA INICIAL
 # =========================
 
-@app.get("/")
+@app.get("/index")
 def home(request: Request):
     return templates.TemplateResponse(
         request=request,
@@ -151,7 +151,7 @@ def pagina_login(request: Request):
 # CADASTRO
 # =========================
 
-@app.get("/cadastro")
+@app.get("/")
 def pagina_cadastro(request: Request):
     return templates.TemplateResponse(
         request=request,

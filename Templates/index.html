@@ -1,21 +1,46 @@
 {% extends "base.html" %}
 
-
+{% block title %}
+Home
+{% endblock %}
 
 {% block content %}
 
-<h1>LUMINA</h1>
+<section class="dashboard">
 
-<p>
-    Sua biblioteca digital para gerenciamento de livros e empréstimos.
-</p>
+    <h1>Bem-vinda(o)!</h1>
 
-<a href="/login">
-    Entrar
-</a>
+    <div class="cards">
 
-<a href="/cadastro">
-    Cadastrar
-</a>
+        <div class="card">
+            <h2>Livros Cadastrados</h2>
+        
+        </div>
+
+        <div class="card">
+            <h2>Empréstimos</h2>
+    
+        </div>
+
+        <div class="card">
+            <h2>Usuários</h2>
+        
+        </div>
+
+    </div>
+
+    <div class="acoes">
+
+        <a href="/cadastro-livro">
+            Cadastrar novo livro
+        </a>
+
+        <a href="#">
+            Cadastrar usuário
+        </a>
+
+    </div>
+
+</section>
 
 {% endblock %}
