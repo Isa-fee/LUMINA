@@ -13,7 +13,7 @@ O sistema permitirá o cadastro, consulta, edição e exclusão de livros, além
 
 ## Documentação base do Projeto
 
-https://docs.google.com/document/d/16MUFsMHxRDOqG6ue3hIMhtJyaDXn2iL0edodAQmlLZo/edit?usp=sharing
+Colocar o link
 
 ## Tecnologia de Frontend
 
