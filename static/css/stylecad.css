@@ -24,12 +24,17 @@ form{
     flex-direction: column;
     gap: 15px;
 }
+
 form > button{
     background:#6d412a;
     border-radius: 5px;
     padding: 8px;
     color: #fcf3dc;
+}
 
+form > button > a{
+    color: #fcf3dc;
+    text-decoration: none;
 }
 
 input {
@@ -66,3 +71,4 @@ input {
 
     box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
+

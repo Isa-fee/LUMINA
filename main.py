@@ -151,7 +151,7 @@ def pagina_login(request: Request):
 # CADASTRO
 # =========================
 
-@app.get("/")
+@app.get("/cadastro")
 def pagina_cadastro(request: Request):
     return templates.TemplateResponse(
         request=request,
