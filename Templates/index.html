@@ -1,46 +1,50 @@
 {% extends "base.html" %}
 
 {% block title %}
-Home
+Página Inicial
 {% endblock %}
 
 {% block content %}
 
-<section class="dashboard">
+<main>
 
     <h1>Bem-vinda(o)!</h1>
 
-    <div class="cards">
+    <hr>
+
+    <section class="cards">
 
         <div class="card">
-            <h2>Livros Cadastrados</h2>
-        
+            <img src="{{ url_for('static', path='img/livros.png') }}">
+            <p>Livros Cadastrados</p>
         </div>
 
         <div class="card">
-            <h2>Empréstimos</h2>
-    
+            <img src="{{ url_for('static', path='img/emprestimos.png') }}">
+            <p>Empréstimos</p>
         </div>
 
         <div class="card">
-            <h2>Usuários</h2>
-        
+            <img src="{{ url_for('static', path='img/usuarios.png') }}">
+            <p>Usuários</p>
         </div>
 
-    </div>
+    </section>
 
-    <div class="acoes">
+    <hr>
+
+    <section class="botoes">
 
         <a href="/cadastro-livro">
-            Cadastrar novo livro
+            <button>Cadastrar novo livro</button>
         </a>
 
         <a href="/cadastro">
-            Cadastrar usuário
+            <button>Cadastrar Usuário</button>
         </a>
 
-    </div>
+    </section>
 
-</section>
+</main>
 
 {% endblock %}

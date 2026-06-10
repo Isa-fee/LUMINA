@@ -1,5 +1,101 @@
 {% extends "base.html" %}
 
+{% block title %}
+Livros
+{% endblock %}
+
 {% block content %}
-<h1>Página de Livros</h1>
+
+<main>
+
+    <section class="topo-livros">
+
+        <div class="pesquisa">
+
+            <input
+                type="text"
+                placeholder="Buscar por título, autor ou categoria">
+
+            <button>🔍</button>
+
+        </div>
+
+        <a href="/cadastro-livro">
+            <button class="novo-livro">
+                + Novo livro
+            </button>
+        </a>
+
+    </section>
+
+    <section class="lista-livros">
+
+        <div class="livro">
+
+            <div class="capa">
+                CAPA
+            </div>
+
+            <div class="dados">
+
+                <p><strong>TÍTULO:</strong> Dom Casmurro</p>
+
+                <p><strong>AUTOR:</strong> Machado de Assis</p>
+
+                <p><strong>CATEGORIA:</strong> Romance</p>
+
+                <p><strong>DISPONÍVEIS:</strong> 3</p>
+
+                <p><strong>STATUS:</strong> Disponível</p>
+
+                <div class="acoes">
+
+                    <strong>AÇÕES:</strong>
+
+                    <button>Editar</button>
+
+                    <button>Excluir</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="livro">
+
+            <div class="capa">
+                CAPA
+            </div>
+
+            <div class="dados">
+
+                <p><strong>TÍTULO:</strong> Dom Casmurro</p>
+
+                <p><strong>AUTOR:</strong> Machado de Assis</p>
+
+                <p><strong>CATEGORIA:</strong> Romance</p>
+
+                <p><strong>DISPONÍVEIS:</strong> 3</p>
+
+                <p><strong>STATUS:</strong> Disponível</p>
+
+                <div class="acoes">
+
+                    <strong>AÇÕES:</strong>
+
+                    <button>Editar</button>
+
+                    <button>Excluir</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
 {% endblock %}

@@ -1,33 +1,446 @@
-header{
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
     font-family:sans-serif;
-    border: 1px solid black;
-    margin: 0;
-    background-color: #b0653f;
-    padding: 20px 40px;
-    
 }
-nav > a{
-    font-size: 25px;
-    color: antiquewhite;
-    text-decoration: none;
+
+body{
+    background:#efe5d1;
 }
+
+/* HEADER */
+
+header{
+    background:#b0653f;
+    padding:18px 40px;
+}
+
 nav{
     display:flex;
     align-items:center;
     justify-content:space-between;
 }
 
-footer{
-    border: 1px solid black;
+.logo{
+    width:60px;
 }
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:22px;
+}
+
+nav input{
+
+    width:220px;
+    height:35px;
+
+    border:none;
+    border-radius:20px;
+
+    background:#efe5d1;
+
+    padding:10px;
+}
+
+/* MAIN */
 
 main{
-    border: 1px solid black;
-    padding:40px;
+
+    width:95%;
+    margin:auto;
+
+    padding:40px 0;
+
+    color:#6d412a;
 }
 
-body{
-    background-color: antiquewhite;
-    margin: 0;
+main h1{
+
+    font-size:42px;
+    font-weight:normal;
 }
 
+hr{
+
+    margin:30px 0;
+
+    border:1px solid #9d6b4d;
+}
+
+/* CARDS */
+
+.cards{
+
+    display:flex;
+    justify-content:space-evenly;
+
+    text-align:center;
+}
+
+.card img{
+
+    width:110px;
+    margin-bottom:15px;
+}
+
+.card p{
+
+    font-size:22px;
+}
+
+/* BOTÕES */
+
+.botoes{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:100px;
+
+    margin-top:60px;
+}
+
+.botoes button{
+
+    background:#7b472d;
+
+    color:white;
+
+    border:none;
+
+    padding:18px 35px;
+
+    border-radius:8px;
+
+    font-size:18px;
+
+    cursor:pointer;
+}
+
+.botoes button:hover{
+
+    background:#643822;
+}
+
+/* FOOTER */
+
+footer{
+    position: fixed;
+
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    background:#b0653f;
+
+    color:white;
+
+    text-align:center;
+
+    padding:30px;
+
+    margin-top:80px;
+}
+
+/* ===========================
+   CADASTRO DE LIVRO
+=========================== */
+
+.livro-main{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:72vh;
+}
+
+.livro-card{
+
+    width:500px;
+
+    background:#b0653f;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.25);
+
+    color:#fff;
+}
+
+.livro-card h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    font-size:34px;
+
+    font-weight:normal;
+}
+
+.livro-card form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+}
+
+.campo{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+.campo label{
+
+    width:120px;
+
+    text-align:right;
+
+    font-size:22px;
+
+    color:#f6e7d3;
+}
+
+.campo input{
+
+    width:250px;
+
+    padding:10px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#a25d39;
+
+    color:white;
+
+    font-size:18px;
+}
+
+.campo input:focus{
+
+    outline:none;
+}
+
+.upload{
+
+    margin-top:18px;
+
+    border:2px solid rgba(255,255,255,.2);
+
+    border-radius:10px;
+
+    padding:28px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    color:#f7ebda;
+
+    font-size:22px;
+}
+
+.botoes-livro{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:10px;
+}
+
+.botoes-livro button{
+
+    width:180px;
+
+    background:#7a4a2d;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:12px;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.botoes-livro button:hover{
+
+    background:#633821;
+}
+
+
+/* ===========================
+   PÁGINA LIVROS
+=========================== */
+
+.topo-livros{
+
+    width:80%;
+    margin:20px auto 40px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.pesquisa{
+
+    display:flex;
+    align-items:center;
+}
+
+.pesquisa input{
+
+    width:430px;
+    padding:12px 18px;
+
+    border:1px solid #a26b4d;
+    border-radius:25px 0 0 25px;
+
+    background:#f5f2ec;
+}
+
+.pesquisa button{
+
+    width:45px;
+    height:45px;
+
+    border:none;
+
+    background:#6d412a;
+
+    color:white;
+
+    border-radius:0 25px 25px 0;
+
+    cursor:pointer;
+
+    font-size:18px;
+}
+
+.novo-livro{
+
+    background:#7b472d;
+
+    color:white;
+
+    border:none;
+
+    border-radius:25px;
+
+    padding:14px 40px;
+
+    cursor:pointer;
+
+    font-size:18px;
+}
+
+.lista-livros{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:35px;
+
+    margin-bottom:120px;
+}
+
+.livro{
+
+    width:760px;
+
+    background:transparent;
+
+    border:1px solid #b38467;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    display:flex;
+
+    gap:25px;
+}
+
+.capa{
+
+    width:130px;
+
+    height:170px;
+
+    background:#b0653f;
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:32px;
+}
+
+.dados{
+
+    display:flex;
+    flex-direction:column;
+
+    gap:12px;
+
+    color:#6d412a;
+
+    font-size:20px;
+}
+
+.acoes{
+
+    margin-top:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.acoes button{
+
+    background:#7b472d;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:8px 24px;
+
+    cursor:pointer;
+}
+
+.acoes button:hover{
+
+    background:#633821;
+}
