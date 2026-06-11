@@ -1,8 +1,13 @@
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Depends, Request, Form, UploadFile, File
+import shutil
+import os
+
 from contextlib import asynccontextmanager
 from sqlmodel import SQLModel, Session
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import RedirectResponse
+
 
 from database import engine, get_session
 
@@ -19,7 +24,11 @@ from models import (
 
     Emprestimo,
     EmprestimoBase,
-    EmprestimoUpdate
+    EmprestimoUpdate,
+    
+    Leitor,
+    LeitorBase,
+    LeitorUpdate,
 )
 
 
@@ -112,11 +121,39 @@ def pagina_livros(
 
 @app.post("/livros")
 def criar_livro(
-    livro: LivroBase,
+    titulo: str = Form(...),
+    autor: str = Form(...),
+    categoria: str = Form(...),
+    capa: UploadFile = File(...),
     session: Session = Depends(get_session)
 ):
-    return crud.criar_livro(session, livro)
 
+    caminho_imagem = None
+
+    if capa:
+
+        caminho_imagem = f"static/uploads/{capa.filename}"
+
+        with open(caminho_imagem, "wb") as buffer:
+            shutil.copyfileobj(capa.file, buffer)
+
+    livro = Livro(
+        titulo=titulo,
+        autor=autor,
+        categoria=categoria,
+        capa=caminho_imagem
+    )
+
+    session.add(livro)
+
+    session.commit()
+
+    session.refresh(livro)
+
+    return RedirectResponse(
+        url="/pagina-livros",
+        status_code=303
+    )
 
 @app.put("/livros/{livro_id}")
 def atualizar_livro(
@@ -139,7 +176,7 @@ def deletar_livro(
 # LOGIN
 # =========================
 
-@app.get("/login")
+@app.get("/")
 def pagina_login(request: Request):
     return templates.TemplateResponse(
         request=request,
@@ -214,3 +251,55 @@ def devolver_livro(
     session: Session = Depends(get_session)
 ):
     return crud.devolver_livro(session, emprestimo_id)
+
+
+
+# =========================
+# LEITORES
+# =========================
+
+
+@app.get("/pagina-leitores")
+def pagina_leitores(
+    request: Request,
+    session: Session = Depends(get_session)
+):
+
+    leitores = crud.listar_leitores(session)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="leitores.html",
+        context={
+            "request": request,
+            "leitores": leitores
+        }
+    )
+
+@app.get("/cadastro-leitor")
+def pagina_cadastro_leitor(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="cadastroLeitor.html",
+        context={"request": request}
+    )
+
+@app.post("/leitores")
+def criar_leitor(
+    nome: str = Form(...),
+    email: str = Form(...),
+    session: Session = Depends(get_session)
+):
+
+    leitor = LeitorBase(
+        nome=nome,
+        email=email
+    )
+
+    crud.criar_leitor(session, leitor)
+
+    return RedirectResponse(
+        url="/pagina-leitores",
+        status_code=303
+    )

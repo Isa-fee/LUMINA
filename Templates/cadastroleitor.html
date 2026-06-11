@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cadastro de Leitor
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <h1>Cadastrar Leitor</h1>
+
+    <form
+        action="/leitores"
+        method="POST"
+    >
+
+        <input
+            type="text"
+            name="nome"
+            placeholder="Nome do leitor"
+            required
+        >
+
+        <input
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            required
+        >
+
+        <button type="submit">
+            Cadastrar
+        </button>
+
+    </form>
+
+</main>
+
+{% endblock %}

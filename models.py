@@ -33,6 +33,7 @@ class LivroBase(SQLModel):
 class Livro(LivroBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     disponivel: bool = True
+    capa: Optional[str] = None
 
 
 class LivroUpdate(SQLModel):
@@ -46,7 +47,7 @@ class LivroUpdate(SQLModel):
 # =====================
 
 class EmprestimoBase(SQLModel):
-    usuario_id: int
+    leitor_id: int
     livro_id: int
 
 
@@ -57,6 +58,23 @@ class Emprestimo(EmprestimoBase, table=True):
 
 
 class EmprestimoUpdate(SQLModel):
-    usuario_id: Optional[int] = None
+    leitor_id: Optional[int] = None
     livro_id: Optional[int] = None
     data_devolucao: Optional[date] = None
+
+# =====================
+# LEITORES
+# =====================
+
+class LeitorBase(SQLModel):
+    nome: str
+    email: str
+
+
+class Leitor(LeitorBase, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+
+
+class LeitorUpdate(SQLModel):
+    nome: str
+    email: str

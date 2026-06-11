@@ -30,71 +30,73 @@ Livros
 
     <section class="lista-livros">
 
-        <div class="livro">
+    {% for livro in livros %}
 
-            <div class="capa">
-                CAPA
-            </div>
+    <div class="livro">
 
-            <div class="dados">
+        <div class="capa">
 
-                <p><strong>TÍTULO:</strong> Dom Casmurro</p>
+            {% if livro.capa %}
 
-                <p><strong>AUTOR:</strong> Machado de Assis</p>
+                <img
+                    src="/{{ livro.capa }}"
+                    alt="Capa do livro"
+                    width="120"
+                >
 
-                <p><strong>CATEGORIA:</strong> Romance</p>
+            {% else %}
 
-                <p><strong>DISPONÍVEIS:</strong> 3</p>
+                <p>Sem capa</p>
 
-                <p><strong>STATUS:</strong> Disponível</p>
+            {% endif %}
 
-                <div class="acoes">
+        </div>
 
-                    <strong>AÇÕES:</strong>
+        <div class="dados">
 
-                    <button>Editar</button>
+            <p>
+                <strong>TÍTULO:</strong>
+                {{ livro.titulo }}
+            </p>
 
-                    <button>Excluir</button>
+            <p>
+                <strong>AUTOR:</strong>
+                {{ livro.autor }}
+            </p>
 
-                </div>
+            <p>
+                <strong>CATEGORIA:</strong>
+                {{ livro.categoria }}
+            </p>
+
+            <p>
+                <strong>STATUS:</strong>
+
+                {% if livro.disponivel %}
+                    Disponível
+                {% else %}
+                    Emprestado
+                {% endif %}
+
+            </p>
+
+            <div class="acoes">
+
+                <strong>AÇÕES:</strong>
+
+                <button>Editar</button>
+
+                <button>Excluir</button>
 
             </div>
 
         </div>
 
-        <div class="livro">
+    </div>
 
-            <div class="capa">
-                CAPA
-            </div>
+    {% endfor %}
 
-            <div class="dados">
-
-                <p><strong>TÍTULO:</strong> Dom Casmurro</p>
-
-                <p><strong>AUTOR:</strong> Machado de Assis</p>
-
-                <p><strong>CATEGORIA:</strong> Romance</p>
-
-                <p><strong>DISPONÍVEIS:</strong> 3</p>
-
-                <p><strong>STATUS:</strong> Disponível</p>
-
-                <div class="acoes">
-
-                    <strong>AÇÕES:</strong>
-
-                    <button>Editar</button>
-
-                    <button>Excluir</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
 </main>
 

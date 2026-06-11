@@ -13,21 +13,20 @@ Página Inicial
     <hr>
 
     <section class="cards">
-
-        <div class="card">
+        <a href="/pagina-livros"><div class="card">
             <img src="{{ url_for('static', path='img/livros.png') }}">
             <p>Livros Cadastrados</p>
-        </div>
+        </div></a>
 
-        <div class="card">
+        <a href="/pagina-emprestimos"><div class="card">
             <img src="{{ url_for('static', path='img/emprestimos.png') }}">
             <p>Empréstimos</p>
-        </div>
+        </div></a>
 
-        <div class="card">
+        <a href="/pagina-leitores"><div class="card">
             <img src="{{ url_for('static', path='img/usuarios.png') }}">
-            <p>Usuários</p>
-        </div>
+            <p>Leitores</p>
+        </div></a>
 
     </section>
 
@@ -39,8 +38,8 @@ Página Inicial
             <button>Cadastrar novo livro</button>
         </a>
 
-        <a href="/cadastro">
-            <button>Cadastrar Usuário</button>
+        <a href="/cadastro-leitor">
+            <button>Cadastrar Leitor</button>
         </a>
 
     </section>

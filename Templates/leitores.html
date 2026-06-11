@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+Leitores
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <section class="topo-leitores">
+
+        <div class="titulo">
+
+            <h1>Leitores Cadastrados</h1>
+
+        </div>
+
+        <a href="/cadastro-leitor">
+
+            <button class="novo-leitor">
+                + Novo leitor
+            </button>
+
+        </a>
+
+    </section>
+
+    <section class="lista-leitores">
+
+        {% for leitor in leitores %}
+
+        <div class="leitor">
+
+            <div class="dados">
+
+                <p>
+                    <strong>NOME:</strong>
+                    {{ leitor.nome }}
+                </p>
+
+                <p>
+                    <strong>E-MAIL:</strong>
+                    {{ leitor.email }}
+                </p>
+
+                <div class="acoes">
+
+                    <strong>AÇÕES:</strong>
+
+                    <button>Editar</button>
+
+                    <button>Excluir</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</main>
+
+{% endblock %}

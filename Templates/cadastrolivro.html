@@ -12,50 +12,32 @@ Cadastro de Livro
 
         <h2>CADASTRO DE LIVRO</h2>
 
-        <form>
+        <form action="/livros" method="POST" enctype="multipart/form-data">
 
-            <div class="campo">
-                <label>Título:</label>
-                <input type="text">
-            </div>
+    <input
+        type="text"
+        name="titulo"
+        placeholder="Título">
 
-            <div class="campo">
-                <label>Autor:</label>
-                <input type="text">
-            </div>
+    <input
+        type="text"
+        name="autor"
+        placeholder="Autor">
 
-            <div class="campo">
-                <label>Categoria:</label>
-                <input type="text">
-            </div>
+    <input
+        type="text"
+        name="categoria"
+        placeholder="Categoria">
+        
+    <input
+        type="file"
+        name="capa">
 
-            <div class="campo">
-                <label>ISBN:</label>
-                <input type="text">
-            </div>
+    <button type="submit">
+        Cadastrar
+    </button>
 
-            <div class="campo">
-                <label>Quantidade:</label>
-                <input type="number">
-            </div>
-
-            <label for="capa" class="upload">
-                Faça o upload da capa +
-            </label>
-
-            <input id="capa" type="file" hidden>
-
-            <div class="botoes-livro">
-
-                <a href="/index">
-                    <button type="button">Cancelar</button>
-                </a>
-
-                <button type="submit">Salvar</button>
-
-            </div>
-
-        </form>
+</form>
 
     </div>
 

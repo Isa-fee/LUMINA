@@ -1,5 +1,5 @@
 from sqlmodel import select
-from models import Usuario, Livro, Emprestimo
+from models import Usuario, Livro, Emprestimo, Leitor
 
 
 # =========================
@@ -138,7 +138,7 @@ def criar_emprestimo(session, emprestimo):
         return {"mensagem": "Livro indisponível"}
 
     novo_emprestimo = Emprestimo(
-        usuario_id=emprestimo.usuario_id,
+        leitor_id=emprestimo.leitor_id,
         livro_id=emprestimo.livro_id
     )
 
@@ -197,3 +197,30 @@ def devolver_livro(session, emprestimo_id):
     session.commit()
 
     return {"mensagem": "Livro devolvido"}
+
+
+
+
+
+
+
+def criar_leitor(session, leitor):
+
+    novo_leitor = Leitor(
+        nome=leitor.nome,
+        email=leitor.email
+    )
+
+    session.add(novo_leitor)
+
+    session.commit()
+
+    session.refresh(novo_leitor)
+
+    return novo_leitor
+
+def listar_leitores(session):
+
+    leitores = session.exec(select(Leitor)).all()
+
+    return leitores
