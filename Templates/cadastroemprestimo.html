@@ -1,40 +1,40 @@
 {% extends "base.html" %}
 
 {% block title %}
-Cadastro de Leitor
+Cadastro de Empréstimo
 {% endblock %}
 
 {% block content %}
 
-<main class="leitor-main">
+<main class="emprestimo-main">
 
-    <section class="leitor-card">
+    <section class="emprestimo-card">
 
-        <h2>CADASTRO DE LEITOR</h2>
+        <h2>CADASTRO DE EMPRÉSTIMO</h2>
 
-        <form action="/leitores" method="POST">
+        <form action="/cadastro-emprestimo" method="POST">
 
             <div class="campo">
-                <label>Nome:</label>
+                <label>ID Leitor:</label>
                 <input
-                    type="text"
-                    name="nome"
+                    type="number"
+                    name="leitor_id"
                     required
                 >
             </div>
 
             <div class="campo">
-                <label>E-mail:</label>
+                <label>ID Livro:</label>
                 <input
-                    type="email"
-                    name="email"
+                    type="number"
+                    name="livro_id"
                     required
                 >
             </div>
 
-            <div class="botoes-leitor">
+            <div class="botoes-emprestimo">
 
-                <button type="button">
+                <button type="reset">
                     Cancelar
                 </button>
 

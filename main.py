@@ -252,6 +252,39 @@ def devolver_livro(
 ):
     return crud.devolver_livro(session, emprestimo_id)
 
+# =========================
+# CADASTRO DE EMPRÉSTIMO
+# =========================
+
+@app.get("/cadastro-emprestimo")
+def tela_cadastro_emprestimo(request: Request):
+    return templates.TemplateResponse(
+        "cadastroemprestimo.html",
+        {
+            "request": request
+        }
+    )
+
+
+@app.post("/cadastro-emprestimo")
+def cadastrar_emprestimo(
+    leitor_id: int = Form(...),
+    livro_id: int = Form(...),
+    session: Session = Depends(get_session)
+):
+
+    novo_emprestimo = EmprestimoBase(
+        leitor_id=leitor_id,
+        livro_id=livro_id
+    )
+
+    crud.criar_emprestimo(session, novo_emprestimo)
+
+    return RedirectResponse(
+        "/pagina-emprestimos",
+        status_code=303
+    )
+
 
 
 # =========================

@@ -1,5 +1,101 @@
 {% extends "base.html" %}
 
+{% block title %}
+Empréstimos
+{% endblock %}
+
 {% block content %}
-<h1>Página de empréstimos</h1>
+
+<main>
+
+    <section class="topo-emprestimos">
+
+        <div class="pesquisa">
+
+            <input
+                type="text"
+                placeholder="Buscar por livro ou usuário">
+
+            <button>🔍</button>
+
+        </div>
+
+        <a href="/cadastro-emprestimo">
+
+            <button class="novo-emprestimo">
+                + Novo empréstimo
+            </button>
+
+        </a>
+
+    </section>
+
+    <section class="tabela-emprestimos">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>USUÁRIO</th>
+
+                    <th>LIVRO</th>
+
+                    <th>DATA DO EMPRÉSTIMO</th>
+
+                    <th>PRAZO</th>
+
+                    <th>STATUS</th>
+
+                    <th>AÇÕES</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for emprestimo in emprestimos %}
+
+                <tr>
+
+                    <td>{{ emprestimo.usuario }}</td>
+
+                    <td>{{ emprestimo.livro }}</td>
+
+                    <td>{{ emprestimo.data }}</td>
+
+                    <td>{{ emprestimo.prazo }}</td>
+
+                    <td class="status">
+
+                        {% if emprestimo.atrasado %}
+                            ATRASADO
+                        {% else %}
+                            NO PRAZO
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <button>Excluir</button>
+
+                        <button>Editar</button>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</main>
+
 {% endblock %}
