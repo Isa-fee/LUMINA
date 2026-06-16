@@ -7,7 +7,7 @@ from sqlmodel import SQLModel, Session
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
-
+from sqlmodel import select
 
 from database import engine, get_session
 
@@ -68,10 +68,24 @@ def home(request: Request):
 
 @app.post("/usuarios")
 def criar_usuario(
-    usuario: UsuarioBase,
+    nome: str = Form(...),
+    email: str = Form(...),
+    senha: str = Form(...),
     session: Session = Depends(get_session)
 ):
-    return crud.criar_usuario(session, usuario)
+
+    usuario = UsuarioBase(
+        nome=nome,
+        email=email,
+        senha=senha
+    )
+
+    crud.criar_usuario(session, usuario)
+
+    return RedirectResponse(
+        url="/",
+        status_code=303
+    )
 
 
 @app.get("/usuarios")
@@ -97,6 +111,29 @@ def deletar_usuario(
 ):
     return crud.deletar_usuario(session, usuario_id)
 
+
+@app.post("/login")
+def login(
+    email: str = Form(...),
+    senha: str = Form(...),
+    session: Session = Depends(get_session)
+):
+
+    usuario = session.exec(
+        select(Usuario).where(Usuario.email == email)
+    ).first()
+
+    if not usuario:
+        return {"erro": "Usuário não encontrado"}
+
+    if usuario.senha != senha:
+        return {"erro": "Senha incorreta"}
+
+    return RedirectResponse(
+        url="/index",
+        status_code=303
+    )
+    
 
 # =========================
 # LIVROS

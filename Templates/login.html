@@ -6,22 +6,21 @@ Login
 
 {% block content %}
 
-<h1>FAÇA LOGIN</h1>
-
-<form>
+<h1>FAÇA LOGIN </h1>
+<h1>EU SOU O LOGIN NOVO TESTE 999</h1>
+<form action="/login" method="post">
     <h5>E-MAIL</h5>
-
-    <input type="email" >
+    <input type="email" name="email" required>
 
     <h5>SENHA</h5>
-
-    <input type="password">
+    <input type="password" name="senha" required>
 
     <button type="submit">
-        ENTRAR
+            ENTRAR
     </button>
-
 </form>
+
+
 
 <p>
     Não possui conta?

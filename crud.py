@@ -10,7 +10,8 @@ def criar_usuario(session, usuario):
 
     novo_usuario = Usuario(
         nome=usuario.nome,
-        email=usuario.email
+        email=usuario.email,
+        senha=usuario.senha
     )
 
     session.add(novo_usuario)

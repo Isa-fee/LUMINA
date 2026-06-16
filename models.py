@@ -9,6 +9,7 @@ from datetime import date
 class UsuarioBase(SQLModel):
     nome: str
     email: str
+    senha: str
 
 
 class Usuario(UsuarioBase, table=True):

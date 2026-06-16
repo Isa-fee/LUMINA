@@ -8,23 +8,19 @@ Cadastro
 
 <h1>FAÇA SEU CADASTRO</h1>
 
-<form>
-    <h5>Nome</h5>
+<form action="/usuarios" method="post">
 
-    <input type="text">
+    <h5>Nome</h5>
+    <input type="text" name="nome" required>
 
     <h5>Email</h5>
-
-    <input type="email">
+    <input type="email" name="email" required>
 
     <h5>Senha</h5>
-
-    <input type="password">
+    <input type="password" name="senha" required>
 
     <button type="submit">
-
-        <a href="/login">CADASTRAR</a>
-        
+        CADASTRAR
     </button>
 
 </form>
