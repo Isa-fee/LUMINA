@@ -1,3 +1,4 @@
+```html
 {% extends "base.html" %}
 
 {% block title %}
@@ -15,21 +16,47 @@ Cadastro de Empréstimo
         <form action="/cadastro-emprestimo" method="POST">
 
             <div class="campo">
-                <label>ID Leitor:</label>
-                <input
-                    type="number"
-                    name="leitor_id"
-                    required
-                >
+
+                <label>Leitor:</label>
+
+                <select name="leitor_id" required>
+
+                    <option value="">
+                        Selecione um leitor
+                    </option>
+
+                    {% for leitor in leitores %}
+
+                    <option value="{{ leitor.id }}">
+                        {{ leitor.nome }} - {{ leitor.email }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
             </div>
 
             <div class="campo">
-                <label>ID Livro:</label>
-                <input
-                    type="number"
-                    name="livro_id"
-                    required
-                >
+
+                <label>Livro:</label>
+
+                <select name="livro_id" required>
+
+                    <option value="">
+                        Selecione um livro
+                    </option>
+
+                    {% for livro in livros %}
+
+                    <option value="{{ livro.id }}">
+                        {{ livro.titulo }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
             </div>
 
             <div class="botoes-emprestimo">
@@ -51,3 +78,4 @@ Cadastro de Empréstimo
 </main>
 
 {% endblock %}
+```

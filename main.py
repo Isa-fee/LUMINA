@@ -13,6 +13,8 @@ from database import engine, get_session
 
 import crud
 
+from datetime import timedelta, date
+
 from models import (
     Usuario,
     UsuarioBase,
@@ -251,11 +253,38 @@ def pagina_cadastro_livro(request: Request):
 # =========================
 
 @app.get("/pagina-emprestimos")
-def pagina_emprestimos(request: Request):
+def pagina_emprestimos(
+    request: Request,
+    session: Session = Depends(get_session)
+):
+
+    emprestimos_db = crud.listar_emprestimos(session)
+
+    emprestimos = []
+
+    for emprestimo in emprestimos_db:
+
+        leitor = session.get(Leitor, emprestimo.leitor_id)
+        livro = session.get(Livro, emprestimo.livro_id)
+
+        emprestimos.append({
+            "leitor": leitor.nome if leitor else "Leitor removido",
+            "livro": livro.titulo if livro else "Livro removido",
+            "data_emprestimo": emprestimo.data_emprestimo,
+            "data_devolucao": emprestimo.data_devolucao,
+            "atrasado": (
+                emprestimo.data_devolucao is not None
+                and date.today() > emprestimo.data_devolucao
+            )
+        })
+
     return templates.TemplateResponse(
         request=request,
         name="emprestimos.html",
-        context={"request": request}
+        context={
+            "request": request,
+            "emprestimos": emprestimos
+        }
     )
 
 @app.post("/emprestimos")
@@ -294,14 +323,23 @@ def devolver_livro(
 # =========================
 
 @app.get("/cadastro-emprestimo")
-def tela_cadastro_emprestimo(request: Request):
+def tela_cadastro_emprestimo(
+    request: Request,
+    session: Session = Depends(get_session)
+):
+
+    leitores = crud.listar_leitores(session)
+    livros = crud.listar_livros(session)
+
     return templates.TemplateResponse(
-        "cadastroemprestimo.html",
-        {
-            "request": request
+        request=request,
+        name="cadastroemprestimo.html",
+        context={
+            "request": request,
+            "leitores": leitores,
+            "livros": livros
         }
     )
-
 
 @app.post("/cadastro-emprestimo")
 def cadastrar_emprestimo(
@@ -310,15 +348,20 @@ def cadastrar_emprestimo(
     session: Session = Depends(get_session)
 ):
 
-    novo_emprestimo = EmprestimoBase(
+    novo_emprestimo = Emprestimo(
         leitor_id=leitor_id,
         livro_id=livro_id
     )
 
-    crud.criar_emprestimo(session, novo_emprestimo)
+    novo_emprestimo.data_devolucao = (
+        novo_emprestimo.data_emprestimo + timedelta(days=5)
+    )
+
+    session.add(novo_emprestimo)
+    session.commit()
 
     return RedirectResponse(
-        "/pagina-emprestimos",
+        url="/pagina-emprestimos",
         status_code=303
     )
 
