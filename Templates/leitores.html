@@ -46,13 +46,33 @@ Leitores
 
                 <div class="acoes">
 
-                    <strong>AÇÕES:</strong>
+                <strong>AÇÕES:</strong>
 
-                    <button>Editar</button>
 
-                    <button>Excluir</button>
+                <a href="/editar-leitor/{{ leitor.id }}">
+                    <button>
+                        Editar
+                    </button>
+                </a>
 
-                </div>
+
+                <form action="/excluir-leitor/{{ leitor.id }}" method="post">
+
+                    <button>
+                        Excluir
+                    </button>
+
+                </form>
+                <a href="/leitor/{{ leitor.id }}/detalhes">
+
+                    <button>
+                        Ver detalhes
+                    </button>
+
+                </a>
+
+
+            </div>
 
             </div>
 

@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Detalhes do leitor
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<h1>
+Detalhes de {{ leitor.nome }}
+</h1>
+
+
+<p>
+<strong>Email:</strong>
+{{ leitor.email }}
+</p>
+
+
+
+<h2>
+Empréstimos
+</h2>
+
+
+
+{% if emprestimos %}
+
+
+{% for emprestimo in emprestimos %}
+
+
+<div class="leitor">
+
+
+<p>
+
+<strong>Livro:</strong>
+
+{{ emprestimo.livro }}
+
+</p>
+
+
+
+<p>
+
+<strong>Data do empréstimo:</strong>
+
+{{ emprestimo.data_emprestimo }}
+
+</p>
+
+
+
+<p>
+
+<strong>Data de devolução:</strong>
+
+{{ emprestimo.data_devolucao }}
+
+</p>
+
+
+
+<p>
+
+<strong>Status:</strong>
+
+{{ emprestimo.status }}
+
+</p>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+<p>
+Esse leitor não possui empréstimos.
+</p>
+
+
+
+{% endif %}
+
+
+
+<a href="/pagina-leitores">
+
+<button>
+
+Voltar
+
+</button>
+
+</a>
+
+
+
+{% endblock %}

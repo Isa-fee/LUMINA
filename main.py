@@ -416,3 +416,159 @@ def criar_leitor(
         url="/pagina-leitores",
         status_code=303
     )
+
+@app.put("/leitores/{leitor_id}")
+def atualizar_leitor(
+    leitor_id:int,
+    dados:LeitorUpdate,
+    session:Session = Depends(get_session)
+):
+
+    return crud.atualizar_leitor(
+        session,
+        leitor_id,
+        dados
+    )
+
+
+
+@app.delete("/leitores/{leitor_id}")
+def deletar_leitor(
+    leitor_id:int,
+    session:Session = Depends(get_session)
+):
+
+    return crud.deletar_leitor(
+        session,
+        leitor_id
+    )
+
+@app.get("/leitor/{leitor_id}/detalhes")
+def detalhes_leitor(
+    leitor_id:int,
+    request:Request,
+    session:Session = Depends(get_session)
+):
+
+    leitor = session.get(Leitor, leitor_id)
+
+
+    emprestimos = session.exec(
+        select(Emprestimo)
+        .where(Emprestimo.leitor_id == leitor_id)
+    ).all()
+
+
+    lista = []
+
+
+    for emprestimo in emprestimos:
+
+        livro = session.get(
+            Livro,
+            emprestimo.livro_id
+        )
+
+
+        lista.append({
+
+            "livro": livro.titulo if livro else "Livro removido",
+
+            "data_emprestimo":
+            emprestimo.data_emprestimo,
+
+            "data_devolucao":
+            emprestimo.data_devolucao,
+
+
+            "status":
+            (
+                "Atrasado"
+                if emprestimo.data_devolucao
+                and date.today() > emprestimo.data_devolucao
+
+                else "Em andamento"
+            )
+
+        })
+
+
+    return templates.TemplateResponse(
+
+        request=request,
+
+        name="detalhesLeitor.html",
+
+        context={
+
+            "request":request,
+
+            "leitor":leitor,
+
+            "emprestimos":lista
+
+        }
+
+    )
+
+
+#EDIÇÃO DE LEITORES
+
+@app.get("/editar-leitor/{leitor_id}")
+def editar_leitor_tela(
+    leitor_id:int,
+    request:Request,
+    session:Session = Depends(get_session)
+):
+
+    leitor = session.get(Leitor, leitor_id)
+
+
+    return templates.TemplateResponse(
+        request=request,
+        name="editarLeitor.html",
+        context={
+            "request":request,
+            "leitor":leitor
+        }
+    )
+
+@app.post("/editar-leitor/{leitor_id}")
+def salvar_edicao_leitor(
+    leitor_id:int,
+    nome:str = Form(...),
+    email:str = Form(...),
+    session:Session = Depends(get_session)
+):
+
+    leitor = session.get(Leitor, leitor_id)
+
+
+    leitor.nome = nome
+    leitor.email = email
+
+
+    session.add(leitor)
+
+    session.commit()
+
+
+    return RedirectResponse(
+        url="/pagina-leitores",
+        status_code=303
+    )
+
+
+@app.post("/excluir-leitor/{leitor_id}")
+def excluir_leitor(
+    leitor_id:int,
+    session:Session = Depends(get_session)
+):
+
+    crud.deletar_leitor(session, leitor_id)
+
+
+    return RedirectResponse(
+        url="/pagina-leitores",
+        status_code=303
+    )

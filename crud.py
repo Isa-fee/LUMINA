@@ -201,6 +201,9 @@ def devolver_livro(session, emprestimo_id):
 
 
 
+# =========================
+# LEITORES
+# =========================
 
 
 
@@ -225,3 +228,36 @@ def listar_leitores(session):
     leitores = session.exec(select(Leitor)).all()
 
     return leitores
+
+def atualizar_leitor(session, leitor_id, dados):
+
+    leitor = session.get(Leitor, leitor_id)
+
+    if not leitor:
+        return {"mensagem": "Leitor não encontrado"}
+
+    for chave, valor in dados.dict().items():
+        setattr(leitor, chave, valor)
+
+    session.add(leitor)
+
+    session.commit()
+
+    session.refresh(leitor)
+
+    return leitor
+
+
+
+def deletar_leitor(session, leitor_id):
+
+    leitor = session.get(Leitor, leitor_id)
+
+    if not leitor:
+        return {"mensagem": "Leitor não encontrado"}
+
+    session.delete(leitor)
+
+    session.commit()
+
+    return {"mensagem": "Leitor deletado"}

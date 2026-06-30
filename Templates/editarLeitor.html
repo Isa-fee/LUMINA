@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+<h1>Editar Leitor</h1>
+
+
+<form action="/editar-leitor/{{ leitor.id }}" method="post">
+
+
+<input 
+type="text"
+name="nome"
+value="{{ leitor.nome }}"
+>
+
+
+<input
+type="email"
+name="email"
+value="{{ leitor.email }}"
+>
+
+
+<button>
+Salvar
+</button>
+
+
+</form>
+
+
+{% endblock %}
