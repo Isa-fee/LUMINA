@@ -1,35 +1,39 @@
 {% extends "base.html" %}
 
-
 {% block content %}
 
+<main class="leitor-main">
 
-<h1>Editar Leitor</h1>
+    <div class="leitor-card">
 
+        <h2>Editar Leitor</h2>
 
-<form action="/editar-leitor/{{ leitor.id }}" method="post">
+        <form action="/editar-leitor/{{ leitor.id }}" method="post">
 
+            <div class="campo">
+                <label>Nome</label>
+                <input
+                    type="text"
+                    name="nome"
+                    value="{{ leitor.nome }}">
+            </div>
 
-<input 
-type="text"
-name="nome"
-value="{{ leitor.nome }}"
->
+            <div class="campo">
+                <label>Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ leitor.email }}">
+            </div>
 
+            <div class="botoes-leitor">
+                <button type="submit">Salvar</button>
+            </div>
 
-<input
-type="email"
-name="email"
-value="{{ leitor.email }}"
->
+        </form>
 
+    </div>
 
-<button>
-Salvar
-</button>
-
-
-</form>
-
+</main>
 
 {% endblock %}

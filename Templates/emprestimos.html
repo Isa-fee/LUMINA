@@ -80,9 +80,23 @@ Empréstimos
 
                     <td>
 
-                        <button>Excluir</button>
+                        <form action="/excluir-emprestimo/{{ emprestimo.id }}" method="post">
 
-                        <button>Editar</button>
+                            <button type="submit">
+                                Excluir
+                            </button>
+
+                        </form>
+
+                            <a href="/editar-emprestimo/{{ emprestimo.id }}">
+
+                            <button type="button">
+
+                                Editar
+
+                            </button>
+
+                        </a>
 
                     </td>
 

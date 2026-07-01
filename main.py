@@ -268,6 +268,7 @@ def pagina_emprestimos(
         livro = session.get(Livro, emprestimo.livro_id)
 
         emprestimos.append({
+            "id": emprestimo.id,
             "leitor": leitor.nome if leitor else "Leitor removido",
             "livro": livro.titulo if livro else "Livro removido",
             "data_emprestimo": emprestimo.data_emprestimo,
@@ -317,6 +318,19 @@ def devolver_livro(
     session: Session = Depends(get_session)
 ):
     return crud.devolver_livro(session, emprestimo_id)
+
+@app.post("/excluir-emprestimo/{emprestimo_id}")
+def excluir_emprestimo(
+    emprestimo_id: int,
+    session: Session = Depends(get_session)
+):
+
+    crud.devolver_livro(session, emprestimo_id)
+
+    return RedirectResponse(
+        url="/pagina-emprestimos",
+        status_code=303
+    )
 
 # =========================
 # CADASTRO DE EMPRÉSTIMO

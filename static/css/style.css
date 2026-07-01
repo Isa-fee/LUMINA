@@ -925,3 +925,20 @@ footer{
 
     background:#633821;
 }
+
+
+
+/* ===========================
+   DETALHES DO LEITOR
+=========================== */
+
+.lista-leitores h2{
+
+    color:#6d412a;
+
+    font-size:32px;
+
+    font-weight:normal;
+
+    margin:15px 0 10px;
+}

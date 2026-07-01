@@ -1,114 +1,93 @@
 {% extends "base.html" %}
 
-
 {% block title %}
-
-Detalhes do leitor
-
+Detalhes do Leitor
 {% endblock %}
-
-
 
 {% block content %}
 
+<main>
 
-<h1>
-Detalhes de {{ leitor.nome }}
-</h1>
+    <div class="topo-leitores">
 
+        <h1>Detalhes do Leitor</h1>
 
-<p>
-<strong>Email:</strong>
-{{ leitor.email }}
-</p>
+        <a href="/pagina-leitores">
+            <button class="novo-leitor">
+                Voltar
+            </button>
+        </a>
 
+    </div>
 
+    <div class="lista-leitores">
 
-<h2>
-Empréstimos
-</h2>
+        <div class="leitor">
 
+            <div class="dados">
 
+                <p><strong>Nome:</strong> {{ leitor.nome }}</p>
 
-{% if emprestimos %}
+                <p><strong>Email:</strong> {{ leitor.email }}</p>
 
+            </div>
 
-{% for emprestimo in emprestimos %}
+        </div>
 
+        <h2 style="color:#6d412a; font-weight:normal;">
+            Empréstimos
+        </h2>
 
-<div class="leitor">
+        {% if emprestimos %}
 
+            {% for emprestimo in emprestimos %}
 
-<p>
+            <div class="leitor">
 
-<strong>Livro:</strong>
+                <div class="dados">
 
-{{ emprestimo.livro }}
+                    <p>
+                        <strong>Livro:</strong>
+                        {{ emprestimo.livro }}
+                    </p>
 
-</p>
+                    <p>
+                        <strong>Data do empréstimo:</strong>
+                        {{ emprestimo.data_emprestimo }}
+                    </p>
 
+                    <p>
+                        <strong>Data de devolução:</strong>
+                        {{ emprestimo.data_devolucao }}
+                    </p>
 
+                    <p>
+                        <strong>Status:</strong>
+                        {{ emprestimo.status }}
+                    </p>
 
-<p>
+                </div>
 
-<strong>Data do empréstimo:</strong>
+            </div>
 
-{{ emprestimo.data_emprestimo }}
+            {% endfor %}
 
-</p>
+        {% else %}
 
+            <div class="leitor">
 
+                <div class="dados">
 
-<p>
+                    <p>Esse leitor não possui empréstimos.</p>
 
-<strong>Data de devolução:</strong>
+                </div>
 
-{{ emprestimo.data_devolucao }}
+            </div>
 
-</p>
+        {% endif %}
 
+    </div>
 
-
-<p>
-
-<strong>Status:</strong>
-
-{{ emprestimo.status }}
-
-</p>
-
-
-</div>
-
-
-
-{% endfor %}
-
-
-
-{% else %}
-
-
-<p>
-Esse leitor não possui empréstimos.
-</p>
-
-
-
-{% endif %}
-
-
-
-<a href="/pagina-leitores">
-
-<button>
-
-Voltar
-
-</button>
-
-</a>
-
-
+</main>
 
 {% endblock %}
