@@ -57,14 +57,17 @@ class EmprestimoBase(SQLModel):
 
 class Emprestimo(EmprestimoBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+
     data_emprestimo: date = Field(default_factory=date.today)
-    data_devolucao: Optional[date] = Field(default=None)
+
+    data_devolucao: Optional[date] = None
 
 
 class EmprestimoUpdate(SQLModel):
     leitor_id: Optional[int] = None
     livro_id: Optional[int] = None
     data_devolucao: Optional[date] = None
+
 
 # =====================
 # LEITORES

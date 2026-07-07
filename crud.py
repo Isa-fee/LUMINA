@@ -1,6 +1,6 @@
 from sqlmodel import select
 from models import Usuario, Livro, Emprestimo, Leitor
-
+from datetime import timedelta
 
 # =========================
 # USUARIOS
@@ -135,22 +135,24 @@ def criar_emprestimo(session, emprestimo):
     if not livro:
         return {"mensagem": "Livro não encontrado"}
 
-    if livro.disponivel == False:
+    if livro.quantidade_disponivel <= 0:
         return {"mensagem": "Livro indisponível"}
+
+    livro.quantidade_disponivel -= 1
 
     novo_emprestimo = Emprestimo(
         leitor_id=emprestimo.leitor_id,
         livro_id=emprestimo.livro_id
     )
 
-    livro.disponivel = False
-
-    session.add(novo_emprestimo)
+    novo_emprestimo.data_devolucao = (
+        novo_emprestimo.data_emprestimo + timedelta(days=5)
+    )
 
     session.add(livro)
+    session.add(novo_emprestimo)
 
     session.commit()
-
     session.refresh(novo_emprestimo)
 
     return novo_emprestimo
@@ -189,7 +191,7 @@ def devolver_livro(session, emprestimo_id):
 
     livro = session.get(Livro, emprestimo.livro_id)
 
-    livro.disponivel = True
+    livro.quantidade_disponivel += 1
 
     session.add(livro)
 

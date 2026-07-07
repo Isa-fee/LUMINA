@@ -12,6 +12,11 @@ Cadastro de Empréstimo
     <section class="emprestimo-card">
 
         <h2>CADASTRO DE EMPRÉSTIMO</h2>
+            {% if erro %}
+            <div class="erro">
+                {{ erro }}
+            </div>
+            {% endif %}
 
         <form action="/cadastro-emprestimo" method="POST">
 

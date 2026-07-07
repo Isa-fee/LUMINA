@@ -357,29 +357,85 @@ def tela_cadastro_emprestimo(
 
 @app.post("/cadastro-emprestimo")
 def cadastrar_emprestimo(
+    request: Request,
     leitor_id: int = Form(...),
     livro_id: int = Form(...),
     session: Session = Depends(get_session)
 ):
 
-    novo_emprestimo = Emprestimo(
+    emprestimo = EmprestimoBase(
         leitor_id=leitor_id,
         livro_id=livro_id
     )
 
-    novo_emprestimo.data_devolucao = (
-        novo_emprestimo.data_emprestimo + timedelta(days=5)
-    )
+    resultado = crud.criar_emprestimo(session, emprestimo)
 
-    session.add(novo_emprestimo)
-    session.commit()
+    if isinstance(resultado, dict):
+
+        leitores = crud.listar_leitores(session)
+        livros = crud.listar_livros(session)
+
+        return templates.TemplateResponse(
+            request=request,
+            name="cadastroemprestimo.html",
+            context={
+                "request": request,
+                "erro": resultado["mensagem"],
+                "leitores": leitores,
+                "livros": livros
+            }
+        )
 
     return RedirectResponse(
         url="/pagina-emprestimos",
         status_code=303
     )
 
+@app.get("/editar-emprestimo/{emprestimo_id}")
+def editar_emprestimo_tela(
+    emprestimo_id: int,
+    request: Request,
+    session: Session = Depends(get_session)
+):
 
+    emprestimo = session.get(Emprestimo, emprestimo_id)
+
+    leitores = crud.listar_leitores(session)
+
+    livros = crud.listar_livros(session)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="editarEmprestimo.html",
+        context={
+            "request": request,
+            "emprestimo": emprestimo,
+            "leitores": leitores,
+            "livros": livros
+        }
+    )
+
+@app.post("/editar-emprestimo/{emprestimo_id}")
+def salvar_edicao_emprestimo(
+    emprestimo_id: int,
+    leitor_id: int = Form(...),
+    livro_id: int = Form(...),
+    session: Session = Depends(get_session)
+):
+
+    emprestimo = session.get(Emprestimo, emprestimo_id)
+
+    emprestimo.leitor_id = leitor_id
+    emprestimo.livro_id = livro_id
+
+    session.add(emprestimo)
+
+    session.commit()
+
+    return RedirectResponse(
+        url="/pagina-emprestimos",
+        status_code=303
+    )
 
 # =========================
 # LEITORES

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Editar Empréstimo</h2>
+
+<form action="/editar-emprestimo/{{ emprestimo.id }}" method="post">
+
+    <label>Leitor</label>
+
+    <select name="leitor_id">
+
+        {% for leitor in leitores %}
+
+        <option
+            value="{{ leitor.id }}"
+            {% if leitor.id == emprestimo.leitor_id %}selected{% endif %}
+        >
+            {{ leitor.nome }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <label>Livro</label>
+
+    <select name="livro_id">
+
+        {% for livro in livros %}
+
+        <option
+            value="{{ livro.id }}"
+            {% if livro.id == emprestimo.livro_id %}selected{% endif %}
+        >
+            {{ livro.titulo }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <button type="submit">
+        Salvar
+    </button>
+
+</form>
+
+{% endblock %}

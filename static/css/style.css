@@ -9,6 +9,14 @@ body{
     background:#efe5d1;
 }
 
+.erro{
+    background:#ffd6d6;
+    color:#b30000;
+    padding:10px;
+    margin-bottom:20px;
+    border-radius:8px;
+}
+
 /* HEADER */
 
 header{
