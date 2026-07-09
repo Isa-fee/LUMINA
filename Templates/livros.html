@@ -87,12 +87,15 @@ Livros
             <div class="acoes">
 
                 <strong>AÇÕES:</strong>
+                <a href="/editar-livro/{{ livro.id }}">
+                <button type="button">Editar</button>
+            </a>
 
-                <button>Editar</button>
+                <form action="/excluir-livro/{{ livro.id }}" method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
 
-                <button>Excluir</button>
-
-            </div>
+</div>
 
         </div>
 

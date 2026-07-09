@@ -209,7 +209,64 @@ def deletar_livro(
     session: Session = Depends(get_session)
 ):
     return crud.deletar_livro(session, livro_id)
+    
+@app.get("/editar-livro/{livro_id}")
+def editar_livro_tela(
+    livro_id: int,
+    request: Request,
+    session: Session = Depends(get_session)
+):
 
+    livro = session.get(Livro, livro_id)
+
+    return templates.TemplateResponse(
+        request=request,
+        name="editarLivro.html",
+        context={
+            "request": request,
+            "livro": livro
+        }
+    )
+
+
+@app.post("/editar-livro/{livro_id}")
+def salvar_edicao_livro(
+    livro_id: int,
+    titulo: str = Form(...),
+    autor: str = Form(...),
+    categoria: str = Form(...),
+    quantidade_disponivel: int = Form(...),
+    session: Session = Depends(get_session)
+):
+
+    livro = session.get(Livro, livro_id)
+
+    livro.titulo = titulo
+    livro.autor = autor
+    livro.categoria = categoria
+    livro.quantidade_disponivel = quantidade_disponivel
+
+    session.add(livro)
+    session.commit()
+
+    return RedirectResponse(
+        url="/pagina-livros",
+        status_code=303
+    )
+
+
+@app.post("/excluir-livro/{livro_id}")
+def excluir_livro(
+    livro_id: int,
+    session: Session = Depends(get_session)
+):
+
+    crud.deletar_livro(session, livro_id)
+
+    return RedirectResponse(
+        url="/pagina-livros",
+        status_code=303
+    )
 
 # =========================
 # LOGIN
