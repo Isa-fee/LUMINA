@@ -1,6 +1,9 @@
 annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.13.0
+argon2-cffi==25.1.0
+argon2-cffi-bindings==25.1.0
+cffi==2.1.1
 click==8.4.1
 colorama==0.4.6
 fastapi==0.136.3
@@ -11,8 +14,11 @@ Jinja2==3.1.6
 MarkupSafe==3.0.3
 mysql==0.0.3
 mysqlclient==2.2.8
+pwdlib==0.3.1
+pycparser==3.0
 pydantic==2.13.4
 pydantic_core==2.46.4
+PyJWT==2.13.0
 PyMySQL==1.2.0
 python-multipart==0.0.32
 SQLAlchemy==2.0.50

@@ -1,6 +1,17 @@
 from sqlmodel import select
 from models import Usuario, Livro, Emprestimo, Leitor
 from datetime import timedelta
+from pwdlib import PasswordHash
+
+
+from sqlmodel import select
+from models import Usuario, Livro, Emprestimo, Leitor
+from datetime import timedelta
+from pwdlib import PasswordHash
+
+
+password_hash = PasswordHash.recommended()
+
 
 # =========================
 # USUARIOS
@@ -8,10 +19,12 @@ from datetime import timedelta
 
 def criar_usuario(session, usuario):
 
+    senha_hash = password_hash.hash(usuario.senha)
+
     novo_usuario = Usuario(
         nome=usuario.nome,
         email=usuario.email,
-        senha=usuario.senha
+        senha=senha_hash
     )
 
     session.add(novo_usuario)

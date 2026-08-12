@@ -1,6 +1,8 @@
-from fastapi import FastAPI, Depends, Request, Form, UploadFile, File
+from fastapi import (FastAPI, Depends, Request, Form, UploadFile, File, HTTPException)
+
 import shutil
 import os
+import jwt
 
 from contextlib import asynccontextmanager
 from sqlmodel import SQLModel, Session
@@ -13,7 +15,8 @@ from database import engine, get_session
 
 import crud
 
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime, timezone
+from pwdlib import PasswordHash
 
 from models import (
     Usuario,
@@ -27,11 +30,24 @@ from models import (
     Emprestimo,
     EmprestimoBase,
     EmprestimoUpdate,
-    
+
     Leitor,
     LeitorBase,
     LeitorUpdate,
 )
+
+
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "chave-lumina"
+)
+
+ALGORITHM = "HS256"
+
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
+
+password_hash = PasswordHash.recommended()
+
 
 
 @asynccontextmanager
@@ -56,17 +72,160 @@ app.mount(
 # PÁGINA INICIAL
 # =========================
 
+# =========================
+# AUTENTICAÇÃO JWT
+# =========================
+
+def get_usuario_atual(
+    request: Request,
+    session: Session = Depends(get_session)
+):
+    token = request.cookies.get("access_token")
+
+    if not token:
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    try:
+        dados = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM]
+        )
+
+        usuario_id = dados.get("sub")
+
+        if usuario_id is None:
+            raise HTTPException(
+                status_code=303,
+                headers={"Location": "/"}
+            )
+
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    except jwt.InvalidTokenError:
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    usuario = session.get(
+        Usuario,
+        int(usuario_id)
+    )
+
+    if not usuario:
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    return usuario
+
+
+# =========================
+# PÁGINA INICIAL
+# =========================
+
 @app.get("/index")
-def home(request: Request):
+def home(
+    request: Request,
+    usuario: Usuario = Depends(get_usuario_atual)
+):
+
     return templates.TemplateResponse(
         request=request,
         name="index.html",
-        context={"request": request}
+        context={
+            "request": request,
+            "usuario": usuario
+        }
     )
 
 # =========================
 # USUARIOS
 # =========================
+
+def criar_token(usuario_id: int):
+
+    expiracao = datetime.now(timezone.utc) + timedelta(
+        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+    )
+
+    dados = {
+        "sub": str(usuario_id),
+        "exp": expiracao
+    }
+
+    token = jwt.encode(
+        dados,
+        SECRET_KEY,
+        algorithm=ALGORITHM
+    )
+
+    return token
+
+# def get_usuario_atual(
+#     request: Request,
+#     session: Session = Depends(get_session)
+# ):
+
+    token = request.cookies.get("access_token")
+
+    if not token:
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    try:
+
+        dados = jwt.decode(
+            token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM]
+        )
+
+        usuario_id = dados.get("sub")
+
+        if usuario_id is None:
+            raise HTTPException(
+                status_code=303,
+                headers={"Location": "/"}
+            )
+
+    except jwt.ExpiredSignatureError:
+
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    except jwt.InvalidTokenError:
+
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    usuario = session.get(
+        Usuario,
+        int(usuario_id)
+    )
+
+    if not usuario:
+        raise HTTPException(
+            status_code=303,
+            headers={"Location": "/"}
+        )
+
+    return usuario
 
 @app.post("/usuarios")
 def criar_usuario(
@@ -122,19 +281,56 @@ def login(
 ):
 
     usuario = session.exec(
-        select(Usuario).where(Usuario.email == email)
+        select(Usuario).where(
+            Usuario.email == email
+        )
     ).first()
 
     if not usuario:
-        return {"erro": "Usuário não encontrado"}
+        return {
+            "erro": "Usuário não encontrado"
+        }
 
-    if usuario.senha != senha:
-        return {"erro": "Senha incorreta"}
+    senha_correta = password_hash.verify(
+        senha,
+        usuario.senha
+    )
 
-    return RedirectResponse(
+    if not senha_correta:
+        return {
+            "erro": "Senha incorreta"
+        }
+
+    token = criar_token(usuario.id)
+
+    resposta = RedirectResponse(
         url="/index",
         status_code=303
     )
+
+    resposta.set_cookie(
+        key="access_token",
+        value=token,
+        httponly=True,
+        max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        samesite="lax"
+    )
+
+    return resposta
+
+@app.get("/logout")
+def logout():
+
+    resposta = RedirectResponse(
+        url="/",
+        status_code=303
+    )
+
+    resposta.delete_cookie(
+        key="access_token"
+    )
+
+    return resposta
     
 
 # =========================
@@ -144,7 +340,8 @@ def login(
 @app.get("/pagina-livros")
 def pagina_livros(
     request: Request,
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    usuario: Usuario = Depends(get_usuario_atual)
 ):
 
     livros = crud.listar_livros(session)
@@ -312,7 +509,8 @@ def pagina_cadastro_livro(request: Request):
 @app.get("/pagina-emprestimos")
 def pagina_emprestimos(
     request: Request,
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    usuario: Usuario = Depends(get_usuario_atual)
 ):
 
     emprestimos_db = crud.listar_emprestimos(session)
@@ -502,7 +700,8 @@ def salvar_edicao_emprestimo(
 @app.get("/pagina-leitores")
 def pagina_leitores(
     request: Request,
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    usuario: Usuario = Depends(get_usuario_atual)
 ):
 
     leitores = crud.listar_leitores(session)

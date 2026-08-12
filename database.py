@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, create_engine, Session
 
-DATABASE_URL = "mysql+pymysql://root:admin@localhost/lumina"
+DATABASE_URL = "mysql+pymysql://root:1234@localhost/lumina"
 
 engine = create_engine(DATABASE_URL)
 

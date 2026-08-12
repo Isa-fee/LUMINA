@@ -72,11 +72,12 @@ Livros
             <p>
                 <strong>STATUS:</strong>
 
-                {% if livro.disponivel %}
+                {% if livro.quantidade_disponivel > 0 %}
                     Disponível
                 {% else %}
                     Emprestado
                 {% endif %}
+            </p>
 
             </p>
             <p>
