@@ -6,61 +6,158 @@ Editar Livro
 
 {% block content %}
 
-<main>
+<main class="livro-main">
 
-    <h1>Editar Livro</h1>
+    <section class="livro-card">
 
-    <form action="/editar-livro/{{ livro.id }}" method="post">
+        <h2>EDITAR LIVRO</h2>
 
-        <label>Título</label>
-        <input
-            type="text"
-            name="titulo"
-            value="{{ livro.titulo }}"
-            required
+        <form
+            action="/editar-livro/{{ livro.id }}"
+            method="post"
+            enctype="multipart/form-data"
         >
 
-        <label>Autor</label>
-        <input
-            type="text"
-            name="autor"
-            value="{{ livro.autor }}"
-            required
-        >
+            <div class="campo">
 
-        <label>Categoria</label>
-        <input
-            type="text"
-            name="categoria"
-            value="{{ livro.categoria }}"
-            required
-        >
-        <div class="campo">
+                <label>Título:</label>
 
-            <label>ISBN:</label>
+                <input
+                    type="text"
+                    name="titulo"
+                    value="{{ livro.titulo }}"
+                    required
+                >
 
-            <input
-                type="text"
-                name="isbn"
-                value="{{ livro.isbn }}"
-                required
-            >
-        </div>
+            </div>
 
-        <label>Quantidade disponível</label>
-        <input
-            type="number"
-            name="quantidade_disponivel"
-            value="{{ livro.quantidade_disponivel }}"
-            min="0"
-            required
-        >
 
-        <button type="submit">
-            Salvar Alterações
-        </button>
+            <div class="campo">
 
-    </form>
+                <label>Autor:</label>
+
+                <input
+                    type="text"
+                    name="autor"
+                    value="{{ livro.autor }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Categoria:</label>
+
+                <input
+                    type="text"
+                    name="categoria"
+                    value="{{ livro.categoria }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>ISBN:</label>
+
+                <input
+                    type="text"
+                    name="isbn"
+                    value="{{ livro.isbn }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Quantidade total:</label>
+
+                <input
+                    type="number"
+                    name="quantidade_total"
+                    value="{{ livro.quantidade_total }}"
+                    min="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Quantidade disponível:</label>
+
+                <input
+                    type="text"
+                    value="{{ livro.quantidade_disponivel }}"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Capa atual:</label>
+
+                {% if livro.capa %}
+
+                    <img
+                        src="/{{ livro.capa }}"
+                        alt="Capa do livro"
+                        width="120"
+                    >
+
+                {% else %}
+
+                    <p>
+                        Este livro não possui capa.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>Alterar capa:</label>
+
+                <input
+                    type="file"
+                    name="capa"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <div class="botoes-livro">
+
+                <a href="/pagina-livros">
+
+                    <button type="button">
+                        Cancelar
+                    </button>
+
+                </a>
+
+
+                <button type="submit">
+                    Salvar alterações
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
 
 </main>
 

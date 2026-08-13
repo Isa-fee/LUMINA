@@ -2,6 +2,7 @@ from typing import Optional
 from sqlmodel import SQLModel, Field
 from datetime import date
 
+
 # =====================
 # USUARIOS
 # =====================
@@ -34,10 +35,18 @@ class LivroBase(SQLModel):
 
 
 class Livro(LivroBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: Optional[int] = Field(
+        default=None,
+        primary_key=True
+    )
 
-    quantidade_total: int = Field(default=1)
-    quantidade_disponivel: int = Field(default=1)
+    quantidade_total: int = Field(
+        default=1
+    )
+
+    quantidade_disponivel: int = Field(
+        default=1
+    )
 
     capa: Optional[str] = None
 
@@ -49,6 +58,7 @@ class LivroUpdate(SQLModel):
     isbn: str
     quantidade_total: int
 
+
 # =====================
 # EMPRESTIMOS
 # =====================
@@ -59,9 +69,14 @@ class EmprestimoBase(SQLModel):
 
 
 class Emprestimo(EmprestimoBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: Optional[int] = Field(
+        default=None,
+        primary_key=True
+    )
 
-    data_emprestimo: date = Field(default_factory=date.today)
+    data_emprestimo: date = Field(
+        default_factory=date.today
+    )
 
     data_devolucao: Optional[date] = None
 
@@ -82,7 +97,10 @@ class LeitorBase(SQLModel):
 
 
 class Leitor(LeitorBase, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: Optional[int] = Field(
+        default=None,
+        primary_key=True
+    )
 
 
 class LeitorUpdate(SQLModel):

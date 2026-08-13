@@ -14,103 +14,160 @@ Livros
 
             <input
                 type="text"
-                placeholder="Buscar por título, autor ou categoria">
+                placeholder="Buscar por título, autor ou categoria"
+            >
 
-            <button>🔍</button>
+            <button>
+                🔍
+            </button>
 
         </div>
 
+
         <a href="/cadastro-livro">
+
             <button class="novo-livro">
                 + Novo livro
             </button>
+
         </a>
 
     </section>
 
+
     <section class="lista-livros">
 
-    {% for livro in livros %}
+        {% for livro in livros %}
 
-    <div class="livro">
+        <div class="livro">
 
-        <div class="capa">
+            <div class="capa">
 
-            {% if livro.capa %}
+                {% if livro.capa %}
 
-                <img
-                    src="/{{ livro.capa }}"
-                    alt="Capa do livro"
-                    width="120"
-                >
+                    <img
+                        src="/{{ livro.capa }}"
+                        alt="Capa do livro"
+                        width="120"
+                    >
 
-            {% else %}
-
-                <p>Sem capa</p>
-
-            {% endif %}
-
-        </div>
-
-        <div class="dados">
-
-            <p>
-                <strong>TÍTULO:</strong>
-                {{ livro.titulo }}
-            </p>
-
-            <p>
-                <strong>AUTOR:</strong>
-                {{ livro.autor }}
-            </p>
-
-            <p>
-                <strong>CATEGORIA:</strong>
-                {{ livro.categoria }}
-            </p>
-            
-            <p>
-                <strong>ISBN:</strong>
-                {{ livro.isbn }}
-            </p>
-
-            <p>
-                <strong>STATUS:</strong>
-
-                {% if livro.quantidade_disponivel > 0 %}
-                    Disponível
                 {% else %}
-                    Emprestado
+
+                    <p>
+                        Sem capa
+                    </p>
+
                 {% endif %}
-            </p>
 
-            </p>
-            <p>
-                <strong>QUANTIDADE DISPONÍVEL:</strong>
-                {{ livro.quantidade_disponivel }}
-            </p>
+            </div>
 
-            <div class="acoes">
 
-                <strong>AÇÕES:</strong>
-                <a href="/editar-livro/{{ livro.id }}">
-                <button type="button">Editar</button>
-            </a>
+            <div class="dados">
 
-                <form action="/excluir-livro/{{ livro.id }}" method="post" style="display:inline;">
-                <button type="submit">Excluir</button>
-            </form>
+                <p>
+                    <strong>TÍTULO:</strong>
+                    {{ livro.titulo }}
+                </p>
 
-</div>
+
+                <p>
+                    <strong>AUTOR:</strong>
+                    {{ livro.autor }}
+                </p>
+
+
+                <p>
+                    <strong>CATEGORIA:</strong>
+                    {{ livro.categoria }}
+                </p>
+
+
+                <p>
+                    <strong>ISBN:</strong>
+                    {{ livro.isbn }}
+                </p>
+
+
+                <p>
+
+                    <strong>STATUS:</strong>
+
+                    {% if livro.quantidade_disponivel > 0 %}
+
+                        Disponível
+
+                    {% else %}
+
+                        Emprestado
+
+                    {% endif %}
+
+                </p>
+
+
+                <p>
+
+                    <strong>QUANTIDADE:</strong>
+
+                    {{ livro.quantidade_disponivel }}
+                    /
+                    {{ livro.quantidade_total }}
+
+                </p>
+
+
+                <div class="acoes">
+
+                    <strong>AÇÕES:</strong>
+
+
+                    <a
+                        href="/editar-livro/{{ livro.id }}"
+                    >
+
+                        <button type="button">
+                            Editar
+                        </button>
+
+                    </a>
+
+
+                    <form
+                        action="/excluir-livro/{{ livro.id }}"
+                        method="post"
+                        style="display:inline;"
+                        onsubmit="return confirmarExclusao();"
+                    >
+
+                        <button type="submit">
+                            Excluir
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
 
         </div>
 
-    </div>
+        {% endfor %}
 
-    {% endfor %}
-
-</section>
+    </section>
 
 </main>
+
+
+<script>
+
+function confirmarExclusao() {
+
+    return confirm(
+        "Tem certeza que deseja excluir este livro?"
+    );
+
+}
+
+</script>
 
 {% endblock %}
