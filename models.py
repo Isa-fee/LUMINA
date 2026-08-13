@@ -29,7 +29,9 @@ class LivroBase(SQLModel):
     titulo: str
     autor: str
     categoria: str
+    isbn: str
     quantidade_total: int
+
 
 class Livro(LivroBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -44,6 +46,7 @@ class LivroUpdate(SQLModel):
     titulo: str
     autor: str
     categoria: str
+    isbn: str
     quantidade_total: int
 
 # =====================

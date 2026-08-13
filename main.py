@@ -1,21 +1,40 @@
-from fastapi import (FastAPI, Depends, Request, Form, UploadFile, File, HTTPException)
+from fastapi import (
+    FastAPI,
+    Depends,
+    Request,
+    Form,
+    UploadFile,
+    File,
+    HTTPException
+)
 
 import shutil
 import os
 import jwt
 
 from contextlib import asynccontextmanager
-from sqlmodel import SQLModel, Session
+
+from sqlmodel import (
+    SQLModel,
+    Session,
+    select
+)
+
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
-from sqlmodel import select
 
 from database import engine, get_session
 
 import crud
 
-from datetime import timedelta, date, datetime, timezone
+from datetime import (
+    timedelta,
+    date,
+    datetime,
+    timezone
+)
+
 from pwdlib import PasswordHash
 
 from models import (
@@ -37,6 +56,10 @@ from models import (
 )
 
 
+# =========================
+# CONFIGURAÇÕES
+# =========================
+
 SECRET_KEY = os.getenv(
     "SECRET_KEY",
     "chave-lumina"
@@ -49,6 +72,9 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 password_hash = PasswordHash.recommended()
 
 
+# =========================
+# BANCO DE DADOS
+# =========================
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -58,61 +84,92 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    lifespan=lifespan
+)
 
-templates = Jinja2Templates(directory="templates")
+
+# =========================
+# TEMPLATES
+# =========================
+
+templates = Jinja2Templates(
+    directory="templates"
+)
+
+
+# =========================
+# ARQUIVOS ESTÁTICOS
+# =========================
 
 app.mount(
     "/static",
-    StaticFiles(directory="static"),
+    StaticFiles(
+        directory="static"
+    ),
     name="static"
 )
 
-# =========================
-# PÁGINA INICIAL
-# =========================
 
 # =========================
-# AUTENTICAÇÃO JWT
+# AUTENTICAÇÃO
 # =========================
 
 def get_usuario_atual(
     request: Request,
     session: Session = Depends(get_session)
 ):
-    token = request.cookies.get("access_token")
+
+    token = request.cookies.get(
+        "access_token"
+    )
 
     if not token:
+
         raise HTTPException(
             status_code=303,
-            headers={"Location": "/"}
+            headers={
+                "Location": "/"
+            }
         )
 
     try:
+
         dados = jwt.decode(
             token,
             SECRET_KEY,
             algorithms=[ALGORITHM]
         )
 
-        usuario_id = dados.get("sub")
+        usuario_id = dados.get(
+            "sub"
+        )
 
         if usuario_id is None:
+
             raise HTTPException(
                 status_code=303,
-                headers={"Location": "/"}
+                headers={
+                    "Location": "/"
+                }
             )
 
     except jwt.ExpiredSignatureError:
+
         raise HTTPException(
             status_code=303,
-            headers={"Location": "/"}
+            headers={
+                "Location": "/"
+            }
         )
 
     except jwt.InvalidTokenError:
+
         raise HTTPException(
             status_code=303,
-            headers={"Location": "/"}
+            headers={
+                "Location": "/"
+            }
         )
 
     usuario = session.get(
@@ -121,41 +178,30 @@ def get_usuario_atual(
     )
 
     if not usuario:
+
         raise HTTPException(
             status_code=303,
-            headers={"Location": "/"}
+            headers={
+                "Location": "/"
+            }
         )
 
     return usuario
 
 
 # =========================
-# PÁGINA INICIAL
+# TOKEN
 # =========================
 
-@app.get("/index")
-def home(
-    request: Request,
-    usuario: Usuario = Depends(get_usuario_atual)
+def criar_token(
+    usuario_id: int
 ):
 
-    return templates.TemplateResponse(
-        request=request,
-        name="index.html",
-        context={
-            "request": request,
-            "usuario": usuario
-        }
-    )
-
-# =========================
-# USUARIOS
-# =========================
-
-def criar_token(usuario_id: int):
-
-    expiracao = datetime.now(timezone.utc) + timedelta(
-        minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+    expiracao = (
+        datetime.now(timezone.utc)
+        + timedelta(
+            minutes=ACCESS_TOKEN_EXPIRE_MINUTES
+        )
     )
 
     dados = {
@@ -171,61 +217,32 @@ def criar_token(usuario_id: int):
 
     return token
 
-# def get_usuario_atual(
-#     request: Request,
-#     session: Session = Depends(get_session)
-# ):
 
-    token = request.cookies.get("access_token")
+# =========================
+# PÁGINA INICIAL
+# =========================
 
-    if not token:
-        raise HTTPException(
-            status_code=303,
-            headers={"Location": "/"}
-        )
+@app.get("/index")
+def home(
+    request: Request,
+    usuario: Usuario = Depends(
+        get_usuario_atual
+    )
+):
 
-    try:
-
-        dados = jwt.decode(
-            token,
-            SECRET_KEY,
-            algorithms=[ALGORITHM]
-        )
-
-        usuario_id = dados.get("sub")
-
-        if usuario_id is None:
-            raise HTTPException(
-                status_code=303,
-                headers={"Location": "/"}
-            )
-
-    except jwt.ExpiredSignatureError:
-
-        raise HTTPException(
-            status_code=303,
-            headers={"Location": "/"}
-        )
-
-    except jwt.InvalidTokenError:
-
-        raise HTTPException(
-            status_code=303,
-            headers={"Location": "/"}
-        )
-
-    usuario = session.get(
-        Usuario,
-        int(usuario_id)
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={
+            "request": request,
+            "usuario": usuario
+        }
     )
 
-    if not usuario:
-        raise HTTPException(
-            status_code=303,
-            headers={"Location": "/"}
-        )
 
-    return usuario
+# =========================
+# USUARIOS
+# =========================
 
 @app.post("/usuarios")
 def criar_usuario(
@@ -241,7 +258,10 @@ def criar_usuario(
         senha=senha
     )
 
-    crud.criar_usuario(session, usuario)
+    crud.criar_usuario(
+        session,
+        usuario
+    )
 
     return RedirectResponse(
         url="/",
@@ -253,7 +273,10 @@ def criar_usuario(
 def listar_usuarios(
     session: Session = Depends(get_session)
 ):
-    return crud.listar_usuarios(session)
+
+    return crud.listar_usuarios(
+        session
+    )
 
 
 @app.put("/usuarios/{usuario_id}")
@@ -262,7 +285,12 @@ def atualizar_usuario(
     dados: UsuarioUpdate,
     session: Session = Depends(get_session)
 ):
-    return crud.atualizar_usuario(session, usuario_id, dados)
+
+    return crud.atualizar_usuario(
+        session,
+        usuario_id,
+        dados
+    )
 
 
 @app.delete("/usuarios/{usuario_id}")
@@ -270,8 +298,16 @@ def deletar_usuario(
     usuario_id: int,
     session: Session = Depends(get_session)
 ):
-    return crud.deletar_usuario(session, usuario_id)
 
+    return crud.deletar_usuario(
+        session,
+        usuario_id
+    )
+
+
+# =========================
+# LOGIN
+# =========================
 
 @app.post("/login")
 def login(
@@ -287,6 +323,7 @@ def login(
     ).first()
 
     if not usuario:
+
         return {
             "erro": "Usuário não encontrado"
         }
@@ -297,11 +334,14 @@ def login(
     )
 
     if not senha_correta:
+
         return {
             "erro": "Senha incorreta"
         }
 
-    token = criar_token(usuario.id)
+    token = criar_token(
+        usuario.id
+    )
 
     resposta = RedirectResponse(
         url="/index",
@@ -318,6 +358,7 @@ def login(
 
     return resposta
 
+
 @app.get("/logout")
 def logout():
 
@@ -331,20 +372,24 @@ def logout():
     )
 
     return resposta
-    
+
 
 # =========================
 # LIVROS
-# ========================
+# =========================
 
 @app.get("/pagina-livros")
 def pagina_livros(
     request: Request,
     session: Session = Depends(get_session),
-    usuario: Usuario = Depends(get_usuario_atual)
+    usuario: Usuario = Depends(
+        get_usuario_atual
+    )
 ):
 
-    livros = crud.listar_livros(session)
+    livros = crud.listar_livros(
+        session
+    )
 
     return templates.TemplateResponse(
         request=request,
@@ -355,28 +400,59 @@ def pagina_livros(
         }
     )
 
+
+# =========================
+# CADASTRAR LIVRO
+# =========================
+
 @app.post("/livros")
 def criar_livro(
     titulo: str = Form(...),
     autor: str = Form(...),
     categoria: str = Form(...),
-    capa: UploadFile = File(...),
+    isbn: str = Form(...),
+    quantidade_total: int = Form(...),
+    capa: UploadFile = File(None),
     session: Session = Depends(get_session)
 ):
 
+    if quantidade_total < 1:
+
+        return RedirectResponse(
+            url="/cadastro-livro",
+            status_code=303
+        )
+
     caminho_imagem = None
 
-    if capa:
+    if capa and capa.filename:
 
-        caminho_imagem = f"static/uploads/{capa.filename}"
+        os.makedirs(
+            "static/uploads",
+            exist_ok=True
+        )
 
-        with open(caminho_imagem, "wb") as buffer:
-            shutil.copyfileobj(capa.file, buffer)
+        caminho_imagem = (
+            f"static/uploads/{capa.filename}"
+        )
+
+        with open(
+            caminho_imagem,
+            "wb"
+        ) as buffer:
+
+            shutil.copyfileobj(
+                capa.file,
+                buffer
+            )
 
     livro = Livro(
         titulo=titulo,
         autor=autor,
         categoria=categoria,
+        isbn=isbn,
+        quantidade_total=quantidade_total,
+        quantidade_disponivel=quantidade_total,
         capa=caminho_imagem
     )
 
@@ -391,22 +467,45 @@ def criar_livro(
         status_code=303
     )
 
+
+# =========================
+# ATUALIZAR LIVRO - API
+# =========================
+
 @app.put("/livros/{livro_id}")
 def atualizar_livro(
     livro_id: int,
     dados: LivroUpdate,
     session: Session = Depends(get_session)
 ):
-    return crud.atualizar_livro(session, livro_id, dados)
 
+    return crud.atualizar_livro(
+        session,
+        livro_id,
+        dados
+    )
+
+
+# =========================
+# EXCLUIR LIVRO - API
+# =========================
 
 @app.delete("/livros/{livro_id}")
 def deletar_livro(
     livro_id: int,
     session: Session = Depends(get_session)
 ):
-    return crud.deletar_livro(session, livro_id)
-    
+
+    return crud.deletar_livro(
+        session,
+        livro_id
+    )
+
+
+# =========================
+# TELA DE EDIÇÃO
+# =========================
+
 @app.get("/editar-livro/{livro_id}")
 def editar_livro_tela(
     livro_id: int,
@@ -414,7 +513,17 @@ def editar_livro_tela(
     session: Session = Depends(get_session)
 ):
 
-    livro = session.get(Livro, livro_id)
+    livro = session.get(
+        Livro,
+        livro_id
+    )
+
+    if not livro:
+
+        return RedirectResponse(
+            url="/pagina-livros",
+            status_code=303
+        )
 
     return templates.TemplateResponse(
         request=request,
@@ -426,31 +535,105 @@ def editar_livro_tela(
     )
 
 
+# =========================
+# SALVAR EDIÇÃO DO LIVRO
+# =========================
+
 @app.post("/editar-livro/{livro_id}")
 def salvar_edicao_livro(
     livro_id: int,
     titulo: str = Form(...),
     autor: str = Form(...),
     categoria: str = Form(...),
-    quantidade_disponivel: int = Form(...),
+    isbn: str = Form(...),
+    quantidade_total: int = Form(...),
+    capa: UploadFile = File(None),
     session: Session = Depends(get_session)
 ):
 
-    livro = session.get(Livro, livro_id)
+    livro = session.get(
+        Livro,
+        livro_id
+    )
+
+    if not livro:
+
+        return RedirectResponse(
+            url="/pagina-livros",
+            status_code=303
+        )
+
+    if quantidade_total < 1:
+
+        return RedirectResponse(
+            url=f"/editar-livro/{livro_id}",
+            status_code=303
+        )
+
+    quantidade_emprestada = (
+        livro.quantidade_total
+        - livro.quantidade_disponivel
+    )
+
+    if quantidade_total < quantidade_emprestada:
+
+        return RedirectResponse(
+            url=f"/editar-livro/{livro_id}",
+            status_code=303
+        )
 
     livro.titulo = titulo
     livro.autor = autor
     livro.categoria = categoria
-    livro.quantidade_disponivel = quantidade_disponivel
+    livro.isbn = isbn
+
+    livro.quantidade_total = (
+        quantidade_total
+    )
+
+    livro.quantidade_disponivel = (
+        quantidade_total
+        - quantidade_emprestada
+    )
+
+    if capa and capa.filename:
+
+        os.makedirs(
+            "static/uploads",
+            exist_ok=True
+        )
+
+        caminho_imagem = (
+            f"static/uploads/{capa.filename}"
+        )
+
+        with open(
+            caminho_imagem,
+            "wb"
+        ) as buffer:
+
+            shutil.copyfileobj(
+                capa.file,
+                buffer
+            )
+
+        livro.capa = caminho_imagem
 
     session.add(livro)
+
     session.commit()
+
+    session.refresh(livro)
 
     return RedirectResponse(
         url="/pagina-livros",
         status_code=303
     )
 
+
+# =========================
+# EXCLUIR LIVRO PELA TELA
+# =========================
 
 @app.post("/excluir-livro/{livro_id}")
 def excluir_livro(
@@ -458,47 +641,68 @@ def excluir_livro(
     session: Session = Depends(get_session)
 ):
 
-    crud.deletar_livro(session, livro_id)
+    crud.deletar_livro(
+        session,
+        livro_id
+    )
 
     return RedirectResponse(
         url="/pagina-livros",
         status_code=303
     )
 
+
 # =========================
 # LOGIN
 # =========================
 
 @app.get("/")
-def pagina_login(request: Request):
+def pagina_login(
+    request: Request
+):
+
     return templates.TemplateResponse(
         request=request,
         name="login.html",
-        context={"request": request}
+        context={
+            "request": request
+        }
     )
+
 
 # =========================
 # CADASTRO
 # =========================
 
 @app.get("/cadastro")
-def pagina_cadastro(request: Request):
+def pagina_cadastro(
+    request: Request
+):
+
     return templates.TemplateResponse(
         request=request,
         name="cadastro.html",
-        context={"request": request}
+        context={
+            "request": request
+        }
     )
+
 
 # =========================
 # CADASTRO DE LIVROS
 # =========================
 
 @app.get("/cadastro-livro")
-def pagina_cadastro_livro(request: Request):
+def pagina_cadastro_livro(
+    request: Request
+):
+
     return templates.TemplateResponse(
         request=request,
         name="cadastroLivro.html",
-        context={"request": request}
+        context={
+            "request": request
+        }
     )
 
 
@@ -510,28 +714,60 @@ def pagina_cadastro_livro(request: Request):
 def pagina_emprestimos(
     request: Request,
     session: Session = Depends(get_session),
-    usuario: Usuario = Depends(get_usuario_atual)
+    usuario: Usuario = Depends(
+        get_usuario_atual
+    )
 ):
 
-    emprestimos_db = crud.listar_emprestimos(session)
+    emprestimos_db = (
+        crud.listar_emprestimos(
+            session
+        )
+    )
 
     emprestimos = []
 
     for emprestimo in emprestimos_db:
 
-        leitor = session.get(Leitor, emprestimo.leitor_id)
-        livro = session.get(Livro, emprestimo.livro_id)
+        leitor = session.get(
+            Leitor,
+            emprestimo.leitor_id
+        )
+
+        livro = session.get(
+            Livro,
+            emprestimo.livro_id
+        )
 
         emprestimos.append({
+
             "id": emprestimo.id,
-            "leitor": leitor.nome if leitor else "Leitor removido",
-            "livro": livro.titulo if livro else "Livro removido",
-            "data_emprestimo": emprestimo.data_emprestimo,
-            "data_devolucao": emprestimo.data_devolucao,
+
+            "leitor": (
+                leitor.nome
+                if leitor
+                else "Leitor removido"
+            ),
+
+            "livro": (
+                livro.titulo
+                if livro
+                else "Livro removido"
+            ),
+
+            "data_emprestimo":
+                emprestimo.data_emprestimo,
+
+            "data_devolucao":
+                emprestimo.data_devolucao,
+
             "atrasado": (
-                emprestimo.data_devolucao is not None
-                and date.today() > emprestimo.data_devolucao
+                emprestimo.data_devolucao
+                is not None
+                and date.today()
+                > emprestimo.data_devolucao
             )
+
         })
 
     return templates.TemplateResponse(
@@ -543,19 +779,27 @@ def pagina_emprestimos(
         }
     )
 
+
 @app.post("/emprestimos")
 def criar_emprestimo(
     emprestimo: EmprestimoBase,
     session: Session = Depends(get_session)
 ):
-    return crud.criar_emprestimo(session, emprestimo)
+
+    return crud.criar_emprestimo(
+        session,
+        emprestimo
+    )
 
 
 @app.get("/emprestimos")
 def listar_emprestimos(
     session: Session = Depends(get_session)
 ):
-    return crud.listar_emprestimos(session)
+
+    return crud.listar_emprestimos(
+        session
+    )
 
 
 @app.put("/emprestimos/{emprestimo_id}")
@@ -564,7 +808,12 @@ def atualizar_emprestimo(
     dados: EmprestimoUpdate,
     session: Session = Depends(get_session)
 ):
-    return crud.atualizar_emprestimo(session, emprestimo_id, dados)
+
+    return crud.atualizar_emprestimo(
+        session,
+        emprestimo_id,
+        dados
+    )
 
 
 @app.delete("/emprestimos/{emprestimo_id}")
@@ -572,20 +821,31 @@ def devolver_livro(
     emprestimo_id: int,
     session: Session = Depends(get_session)
 ):
-    return crud.devolver_livro(session, emprestimo_id)
 
-@app.post("/excluir-emprestimo/{emprestimo_id}")
+    return crud.devolver_livro(
+        session,
+        emprestimo_id
+    )
+
+
+@app.post(
+    "/excluir-emprestimo/{emprestimo_id}"
+)
 def excluir_emprestimo(
     emprestimo_id: int,
     session: Session = Depends(get_session)
 ):
 
-    crud.devolver_livro(session, emprestimo_id)
+    crud.devolver_livro(
+        session,
+        emprestimo_id
+    )
 
     return RedirectResponse(
         url="/pagina-emprestimos",
         status_code=303
     )
+
 
 # =========================
 # CADASTRO DE EMPRÉSTIMO
@@ -597,8 +857,13 @@ def tela_cadastro_emprestimo(
     session: Session = Depends(get_session)
 ):
 
-    leitores = crud.listar_leitores(session)
-    livros = crud.listar_livros(session)
+    leitores = crud.listar_leitores(
+        session
+    )
+
+    livros = crud.listar_livros(
+        session
+    )
 
     return templates.TemplateResponse(
         request=request,
@@ -609,6 +874,7 @@ def tela_cadastro_emprestimo(
             "livros": livros
         }
     )
+
 
 @app.post("/cadastro-emprestimo")
 def cadastrar_emprestimo(
@@ -623,12 +889,20 @@ def cadastrar_emprestimo(
         livro_id=livro_id
     )
 
-    resultado = crud.criar_emprestimo(session, emprestimo)
+    resultado = crud.criar_emprestimo(
+        session,
+        emprestimo
+    )
 
     if isinstance(resultado, dict):
 
-        leitores = crud.listar_leitores(session)
-        livros = crud.listar_livros(session)
+        leitores = crud.listar_leitores(
+            session
+        )
+
+        livros = crud.listar_livros(
+            session
+        )
 
         return templates.TemplateResponse(
             request=request,
@@ -646,18 +920,28 @@ def cadastrar_emprestimo(
         status_code=303
     )
 
-@app.get("/editar-emprestimo/{emprestimo_id}")
+
+@app.get(
+    "/editar-emprestimo/{emprestimo_id}"
+)
 def editar_emprestimo_tela(
     emprestimo_id: int,
     request: Request,
     session: Session = Depends(get_session)
 ):
 
-    emprestimo = session.get(Emprestimo, emprestimo_id)
+    emprestimo = session.get(
+        Emprestimo,
+        emprestimo_id
+    )
 
-    leitores = crud.listar_leitores(session)
+    leitores = crud.listar_leitores(
+        session
+    )
 
-    livros = crud.listar_livros(session)
+    livros = crud.listar_livros(
+        session
+    )
 
     return templates.TemplateResponse(
         request=request,
@@ -670,7 +954,10 @@ def editar_emprestimo_tela(
         }
     )
 
-@app.post("/editar-emprestimo/{emprestimo_id}")
+
+@app.post(
+    "/editar-emprestimo/{emprestimo_id}"
+)
 def salvar_edicao_emprestimo(
     emprestimo_id: int,
     leitor_id: int = Form(...),
@@ -678,7 +965,10 @@ def salvar_edicao_emprestimo(
     session: Session = Depends(get_session)
 ):
 
-    emprestimo = session.get(Emprestimo, emprestimo_id)
+    emprestimo = session.get(
+        Emprestimo,
+        emprestimo_id
+    )
 
     emprestimo.leitor_id = leitor_id
     emprestimo.livro_id = livro_id
@@ -692,19 +982,23 @@ def salvar_edicao_emprestimo(
         status_code=303
     )
 
+
 # =========================
 # LEITORES
 # =========================
-
 
 @app.get("/pagina-leitores")
 def pagina_leitores(
     request: Request,
     session: Session = Depends(get_session),
-    usuario: Usuario = Depends(get_usuario_atual)
+    usuario: Usuario = Depends(
+        get_usuario_atual
+    )
 ):
 
-    leitores = crud.listar_leitores(session)
+    leitores = crud.listar_leitores(
+        session
+    )
 
     return templates.TemplateResponse(
         request=request,
@@ -715,14 +1009,20 @@ def pagina_leitores(
         }
     )
 
+
 @app.get("/cadastro-leitor")
-def pagina_cadastro_leitor(request: Request):
+def pagina_cadastro_leitor(
+    request: Request
+):
 
     return templates.TemplateResponse(
         request=request,
         name="cadastroLeitor.html",
-        context={"request": request}
+        context={
+            "request": request
+        }
     )
+
 
 @app.post("/leitores")
 def criar_leitor(
@@ -736,18 +1036,22 @@ def criar_leitor(
         email=email
     )
 
-    crud.criar_leitor(session, leitor)
+    crud.criar_leitor(
+        session,
+        leitor
+    )
 
     return RedirectResponse(
         url="/pagina-leitores",
         status_code=303
     )
 
+
 @app.put("/leitores/{leitor_id}")
 def atualizar_leitor(
-    leitor_id:int,
-    dados:LeitorUpdate,
-    session:Session = Depends(get_session)
+    leitor_id: int,
+    dados: LeitorUpdate,
+    session: Session = Depends(get_session)
 ):
 
     return crud.atualizar_leitor(
@@ -757,11 +1061,10 @@ def atualizar_leitor(
     )
 
 
-
 @app.delete("/leitores/{leitor_id}")
 def deletar_leitor(
-    leitor_id:int,
-    session:Session = Depends(get_session)
+    leitor_id: int,
+    session: Session = Depends(get_session)
 ):
 
     return crud.deletar_leitor(
@@ -769,24 +1072,29 @@ def deletar_leitor(
         leitor_id
     )
 
-@app.get("/leitor/{leitor_id}/detalhes")
+
+@app.get(
+    "/leitor/{leitor_id}/detalhes"
+)
 def detalhes_leitor(
-    leitor_id:int,
-    request:Request,
-    session:Session = Depends(get_session)
+    leitor_id: int,
+    request: Request,
+    session: Session = Depends(get_session)
 ):
 
-    leitor = session.get(Leitor, leitor_id)
-
+    leitor = session.get(
+        Leitor,
+        leitor_id
+    )
 
     emprestimos = session.exec(
         select(Emprestimo)
-        .where(Emprestimo.leitor_id == leitor_id)
+        .where(
+            Emprestimo.leitor_id == leitor_id
+        )
     ).all()
 
-
     lista = []
-
 
     for emprestimo in emprestimos:
 
@@ -795,89 +1103,92 @@ def detalhes_leitor(
             emprestimo.livro_id
         )
 
-
         lista.append({
 
-            "livro": livro.titulo if livro else "Livro removido",
+            "livro": (
+                livro.titulo
+                if livro
+                else "Livro removido"
+            ),
 
             "data_emprestimo":
-            emprestimo.data_emprestimo,
+                emprestimo.data_emprestimo,
 
             "data_devolucao":
-            emprestimo.data_devolucao,
+                emprestimo.data_devolucao,
 
-
-            "status":
-            (
+            "status": (
                 "Atrasado"
-                if emprestimo.data_devolucao
-                and date.today() > emprestimo.data_devolucao
-
+                if (
+                    emprestimo.data_devolucao
+                    and date.today()
+                    > emprestimo.data_devolucao
+                )
                 else "Em andamento"
             )
 
         })
 
-
     return templates.TemplateResponse(
-
         request=request,
-
         name="detalhesLeitor.html",
-
         context={
-
-            "request":request,
-
-            "leitor":leitor,
-
-            "emprestimos":lista
-
+            "request": request,
+            "leitor": leitor,
+            "emprestimos": lista
         }
-
     )
 
 
-#EDIÇÃO DE LEITORES
+# =========================
+# EDIÇÃO DE LEITORES
+# =========================
 
-@app.get("/editar-leitor/{leitor_id}")
+@app.get(
+    "/editar-leitor/{leitor_id}"
+)
 def editar_leitor_tela(
-    leitor_id:int,
-    request:Request,
-    session:Session = Depends(get_session)
+    leitor_id: int,
+    request: Request,
+    session: Session = Depends(get_session)
 ):
 
-    leitor = session.get(Leitor, leitor_id)
-
+    leitor = session.get(
+        Leitor,
+        leitor_id
+    )
 
     return templates.TemplateResponse(
         request=request,
         name="editarLeitor.html",
         context={
-            "request":request,
-            "leitor":leitor
+            "request": request,
+            "leitor": leitor
         }
     )
 
-@app.post("/editar-leitor/{leitor_id}")
+
+@app.post(
+    "/editar-leitor/{leitor_id}"
+)
 def salvar_edicao_leitor(
-    leitor_id:int,
-    nome:str = Form(...),
-    email:str = Form(...),
-    session:Session = Depends(get_session)
+    leitor_id: int,
+    nome: str = Form(...),
+    email: str = Form(...),
+    session: Session = Depends(get_session)
 ):
 
-    leitor = session.get(Leitor, leitor_id)
-
+    leitor = session.get(
+        Leitor,
+        leitor_id
+    )
 
     leitor.nome = nome
     leitor.email = email
 
-
     session.add(leitor)
 
     session.commit()
-
 
     return RedirectResponse(
         url="/pagina-leitores",
@@ -885,14 +1196,18 @@ def salvar_edicao_leitor(
     )
 
 
-@app.post("/excluir-leitor/{leitor_id}")
+@app.post(
+    "/excluir-leitor/{leitor_id}"
+)
 def excluir_leitor(
-    leitor_id:int,
-    session:Session = Depends(get_session)
+    leitor_id: int,
+    session: Session = Depends(get_session)
 ):
 
-    crud.deletar_leitor(session, leitor_id)
-
+    crud.deletar_leitor(
+        session,
+        leitor_id
+    )
 
     return RedirectResponse(
         url="/pagina-leitores",

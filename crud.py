@@ -85,7 +85,10 @@ def criar_livro(session, livro):
     novo_livro = Livro(
         titulo=livro.titulo,
         autor=livro.autor,
-        categoria=livro.categoria
+        categoria=livro.categoria,
+        isbn=livro.isbn,
+        quantidade_total=livro.quantidade_total,
+        quantidade_disponivel=livro.quantidade_total
     )
 
     session.add(novo_livro)
@@ -111,13 +114,36 @@ def atualizar_livro(session, livro_id, dados):
     if not livro:
         return {"mensagem": "Livro não encontrado"}
 
-    for chave, valor in dados.dict().items():
-        setattr(livro, chave, valor)
+    if dados.quantidade_total < 1:
+        return {
+            "mensagem": "A quantidade deve ser maior que zero"
+        }
+
+    quantidade_emprestada = (
+        livro.quantidade_total - livro.quantidade_disponivel
+    )
+
+    if dados.quantidade_total < quantidade_emprestada:
+        return {
+            "mensagem": (
+                "A quantidade total não pode ser menor "
+                "que a quantidade atualmente emprestada."
+            )
+        }
+
+    livro.titulo = dados.titulo
+    livro.autor = dados.autor
+    livro.categoria = dados.categoria
+    livro.isbn = dados.isbn
+
+    livro.quantidade_total = dados.quantidade_total
+
+    livro.quantidade_disponivel = (
+        dados.quantidade_total - quantidade_emprestada
+    )
 
     session.add(livro)
-
     session.commit()
-
     session.refresh(livro)
 
     return livro
@@ -128,13 +154,34 @@ def deletar_livro(session, livro_id):
     livro = session.get(Livro, livro_id)
 
     if not livro:
-        return {"mensagem": "Livro não encontrado"}
+        return {
+            "sucesso": False,
+            "mensagem": "Livro não encontrado"
+        }
+
+    # Verifica se existem empréstimos relacionados ao livro
+    emprestimos = session.exec(
+        select(Emprestimo).where(
+            Emprestimo.livro_id == livro_id
+        )
+    ).all()
+
+    if emprestimos:
+        return {
+            "sucesso": False,
+            "mensagem": (
+                "Não é possível excluir este livro porque "
+                "existem empréstimos registrados para ele."
+            )
+        }
 
     session.delete(livro)
-
     session.commit()
 
-    return {"mensagem": "Livro deletado"}
+    return {
+        "sucesso": True,
+        "mensagem": "Livro excluído com sucesso"
+    }
 
 
 # =========================

@@ -35,6 +35,17 @@ Editar Livro
             value="{{ livro.categoria }}"
             required
         >
+        <div class="campo">
+
+            <label>ISBN:</label>
+
+            <input
+                type="text"
+                name="isbn"
+                value="{{ livro.isbn }}"
+                required
+            >
+        </div>
 
         <label>Quantidade disponível</label>
         <input
