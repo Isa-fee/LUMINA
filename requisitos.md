@@ -8,7 +8,7 @@ O presente documento tem como objetivo apresentar o levantamento de requisitos d
 
 O sistema **Lumina** será uma aplicação web que permitirá o gerenciamento completo de uma biblioteca. Entre suas principais funcionalidades estão o cadastro e controle de livros, autenticação de usuários e gerenciamento de empréstimos.
 
-O sistema será desenvolvido utilizando tecnologias modernas, incluindo **HTML, CSS e Vue.js** no frontend, além de uma **API REST** no backend.
+O sistema será desenvolvido utilizando tecnologias modernas, incluindo **HTML, CSS e React.js** no frontend, além de uma **API REST** no backend.
 
 ## 3. REQUISITOS FUNCIONAIS
 
@@ -57,7 +57,7 @@ Os requisitos funcionais descrevem as funcionalidades que o sistema deve oferece
 
 **RF04.01** – O sistema deve permitir que o usuário encerre sua sessão a qualquer momento.
 
-**RF04.02** – O sistema deve invalidar o token JWT após o logout.
+**RF04.02** – O sistema deve remover o token de autenticação do cliente após o logout.
 
 **RF04.03** – O sistema deve redirecionar o usuário para a tela de login após o encerramento da sessão.
 
@@ -137,7 +137,7 @@ Os requisitos funcionais descrevem as funcionalidades que o sistema deve oferece
 
 **RF12.01** – O sistema deve calcular automaticamente a data prevista de devolução.
 
-**RF12.02** – O prazo padrão de devolução deve ser de 15 dias corridos após a data do empréstimo.
+**RF12.02** – O prazo padrão de devolução deve ser de 5 dias corridos após a data do empréstimo.
 
 **RF12.03** – O sistema deve exibir ao usuário a data prevista para devolução.
 
@@ -213,7 +213,7 @@ A API deve ser stateless, não armazenando estado da sessão no servidor.
 
 ### RNF06 – Interface Web
 
-O sistema deve possuir interface web desenvolvida utilizando HTML, CSS e Vue.js.
+O sistema deve possuir interface web desenvolvida utilizando HTML, CSS e React.js.
 
 ### RNF07 – Responsividade
 
