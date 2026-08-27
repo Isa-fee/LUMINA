@@ -13,27 +13,34 @@ Este projeto tem como objetivo desenvolver um sistema de gerenciamento de dados 
 
 O sistema permitirá o cadastro, consulta, edição e exclusão de livros, além do controle de empréstimos e devoluções.
 
-## Documentação Base do Projeto
 
-Colocar o link
+## Tecnologias Utilizadas
 
-## Tecnologia de Frontend
+### Frontend
 
 * HTML
 * CSS
-* VueJS
+* JavaScript
+* React
+* Vite
 
-## Tecnologia de Backend
+### Backend
 
 * Python
 * FastAPI
-* SQLAlchemy
+* SQLModel
 * JWT
-* MySQL
+* SQLite
+
+---
 
 ## Configuração do Ambiente
 
+Antes de executar o projeto pela primeira vez, é necessário configurar o ambiente do backend e instalar as dependências do frontend.
+
 ### 1. Criar o ambiente virtual
+
+Na raiz do projeto, execute:
 
 ```bash
 py -m venv env
@@ -47,25 +54,139 @@ py -m venv env
 .\env\Scripts\activate
 ```
 
-### 3. Instalar as dependências
+Após a ativação, o terminal deverá apresentar `(env)` no início da linha.
+
+### 3. Instalar as dependências do backend
+
+Com o ambiente virtual ativado e ainda na raiz do projeto, execute:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Executar a aplicação
+### 4. Instalar as dependências do frontend
+
+Entre na pasta do frontend:
+
+```bash
+cd frontend
+```
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+Depois, volte para a raiz do projeto:
+
+```bash
+cd ..
+```
+
+> As etapas de criação do ambiente virtual e instalação das dependências são necessárias principalmente na primeira execução do projeto.
+
+---
+
+## Executando o Projeto
+
+Para executar o Lumina, é necessário manter **dois terminais abertos simultaneamente**: um para o backend FastAPI e outro para o frontend React.
+
+### Terminal 1 — Backend FastAPI
+
+Abra um terminal na raiz do projeto:
+
+```text
+C:\Users\...\Documents\LUMINA>
+```
+
+Caso o ambiente virtual ainda não esteja ativado, execute:
+
+```cmd
+.\env\Scripts\activate
+```
+
+Em seguida, inicie o backend:
 
 ```bash
 uvicorn main:app --reload
 ```
 
-> Caso o arquivo principal esteja em outra pasta, ajuste o comando conforme a estrutura do projeto.
+O backend estará disponível em:
 
-### 5. Desativar o ambiente virtual
+```text
+http://127.0.0.1:8000
+```
+
+A documentação automática da API estará disponível em:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+Mantenha esse terminal aberto enquanto estiver utilizando o sistema.
+
+### Terminal 2 — Frontend React
+
+Abra um **segundo terminal** no VS Code e entre na pasta do frontend:
+
+```bash
+cd frontend
+```
+
+Inicie o frontend:
+
+```bash
+npm run dev
+```
+
+O frontend estará disponível em:
+
+```text
+http://localhost:5173
+```
+
+Mantenha esse terminal aberto também.
+
+### Resumo
+
+Ao executar o projeto, os dois terminais deverão ficar aproximadamente assim:
+
+**Terminal 1 — Backend**
+
+```text
+(env) C:\Users\...\Documents\LUMINA>
+uvicorn main:app --reload
+
+→ FastAPI: http://127.0.0.1:8000
+```
+
+**Terminal 2 — Frontend**
+
+```text
+(env) C:\Users\...\Documents\LUMINA\frontend>
+npm run dev
+
+→ React: http://localhost:5173
+```
+
+Depois, acesse o sistema pelo navegador em:
+
+```text
+http://localhost:5173
+```
+
+### Encerrar o Projeto
+
+Para interromper o backend e o frontend, utilize `Ctrl + C` em cada terminal.
+
+Para desativar o ambiente virtual:
 
 ```bash
 deactivate
 ```
+
+---
 
 ## Cronograma do Projeto
 
@@ -74,7 +195,7 @@ deactivate
 * Definir o projeto;
 * Levantamento e definição dos requisitos;
 * Criação dos diagramas (caso de uso, classe, sequência e atividades);
-* Desenvolvimento inicial do backend (API REST) e frontend (Vue.js);
+* Desenvolvimento inicial do backend (API REST) e frontend;
 * Implementação de autenticação com JWT;
 * Garantir que a aplicação seja stateless.
 
@@ -105,4 +226,3 @@ deactivate
 * Documentação do projeto.
 
 **Entrega esperada:** Projeto completo.
-
