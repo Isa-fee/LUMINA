@@ -12,6 +12,8 @@ import shutil
 import os
 import jwt
 
+from routers import livros, leitores, emprestimos, usuarios
+
 from contextlib import asynccontextmanager
 
 from sqlmodel import (
@@ -44,15 +46,12 @@ from models import (
 
     Livro,
     LivroBase,
-    LivroUpdate,
 
     Emprestimo,
     EmprestimoBase,
-    EmprestimoUpdate,
 
     Leitor,
-    LeitorBase,
-    LeitorUpdate,
+    LeitorBase
 )
 
 
@@ -88,6 +87,21 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+app.include_router(
+    livros.router
+)
+
+app.include_router(
+    leitores.router
+)
+
+app.include_router(
+    emprestimos.router
+)
+
+app.include_router(
+    usuarios.router
+)
 
 # =========================
 # TEMPLATES
@@ -468,38 +482,8 @@ def criar_livro(
     )
 
 
-# =========================
-# ATUALIZAR LIVRO - API
-# =========================
-
-@app.put("/livros/{livro_id}")
-def atualizar_livro(
-    livro_id: int,
-    dados: LivroUpdate,
-    session: Session = Depends(get_session)
-):
-
-    return crud.atualizar_livro(
-        session,
-        livro_id,
-        dados
-    )
 
 
-# =========================
-# EXCLUIR LIVRO - API
-# =========================
-
-@app.delete("/livros/{livro_id}")
-def deletar_livro(
-    livro_id: int,
-    session: Session = Depends(get_session)
-):
-
-    return crud.deletar_livro(
-        session,
-        livro_id
-    )
 
 
 # =========================
@@ -780,53 +764,6 @@ def pagina_emprestimos(
     )
 
 
-@app.post("/emprestimos")
-def criar_emprestimo(
-    emprestimo: EmprestimoBase,
-    session: Session = Depends(get_session)
-):
-
-    return crud.criar_emprestimo(
-        session,
-        emprestimo
-    )
-
-
-@app.get("/emprestimos")
-def listar_emprestimos(
-    session: Session = Depends(get_session)
-):
-
-    return crud.listar_emprestimos(
-        session
-    )
-
-
-@app.put("/emprestimos/{emprestimo_id}")
-def atualizar_emprestimo(
-    emprestimo_id: int,
-    dados: EmprestimoUpdate,
-    session: Session = Depends(get_session)
-):
-
-    return crud.atualizar_emprestimo(
-        session,
-        emprestimo_id,
-        dados
-    )
-
-
-@app.delete("/emprestimos/{emprestimo_id}")
-def devolver_livro(
-    emprestimo_id: int,
-    session: Session = Depends(get_session)
-):
-
-    return crud.devolver_livro(
-        session,
-        emprestimo_id
-    )
-
 
 @app.post(
     "/excluir-emprestimo/{emprestimo_id}"
@@ -1047,30 +984,8 @@ def criar_leitor(
     )
 
 
-@app.put("/leitores/{leitor_id}")
-def atualizar_leitor(
-    leitor_id: int,
-    dados: LeitorUpdate,
-    session: Session = Depends(get_session)
-):
-
-    return crud.atualizar_leitor(
-        session,
-        leitor_id,
-        dados
-    )
 
 
-@app.delete("/leitores/{leitor_id}")
-def deletar_leitor(
-    leitor_id: int,
-    session: Session = Depends(get_session)
-):
-
-    return crud.deletar_leitor(
-        session,
-        leitor_id
-    )
 
 
 @app.get(

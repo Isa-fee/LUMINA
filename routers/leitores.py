@@ -1,0 +1,110 @@
+from fastapi import (
+    APIRouter,
+    Depends,
+    HTTPException
+)
+
+from sqlmodel import Session
+
+from database import get_session
+from models import LeitorBase, LeitorUpdate
+from services import leitor_service
+
+
+router = APIRouter(
+    prefix="/api/leitores",
+    tags=["Leitores"]
+)
+
+
+@router.get("/")
+def listar_leitores(
+    session: Session = Depends(get_session)
+):
+
+    return leitor_service.listar_leitores(
+        session
+    )
+
+
+@router.get("/{leitor_id}")
+def buscar_leitor(
+    leitor_id: int,
+    session: Session = Depends(get_session)
+):
+
+    leitor = leitor_service.buscar_leitor(
+        session,
+        leitor_id
+    )
+
+    if not leitor:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Leitor não encontrado."
+        )
+
+    return leitor
+
+
+@router.post("/")
+def criar_leitor(
+    dados: LeitorBase,
+    session: Session = Depends(get_session)
+):
+
+    return leitor_service.criar_leitor(
+        session=session,
+        nome=dados.nome,
+        email=dados.email
+    )
+
+
+@router.put("/{leitor_id}")
+def atualizar_leitor(
+    leitor_id: int,
+    dados: LeitorUpdate,
+    session: Session = Depends(get_session)
+):
+
+    try:
+
+        return leitor_service.atualizar_leitor(
+            session=session,
+            leitor_id=leitor_id,
+            nome=dados.nome,
+            email=dados.email
+        )
+
+    except ValueError as erro:
+
+        raise HTTPException(
+            status_code=404,
+            detail=str(erro)
+        )
+
+
+@router.delete("/{leitor_id}")
+def excluir_leitor(
+    leitor_id: int,
+    session: Session = Depends(get_session)
+):
+
+    try:
+
+        leitor_service.excluir_leitor(
+            session,
+            leitor_id
+        )
+
+        return {
+            "mensagem": "Leitor excluído com sucesso."
+        }
+
+    except ValueError as erro:
+
+        raise HTTPException(
+            status_code=404,
+            detail=str(erro)
+        )
