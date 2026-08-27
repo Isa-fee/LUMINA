@@ -3,6 +3,9 @@ from sqlmodel import Session
 from models import Livro
 from repositories import livro_repository, emprestimo_repository
 
+import os
+import uuid
+import shutil
 
 def listar_livros(
     session: Session
@@ -22,14 +25,14 @@ def buscar_livro(
     )
 
 
-def criar_livro(
-    session: Session,
-    titulo: str,
-    autor: str,
-    categoria: str,
-    isbn: str,
-    quantidade_total: int,
-    capa: str | None = None
+async def criar_livro(
+    session,
+    titulo,
+    autor,
+    categoria,
+    isbn,
+    quantidade_total,
+    capa=None
 ):
 
     if quantidade_total < 1:
@@ -37,21 +40,91 @@ def criar_livro(
             "A quantidade deve ser maior que zero."
         )
 
-    livro = Livro(
+
+    caminho_capa = None
+
+
+    if capa:
+
+        extensoes_permitidas = {
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".webp"
+        }
+
+        _, extensao = os.path.splitext(
+            capa.filename
+        )
+
+        extensao = extensao.lower()
+
+
+        if extensao not in extensoes_permitidas:
+
+            raise ValueError(
+                "Formato de imagem não permitido."
+            )
+
+
+        nome_arquivo = (
+            f"{uuid.uuid4()}{extensao}"
+        )
+
+
+        pasta_capas = os.path.join(
+            "static",
+            "uploads",
+            "capas"
+        )
+
+
+        os.makedirs(
+            pasta_capas,
+            exist_ok=True
+        )
+
+
+        caminho_arquivo = os.path.join(
+            pasta_capas,
+            nome_arquivo
+        )
+
+
+        with open(
+            caminho_arquivo,
+            "wb"
+        ) as arquivo:
+
+            shutil.copyfileobj(
+                capa.file,
+                arquivo
+            )
+
+
+        caminho_capa = (
+            f"uploads/capas/{nome_arquivo}"
+        )
+
+
+    novo_livro = Livro(
         titulo=titulo,
         autor=autor,
         categoria=categoria,
         isbn=isbn,
         quantidade_total=quantidade_total,
         quantidade_disponivel=quantidade_total,
-        capa=capa
+        capa=caminho_capa
     )
 
-    return livro_repository.salvar(
-        session,
-        livro
-    )
 
+    session.add(novo_livro)
+
+    session.commit()
+
+    session.refresh(novo_livro)
+
+    return novo_livro
 
 def excluir_livro(
     session: Session,

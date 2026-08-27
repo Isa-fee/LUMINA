@@ -1,0 +1,375 @@
+.home-layout {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #fffdfb;
+
+    color: #6d412a;
+
+    font-family: Arial, sans-serif;
+}
+
+
+.home-main {
+    width: min(1440px, 95%);
+
+    margin: 0 auto;
+
+    padding: 35px 0 55px;
+
+    flex: 1;
+}
+
+/* ========================================
+   BOAS-VINDAS
+======================================== */
+
+.home-boas-vindas {
+    min-height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.home-boas-vindas h1 {
+    margin: 0 0 10px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 2.5rem;
+    font-weight: 450;
+
+    color: #743b1e;
+}
+
+
+.home-boas-vindas p {
+    margin: 0;
+
+    font-size: 1rem;
+
+    color: #b06b47;
+}
+
+
+.home-raposa {
+    width: 240px;
+    max-height: 125px;
+
+    object-fit: contain;
+}
+
+
+/* ========================================
+   TÍTULOS
+======================================== */
+
+.titulo-secao {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    margin: 10px 0 28px;
+
+    color: #673619;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+
+.titulo-secao div {
+    height: 1px;
+
+    flex: 1;
+
+    background: #d7b9a7;
+}
+
+
+/* ========================================
+   RESUMO
+======================================== */
+
+.resumo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 22px;
+
+    margin-bottom: 42px;
+}
+
+
+.resumo-card {
+    min-height: 105px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 18px 20px;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 3px 12px rgba(105, 57, 30, 0.13);
+}
+
+
+.resumo-card img {
+    width: 95px;
+    height: 95px;
+
+    object-fit: contain;
+}
+
+.resumo-card div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.resumo-card strong {
+    font-size: 1.25rem;
+
+    color: #704127;
+}
+
+.resumo-card span {
+    font-size: 0.95rem;
+
+    color: #80543d;
+}
+
+
+/* ========================================
+   ACESSO RÁPIDO
+======================================== */
+
+.acesso-rapido {
+    display: flex;
+    justify-content: center;
+
+    gap: 110px;
+
+    margin: 0 0 45px;
+}
+
+
+.atalho-card {
+    width: 180px;
+    min-height: 165px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 3px 12px rgba(105, 57, 30, 0.13);
+
+    color: #75452d;
+
+    text-align: center;
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.atalho-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 7px 18px rgba(105, 57, 30, 0.17);
+}
+
+
+.atalho-card img {
+    width: 105px;
+    height: 90px;
+
+    object-fit: contain;
+}
+
+
+.atalho-card span {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.05rem;
+}
+
+
+.home-divisor {
+    width: 100%;
+    height: 1px;
+
+    margin: 5px 0 35px;
+
+    background: #d7b9a7;
+}
+
+
+/* ========================================
+   AÇÕES
+======================================== */
+
+.acoes-home {
+    display: flex;
+    justify-content: center;
+
+    gap: 70px;
+}
+
+
+.acao-home-card {
+    width: 330px;
+    min-height: 180px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 25px;
+
+    border: 1px solid #d89a77;
+    border-radius: 14px;
+
+    color: #713b20;
+
+    text-decoration: none;
+
+    background: #fffaf6;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.acao-home-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 16px rgba(105, 57, 30, 0.10);
+}
+
+
+.acao-home-card > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.acao-home-card img {
+    width: 105px;
+    height: 78px;
+
+    margin-bottom: 10px;
+
+    object-fit: contain;
+}
+
+
+.acao-home-card strong {
+    font-size: 1rem;
+}
+
+.acao-home-card p {
+    max-width: 190px;
+
+    margin: 6px 0 0;
+
+    font-size: 0.95rem;
+}
+
+
+.acao-seta {
+    padding-bottom: 25px;
+
+    font-size: 1.8rem;
+}
+
+
+/* ========================================
+   CARREGAMENTO
+======================================== */
+
+.home-carregando {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #6d412a;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .resumo-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .acesso-rapido {
+        flex-wrap: wrap;
+
+        gap: 25px;
+    }
+
+
+    .acoes-home {
+        flex-wrap: wrap;
+
+        gap: 25px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .home-raposa {
+        display: none;
+    }
+
+
+    .resumo-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .acao-home-card {
+        width: 100%;
+    }
+}

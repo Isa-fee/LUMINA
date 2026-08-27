@@ -1,20 +1,33 @@
-const API_URL = "http://127.0.0.1:8000"
-
+export const API_URL =
+    "http://127.0.0.1:8000"
 
 export async function apiFetch(
     endpoint,
     options = {}
 ) {
+
     const token = localStorage.getItem("token")
 
     const headers = {
-        "Content-Type": "application/json",
         ...options.headers
     }
 
-    if (token) {
-        headers.Authorization = `Bearer ${token}`
+
+    // Se NÃO for FormData, envia como JSON
+    if (!(options.body instanceof FormData)) {
+
+        headers["Content-Type"] =
+            "application/json"
     }
+
+
+    // Adiciona o token JWT
+    if (token) {
+
+        headers.Authorization =
+            `Bearer ${token}`
+    }
+
 
     const response = await fetch(
         `${API_URL}${endpoint}`,
@@ -23,6 +36,7 @@ export async function apiFetch(
             headers
         }
     )
+
 
     return response
 }

@@ -1,8 +1,9 @@
 import { useState } from "react"
-
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { login } from "../services/authService"
+
+import "../styles/Login.css"
 
 
 function Login() {
@@ -10,14 +11,17 @@ function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [mensagem, setMensagem] = useState("")
+    const [carregando, setCarregando] = useState(false)
 
     const navigate = useNavigate()
+
 
     async function handleSubmit(event) {
 
         event.preventDefault()
 
-        setMensagem("Entrando...")
+        setMensagem("")
+        setCarregando(true)
 
         try {
 
@@ -36,66 +40,111 @@ function Login() {
             setMensagem(
                 erro.message
             )
+
+        } finally {
+
+            setCarregando(false)
         }
     }
 
 
     return (
-        <main>
+        <main className="login-page">
 
-            <h1>Lumina</h1>
+            <section className="login-identidade">
 
-            <h2>Entrar</h2>
+                <img
+                    src="/images/logo-lumina.png"
+                    alt="Lumina"
+                    className="login-logo"
+                />
 
-            <form onSubmit={handleSubmit}>
+            </section>
 
-                <div>
-                    <label htmlFor="email">
-                        E-mail
-                    </label>
 
-                    <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={
-                            (event) =>
-                                setEmail(
-                                    event.target.value
-                                )
-                        }
-                        required
-                    />
+            <section className="login-area">
+
+                <div className="login-card">
+
+                    <h1>FAÇA LOGIN</h1>
+
+                    <form onSubmit={handleSubmit}>
+
+                        <div className="login-campo">
+
+                            <label htmlFor="email">
+                                E-MAIL
+                            </label>
+
+                            <input
+                                id="email"
+                                type="email"
+                                value={email}
+                                onChange={
+                                    (event) =>
+                                        setEmail(
+                                            event.target.value
+                                        )
+                                }
+                                required
+                            />
+
+                        </div>
+
+
+                        <div className="login-campo">
+
+                            <label htmlFor="senha">
+                                SENHA
+                            </label>
+
+                            <input
+                                id="senha"
+                                type="password"
+                                value={senha}
+                                onChange={
+                                    (event) =>
+                                        setSenha(
+                                            event.target.value
+                                        )
+                                }
+                                required
+                            />
+
+                        </div>
+
+
+                        {mensagem && (
+                            <p className="login-erro">
+                                {mensagem}
+                            </p>
+                        )}
+
+
+                        <button
+                            type="submit"
+                            disabled={carregando}
+                        >
+                            {carregando
+                                ? "ENTRANDO..."
+                                : "ENTRAR"
+                            }
+                        </button>
+
+                    </form>
+
+
+                    <p className="login-cadastro">
+                        Não possui conta?{" "}
+
+                        <Link to="/cadastro">
+                            Cadastre-se
+                        </Link>
+                    </p>
+
                 </div>
 
-                <div>
-                    <label htmlFor="senha">
-                        Senha
-                    </label>
-
-                    <input
-                        id="senha"
-                        type="password"
-                        value={senha}
-                        onChange={
-                            (event) =>
-                                setSenha(
-                                    event.target.value
-                                )
-                        }
-                        required
-                    />
-                </div>
-
-                <button type="submit">
-                    Entrar
-                </button>
-
-            </form>
-
-            {mensagem && (
-                <p>{mensagem}</p>
-            )}
+            </section>
 
         </main>
     )

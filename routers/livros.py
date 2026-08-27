@@ -1,7 +1,10 @@
 from fastapi import (
     APIRouter,
     Depends,
-    HTTPException
+    HTTPException,
+    Form,
+    File,
+    UploadFile
 )
 
 from sqlmodel import Session
@@ -52,20 +55,26 @@ def buscar_livro(
 
 
 @router.post("/")
-def criar_livro(
-    dados: LivroBase,
+async def criar_livro(
+    titulo: str = Form(...),
+    autor: str = Form(...),
+    categoria: str = Form(...),
+    isbn: str = Form(...),
+    quantidade_total: int = Form(...),
+    capa: UploadFile | None = File(default=None),
     session: Session = Depends(get_session)
 ):
 
     try:
 
-        livro = livro_service.criar_livro(
+        livro = await livro_service.criar_livro(
             session=session,
-            titulo=dados.titulo,
-            autor=dados.autor,
-            categoria=dados.categoria,
-            isbn=dados.isbn,
-            quantidade_total=dados.quantidade_total
+            titulo=titulo,
+            autor=autor,
+            categoria=categoria,
+            isbn=isbn,
+            quantidade_total=quantidade_total,
+            capa=capa
         )
 
         return livro
@@ -76,7 +85,6 @@ def criar_livro(
             status_code=400,
             detail=str(erro)
         )
-
 
 @router.put("/{livro_id}")
 def atualizar_livro(

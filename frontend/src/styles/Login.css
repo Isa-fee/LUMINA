@@ -1,0 +1,272 @@
+/* ========================================
+   PÁGINA DE LOGIN
+======================================== */
+
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-columns: 55% 45%;
+
+    background:
+        linear-gradient(
+            rgba(70, 37, 18, 0.08),
+            rgba(70, 37, 18, 0.08)
+        ),
+        url("/images/login-background.png");
+
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* ========================================
+   IDENTIDADE DO LUMINA
+======================================== */
+
+.login-identidade {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px;
+}
+
+
+.login-logo {
+    width: min(390px, 80%);
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+/* ========================================
+   ÁREA DO FORMULÁRIO
+======================================== */
+
+.login-area {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 60px 8vw 60px 20px;
+}
+
+
+/* ========================================
+   CARD
+======================================== */
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+
+    padding: 32px 30px;
+
+    background: rgba(255, 253, 250, 0.96);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(50, 25, 10, 0.18);
+
+    color: #75462f;
+}
+
+
+.login-card h1 {
+    margin: 0 0 22px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+
+    color: #75462f;
+}
+
+
+/* ========================================
+   FORMULÁRIO
+======================================== */
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+.login-campo {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.login-campo label {
+    font-family: Arial, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+
+    color: #75462f;
+}
+
+
+.login-campo input {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 1px solid #c8a994;
+    border-radius: 5px;
+
+    background: #fffdfb;
+
+    color: #4f3325;
+
+    font-size: 0.95rem;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.login-campo input:focus {
+    border-color: #7d4b31;
+
+    box-shadow:
+        0 0 0 3px rgba(125, 75, 49, 0.10);
+}
+
+
+/* ========================================
+   BOTÃO
+======================================== */
+
+.login-card button {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 9px 16px;
+
+    border: none;
+    border-radius: 999px;
+
+    background: #7b482e;
+
+    color: #ffffff;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.login-card button:hover:not(:disabled) {
+    background: #673b27;
+
+    transform: translateY(-1px);
+}
+
+
+.login-card button:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+
+/* ========================================
+   ERRO
+======================================== */
+
+.login-erro {
+    margin: -6px 0 -8px;
+
+    color: #9c342d;
+
+    font-size: 0.82rem;
+}
+
+
+/* ========================================
+   CADASTRO
+======================================== */
+
+.login-cadastro {
+    margin: 18px 0 0;
+
+    text-align: center;
+
+    font-size: 0.82rem;
+
+    color: #75513d;
+}
+
+
+.login-cadastro a {
+    color: #6d412a;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.login-cadastro a:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 850px) {
+
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+
+    .login-identidade {
+        min-height: auto;
+
+        padding: 50px 30px 10px;
+    }
+
+
+    .login-logo {
+        width: min(300px, 75%);
+    }
+
+
+    .login-area {
+        min-height: auto;
+
+        justify-content: center;
+
+        padding: 20px 25px 60px;
+    }
+
+
+    .login-card {
+        max-width: 420px;
+    }
+}

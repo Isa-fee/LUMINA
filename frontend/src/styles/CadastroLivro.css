@@ -1,0 +1,393 @@
+.cadastro-livro-page {
+    width: min(1200px, 90%);
+
+    margin: 0 auto;
+
+    padding: 45px 0 70px;
+
+    color: #6d412a;
+}
+
+
+/* TOPO */
+
+.cadastro-livro-topo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 30px;
+}
+
+
+.cadastro-identificacao {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #b9683f;
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+}
+
+
+.cadastro-livro-topo h1 {
+    margin: 0 0 8px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    color: #713b20;
+
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+
+.cadastro-livro-topo p {
+    margin: 0;
+
+    color: #a26546;
+
+    font-size: 0.85rem;
+}
+
+
+.cadastro-voltar {
+    color: #854b2e;
+
+    font-size: 0.82rem;
+
+    text-decoration: none;
+}
+
+
+.cadastro-voltar:hover {
+    text-decoration: underline;
+}
+
+
+/* FORMULÁRIO */
+
+.cadastro-livro-form {
+    display: grid;
+
+    grid-template-columns: 270px 1fr;
+
+    gap: 45px;
+
+    padding: 35px;
+
+    border: 1px solid #ead5c8;
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 4px 16px rgba(105, 57, 30, 0.08);
+}
+
+
+.cadastro-livro-form h2 {
+    margin: 0 0 22px;
+
+    color: #75452e;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+
+/* CAPA */
+
+.cadastro-capa {
+    padding-right: 35px;
+
+    border-right: 1px solid #ead5c8;
+}
+
+
+.upload-capa {
+    width: 190px;
+    height: 260px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
+
+    border: 1px dashed #b97856;
+    border-radius: 10px;
+
+    background: #fff9f5;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.upload-capa:hover {
+    border-color: #75452e;
+
+    background: #fff5ee;
+}
+
+
+.upload-capa img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+.capa-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 20px;
+
+    color: #9a6245;
+
+    text-align: center;
+}
+
+
+.capa-placeholder > span {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #b97856;
+    border-radius: 50%;
+
+    font-size: 1.5rem;
+}
+
+
+.capa-placeholder strong {
+    font-size: 0.82rem;
+}
+
+
+.capa-placeholder small {
+    color: #b08169;
+
+    font-size: 0.68rem;
+}
+
+
+.trocar-capa {
+    display: block;
+
+    margin-top: 12px;
+
+    color: #8c5134;
+
+    font-size: 0.75rem;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
+
+/* DADOS */
+
+.cadastro-dados {
+    min-width: 0;
+}
+
+
+.campos-livro-linha {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+.campo-livro {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 20px;
+}
+
+
+.campo-livro label {
+    color: #75452e;
+
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+
+.campo-livro input {
+    width: 100%;
+    height: 43px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d6b09b;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #fffdfb;
+
+    color: #693b25;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.campo-livro input:focus {
+    border-color: #a76240;
+
+    box-shadow:
+        0 0 0 3px rgba(169, 98, 64, 0.08);
+}
+
+
+.campo-livro input::placeholder {
+    color: #bc9480;
+}
+
+
+/* ERRO */
+
+.cadastro-livro-erro {
+    margin-bottom: 20px;
+
+    padding: 12px 15px;
+
+    border-radius: 8px;
+
+    background: #fff0ed;
+
+    color: #a23d34;
+
+    font-size: 0.8rem;
+}
+
+
+/* BOTÕES */
+
+.cadastro-livro-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 10px;
+}
+
+
+.btn-cancelar-cadastro,
+.btn-salvar-livro {
+    min-width: 130px;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
+
+.btn-cancelar-cadastro {
+    border: 1px solid #b77b5b;
+
+    background: #ffffff;
+
+    color: #7b472d;
+
+    text-decoration: none;
+}
+
+
+.btn-salvar-livro {
+    border: 1px solid #7b472d;
+
+    background: #7b472d;
+
+    color: #ffffff;
+}
+
+
+.btn-salvar-livro:hover {
+    background: #633821;
+}
+
+
+.btn-salvar-livro:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 800px) {
+
+    .cadastro-livro-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    .cadastro-capa {
+        padding: 0 0 30px;
+
+        border-right: none;
+        border-bottom: 1px solid #ead5c8;
+    }
+
+
+    .campos-livro-linha {
+        grid-template-columns: 1fr;
+    }
+
+
+    .cadastro-livro-topo {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

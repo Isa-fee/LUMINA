@@ -1,0 +1,616 @@
+/* ========================================
+   PÁGINA
+======================================== */
+
+.livros-page {
+    width: min(1440px, 92%);
+
+    margin: 0 auto;
+
+    padding: 40px 0 70px;
+
+    color: #6d412a;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.livros-cabecalho {
+    margin-bottom: 28px;
+}
+
+
+.livros-cabecalho > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #b9683f;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+.livros-cabecalho h1 {
+    margin: 0 0 8px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    color: #713b20;
+
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+
+.livros-cabecalho p {
+    margin: 0;
+
+    color: #a26546;
+
+    font-size: 1rem;
+}
+
+
+/* ========================================
+   BARRA DE FILTROS
+======================================== */
+
+.barra-livros {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 1fr)
+        180px
+        200px
+        175px;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 18px 20px;
+
+    margin-bottom: 28px;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 3px 14px rgba(105, 57, 30, 0.08);
+}
+
+
+/* PESQUISA */
+
+.busca-livros {
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    border: 1px solid #a96847;
+    border-radius: 999px;
+
+    background: #ffffff;
+}
+
+
+.busca-livros input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #6d412a;
+
+    font-size: 0.9rem;
+}
+
+
+.busca-livros input::placeholder {
+    color: #b66e49;
+}
+
+
+.icone-busca {
+    color: #744027;
+
+    font-size: 1.3rem;
+}
+
+
+/* SELECTS */
+
+.barra-livros select {
+    height: 44px;
+
+    padding: 0 14px;
+
+    border: 1px solid #a96847;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #a75835;
+
+    font-size: 0.88rem;
+
+    cursor: pointer;
+}
+
+
+/* NOVO LIVRO */
+
+.btn-novo-livro {
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    border-radius: 9px;
+
+    background: #794329;
+
+    color: #ffffff;
+
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.btn-novo-livro span {
+    width: 19px;
+    height: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+
+    font-size: 0.9rem;
+}
+
+
+.btn-novo-livro:hover {
+    background: #633821;
+}
+
+
+/* ========================================
+   RESULTADO
+======================================== */
+
+.resultado-livros {
+    margin-bottom: 22px;
+
+    color: #75442c;
+
+    font-size: 0.95rem;
+}
+
+
+/* ========================================
+   GRADE
+======================================== */
+
+.grade-livros {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+/* ========================================
+   CARD
+======================================== */
+
+.card-livro {
+    width: 100%;
+    min-height: 190px;
+
+    display: grid;
+
+    grid-template-columns:
+        130px
+        minmax(250px, 1.5fr)
+        minmax(180px, 0.8fr)
+        minmax(250px, 1fr);
+
+    align-items: center;
+
+    gap: 28px;
+
+    padding: 20px 30px;
+
+    border: 1px solid #b98264;
+    border-radius: 28px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 2px 8px rgba(105, 57, 30, 0.04);
+}
+
+.livro-conteudo {
+    display: flex;
+
+    gap: 18px;
+}
+
+
+/* ========================================
+   CAPA
+======================================== */
+
+.livro-capa-area {
+    width: 115px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+
+    flex-shrink: 0;
+}
+
+
+.livro-capa {
+    width: 115px;
+    height: 145px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    background: #f2dfd1;
+
+    overflow: hidden;
+}
+
+.livro-capa img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+.livro-sem-capa {
+    font-size: 2.8rem;
+}
+
+/* ========================================
+   CATEGORIA
+======================================== */
+
+.categoria-tag {
+    width: 100%;
+
+    display: block;
+
+    margin-top: 7px;
+
+    padding: 3px 8px;
+
+    border-radius: 999px;
+
+    text-align: center;
+
+    font-size: 0.80rem;
+    font-weight: 600;
+
+    color: #ffffff;
+
+    background: #8b765f;
+}
+
+
+/* CORES POR CATEGORIA */
+
+.categoria-fantasia {
+    background: #3f794b;
+}
+
+
+.categoria-romance {
+    background: #c855a2;
+}
+
+
+.categoria-historia {
+    background: #d8a638;
+}
+
+
+.categoria-biografia {
+    background: #a76ac2;
+}
+
+
+.categoria-ficcao {
+    background: #c75a5a;
+}
+
+
+.categoria-ficcao-cientifica {
+    background: #c85261;
+}
+
+
+.categoria-classico,
+.categoria-classicos {
+    background: #c96d3e;
+}
+
+
+.categoria-autoajuda {
+    background: #4a9c8d;
+}
+
+
+.categoria-terror {
+    background: #68465d;
+}
+
+
+.categoria-misterio {
+    background: #68758b;
+}
+
+
+.categoria-aventura {
+    background: #8b7042;
+}
+
+
+.categoria-infantil {
+    background: #d1818e;
+}
+
+
+.categoria-outra {
+    background: #8b765f;
+}
+
+
+/* ========================================
+   INFORMAÇÕES
+======================================== */
+
+.livro-info {
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    padding: 8px 25px 8px 0;
+
+    border-right: 1px solid #dfbba7;
+}
+
+
+.livro-info h2 {
+    margin: 0 0 8px;
+
+    color: #75452e;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+
+.livro-autor {
+    margin: 0;
+
+    color: #8e5c43;
+
+    font-size: 0.95rem;
+}
+
+
+.livro-quantidades {
+    align-self: stretch;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 8px 25px 8px 0;
+
+    border-right: 1px solid #dfbba7;
+}
+
+
+.livro-quantidades p {
+    margin: 4px 0;
+
+    color: #825039;
+
+    font-size: 0.95rem;
+}
+
+
+.livro-quantidades strong {
+    color: #69371f;
+}
+
+
+/* ========================================
+   AÇÕES
+======================================== */
+
+.acoes-livro {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    gap: 18px;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+}
+
+
+.acao-livro {
+    min-width: 60px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #70412a;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+.acao-icone {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #a97052;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #805039;
+
+    font-size: 1.3rem;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.acao-livro:hover .acao-icone {
+    background: #fff5ef;
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   ESTADOS
+======================================== */
+
+.livros-estado,
+.livros-vazio {
+    min-height: 350px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #8c5c43;
+}
+
+
+.livros-vazio h2 {
+    margin-bottom: 5px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-weight: 400;
+}
+
+
+.livros-erro {
+    padding: 14px 18px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background: #fff0ed;
+
+    color: #a23d34;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .card-livro {
+        grid-template-columns:
+            110px 1fr;
+    }
+
+
+    .livro-info {
+        border-right: none;
+    }
+
+
+    .livro-quantidades {
+        grid-column: 1 / -1;
+
+        border-right: none;
+        border-top: 1px solid #dfbba7;
+
+        padding: 15px 0 0;
+    }
+
+
+    .acoes-livro {
+        grid-column: 1 / -1;
+
+        padding-top: 15px;
+
+        border-top: 1px solid #dfbba7;
+    }
+}
