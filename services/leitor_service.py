@@ -1,7 +1,15 @@
 from sqlmodel import Session
 
+from datetime import date
+
+
 from models import Leitor
-from repositories import leitor_repository
+
+from repositories import (
+    leitor_repository,
+    emprestimo_repository,
+    livro_repository
+)
 
 
 def listar_leitores(
@@ -84,3 +92,61 @@ def excluir_leitor(
         session,
         leitor
     )
+
+
+def obter_detalhes_leitor(
+    session: Session,
+    leitor_id: int
+):
+
+    leitor = leitor_repository.buscar_por_id(
+        session,
+        leitor_id
+    )
+
+    if not leitor:
+        raise ValueError(
+            "Leitor não encontrado."
+        )
+
+    emprestimos = (
+        emprestimo_repository.listar_por_leitor(
+            session,
+            leitor_id
+        )
+    )
+
+    historico = []
+
+    hoje = date.today()
+
+    for emprestimo in emprestimos:
+
+        livro = livro_repository.buscar_por_id(
+            session,
+            emprestimo.livro_id
+        )
+
+        status = "No prazo"
+
+        if (
+            emprestimo.data_devolucao
+            and hoje > emprestimo.data_devolucao
+        ):
+            status = "Atrasado"
+
+        historico.append({
+            "id": emprestimo.id,
+            "livro_id": emprestimo.livro_id,
+            "livro": livro.titulo if livro else "Livro não encontrado",
+            "data_emprestimo": emprestimo.data_emprestimo,
+            "data_devolucao": emprestimo.data_devolucao,
+            "status": status
+        })
+
+    return {
+        "id": leitor.id,
+        "nome": leitor.nome,
+        "email": leitor.email,
+        "emprestimos": historico
+    }

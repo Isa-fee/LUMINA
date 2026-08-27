@@ -112,3 +112,24 @@ def excluir_leitor(
             status_code=404,
             detail=str(erro)
         )
+
+
+@router.get("/{leitor_id}/detalhes")
+def detalhes_leitor(
+    leitor_id: int,
+    session: Session = Depends(get_session)
+):
+
+    try:
+
+        return leitor_service.obter_detalhes_leitor(
+            session,
+            leitor_id
+        )
+
+    except ValueError as erro:
+
+        raise HTTPException(
+            status_code=404,
+            detail=str(erro)
+        )
