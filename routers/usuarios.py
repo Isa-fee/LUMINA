@@ -10,6 +10,7 @@ from database import get_session
 from models import UsuarioBase, UsuarioUpdate
 from services import usuario_service
 
+from dependencies.auth import get_current_user
 
 router = APIRouter(
     prefix="/api/usuarios",
@@ -19,7 +20,8 @@ router = APIRouter(
 
 @router.get("/")
 def listar_usuarios(
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    usuario_atual = Depends(get_current_user)
 ):
 
     return usuario_service.listar_usuarios(
@@ -30,7 +32,8 @@ def listar_usuarios(
 @router.get("/{usuario_id}")
 def buscar_usuario(
     usuario_id: int,
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    usuario_atual = Depends(get_current_user)
 ):
 
     usuario = usuario_service.buscar_usuario(
@@ -75,7 +78,8 @@ def criar_usuario(
 def atualizar_usuario(
     usuario_id: int,
     dados: UsuarioUpdate,
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    usuario_atual = Depends(get_current_user)
 ):
 
     try:
@@ -107,7 +111,8 @@ def atualizar_usuario(
 @router.delete("/{usuario_id}")
 def excluir_usuario(
     usuario_id: int,
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    usuario_atual = Depends(get_current_user)
 ):
 
     try:

@@ -106,3 +106,21 @@ class Leitor(LeitorBase, table=True):
 class LeitorUpdate(SQLModel):
     nome: str
     email: str
+
+
+####################### específicos de auth ############################
+
+class LoginRequest(SQLModel):
+    email: str
+    senha: str
+
+
+class TokenResponse(SQLModel):
+    access_token: str
+    token_type: str = "bearer"
+
+
+class UsuarioResponse(SQLModel):
+    id: int
+    nome: str
+    email: str

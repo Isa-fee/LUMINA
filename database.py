@@ -5,8 +5,12 @@ from sqlmodel import (
 )
 
 
+# DATABASE_URL = (
+#     "mysql+pymysql://root:admin@localhost/lumina"
+# )
+
 DATABASE_URL = (
-    "mysql+pymysql://root:admin@localhost/lumina"
+    "mysql+pymysql://root:@localhost/lumina"
 )
 
 

@@ -10,10 +10,14 @@ from database import get_session
 from models import LeitorBase, LeitorUpdate
 from services import leitor_service
 
+from dependencies.auth import get_current_user
 
 router = APIRouter(
     prefix="/api/leitores",
-    tags=["Leitores"]
+    tags=["Leitores"],
+    dependencies=[
+        Depends(get_current_user)
+    ]
 )
 
 

@@ -12,7 +12,7 @@ import shutil
 import os
 import jwt
 
-from routers import livros, leitores, emprestimos, usuarios
+from routers import livros, leitores, emprestimos, usuarios, auth
 
 from contextlib import asynccontextmanager
 
@@ -41,8 +41,6 @@ from pwdlib import PasswordHash
 
 from models import (
     Usuario,
-    UsuarioBase,
-    UsuarioUpdate,
 
     Livro,
     LivroBase,
@@ -103,6 +101,9 @@ app.include_router(
     usuarios.router
 )
 
+app.include_router(
+    auth.router
+)
 # =========================
 # TEMPLATES
 # =========================
@@ -254,69 +255,6 @@ def home(
     )
 
 
-# =========================
-# USUARIOS
-# =========================
-
-@app.post("/usuarios")
-def criar_usuario(
-    nome: str = Form(...),
-    email: str = Form(...),
-    senha: str = Form(...),
-    session: Session = Depends(get_session)
-):
-
-    usuario = UsuarioBase(
-        nome=nome,
-        email=email,
-        senha=senha
-    )
-
-    crud.criar_usuario(
-        session,
-        usuario
-    )
-
-    return RedirectResponse(
-        url="/",
-        status_code=303
-    )
-
-
-@app.get("/usuarios")
-def listar_usuarios(
-    session: Session = Depends(get_session)
-):
-
-    return crud.listar_usuarios(
-        session
-    )
-
-
-@app.put("/usuarios/{usuario_id}")
-def atualizar_usuario(
-    usuario_id: int,
-    dados: UsuarioUpdate,
-    session: Session = Depends(get_session)
-):
-
-    return crud.atualizar_usuario(
-        session,
-        usuario_id,
-        dados
-    )
-
-
-@app.delete("/usuarios/{usuario_id}")
-def deletar_usuario(
-    usuario_id: int,
-    session: Session = Depends(get_session)
-):
-
-    return crud.deletar_usuario(
-        session,
-        usuario_id
-    )
 
 
 # =========================

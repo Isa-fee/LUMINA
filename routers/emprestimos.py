@@ -10,12 +10,15 @@ from database import get_session
 from models import EmprestimoBase, EmprestimoUpdate
 from services import emprestimo_service
 
+from dependencies.auth import get_current_user
 
 router = APIRouter(
     prefix="/api/emprestimos",
-    tags=["Empréstimos"]
+    tags=["Empréstimos"],
+    dependencies=[
+        Depends(get_current_user)
+    ]
 )
-
 
 @router.get("/")
 def listar_emprestimos(
