@@ -5,7 +5,10 @@ import {
 
 import { Link } from "react-router-dom"
 
-import { listarLivros } from "../services/livroService"
+import {
+    listarLivros,
+    excluirLivro
+} from "../services/livroService"
 
 import "../styles/Livros.css"
 
@@ -20,6 +23,8 @@ function Livros() {
     const [disponibilidade, setDisponibilidade] = useState("")
     const [carregando, setCarregando] = useState(true)
     const [erro, setErro] = useState("")
+    const [livroParaExcluir, setLivroParaExcluir] = useState(null)
+    const [excluindo, setExcluindo] = useState(false)
 
 
     useEffect(() => {
@@ -102,6 +107,43 @@ function Livros() {
             )
         }
     )
+
+    async function confirmarExclusao() {
+
+        if (!livroParaExcluir) {
+            return
+        }
+    
+        try {
+    
+            setExcluindo(true)
+            setErro("")
+    
+            await excluirLivro(
+                livroParaExcluir.id
+            )
+    
+            setLivros(
+                (livrosAtuais) =>
+                    livrosAtuais.filter(
+                        (livro) =>
+                            livro.id !== livroParaExcluir.id
+                    )
+            )
+    
+            setLivroParaExcluir(null)
+    
+        } catch (erro) {
+    
+            setErro(erro.message)
+    
+            setLivroParaExcluir(null)
+    
+        } finally {
+    
+            setExcluindo(false)
+        }
+    }
 
 
     if (carregando) {
@@ -367,11 +409,14 @@ function Livros() {
                             <button
                                 type="button"
                                 className="acao-livro"
+                                onClick={
+                                    () => setLivroParaExcluir(livro)
+                                }
                             >
                                 <span className="acao-icone">
                                     ♲
                                 </span>
-                    
+
                                 <span>
                                     Excluir
                                 </span>
@@ -385,6 +430,66 @@ function Livros() {
                 )}
 
             </section>
+
+
+            {livroParaExcluir && (
+
+                <div className="modal-excluir-fundo">
+
+                    <div className="modal-excluir">
+
+                        <div className="modal-excluir-icone">
+                            !
+                        </div>
+
+                        <h2>
+                            Excluir livro?
+                        </h2>
+
+                        <p>
+                            Você está prestes a excluir
+                            <strong>
+                                {" "}
+                                {livroParaExcluir.titulo}
+                            </strong>.
+                            Essa ação não poderá ser desfeita.
+                        </p>
+
+
+                        <div className="modal-excluir-acoes">
+
+                            <button
+                                type="button"
+                                className="modal-btn-cancelar"
+                                onClick={
+                                    () =>
+                                        setLivroParaExcluir(null)
+                                }
+                                disabled={excluindo}
+                            >
+                                Cancelar
+                            </button>
+
+
+                            <button
+                                type="button"
+                                className="modal-btn-confirmar"
+                                onClick={confirmarExclusao}
+                                disabled={excluindo}
+                            >
+                                {excluindo
+                                    ? "Excluindo..."
+                                    : "Sim, excluir"
+                                }
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            )}
 
         </main>
     )

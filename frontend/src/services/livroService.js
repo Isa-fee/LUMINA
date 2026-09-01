@@ -85,3 +85,88 @@ export async function cadastrarLivro(dados) {
 
     return resultado
 }
+
+export async function buscarLivro(id) {
+    const response = await apiFetch(
+        `/api/livros/${id}`
+    )
+
+    const dados = await response.json()
+
+    if (!response.ok) {
+        throw new Error(
+            dados.detail ||
+            "Não foi possível carregar o livro."
+        )
+    }
+
+    return dados
+}
+
+export async function atualizarLivro(id, dados) {
+
+    const response = await apiFetch(
+        `/api/livros/${id}`,
+        {
+            method: "PUT",
+
+            body: JSON.stringify({
+                titulo: dados.titulo,
+                autor: dados.autor,
+                categoria: dados.categoria,
+                isbn: dados.isbn,
+                quantidade_total:
+                    Number(dados.quantidade_total)
+            })
+        }
+    )
+
+
+    const resultado = await response.json()
+
+
+    if (!response.ok) {
+
+        if (Array.isArray(resultado.detail)) {
+
+            const mensagens = resultado.detail.map(
+                (erro) => erro.msg
+            )
+
+            throw new Error(
+                mensagens.join(" | ")
+            )
+        }
+
+
+        throw new Error(
+            resultado.detail ||
+            "Não foi possível atualizar o livro."
+        )
+    }
+
+
+    return resultado
+}
+
+export async function excluirLivro(id) {
+
+    const response = await apiFetch(
+        `/api/livros/${id}`,
+        {
+            method: "DELETE"
+        }
+    )
+
+    const resultado = await response.json()
+
+    if (!response.ok) {
+
+        throw new Error(
+            resultado.detail ||
+            "Não foi possível excluir o livro."
+        )
+    }
+
+    return resultado
+}
