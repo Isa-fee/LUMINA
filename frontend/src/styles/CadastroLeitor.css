@@ -1,0 +1,477 @@
+/* ========================================
+   PÁGINA
+======================================== */
+
+.cadastro-leitor-page {
+    width: min(1200px, 92%);
+
+    margin: 0 auto;
+
+    padding: 40px 0 80px;
+
+    color: #6d412a;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.cadastro-leitor-cabecalho {
+    margin-bottom: 24px;
+}
+
+
+.cadastro-leitor-cabecalho > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #b9683f;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+.cadastro-leitor-cabecalho h1 {
+    margin: 0 0 8px;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    color: #713b20;
+
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+
+.cadastro-leitor-cabecalho p {
+    margin: 0;
+
+    color: #a26546;
+
+    font-size: 1rem;
+}
+
+
+/* ========================================
+   VOLTAR
+======================================== */
+
+.cadastro-leitor-voltar {
+    width: fit-content;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    color: #81513a;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    text-decoration: none;
+}
+
+
+.cadastro-leitor-voltar:hover {
+    color: #b9683f;
+}
+
+
+/* ========================================
+   CARD
+======================================== */
+
+.cadastro-leitor-card {
+    display: grid;
+
+    grid-template-columns:
+        minmax(270px, 0.7fr)
+        minmax(400px, 1.3fr);
+
+    min-height: 430px;
+
+    border: 1px solid #b98264;
+    border-radius: 28px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 4px 18px rgba(105, 57, 30, 0.06);
+
+    overflow: hidden;
+}
+
+
+/* ========================================
+   LADO ESQUERDO
+======================================== */
+
+.cadastro-leitor-ilustracao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 45px;
+
+    border-right: 1px solid #e4c4b2;
+
+    background: #fffaf7;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   FOTO DO LEITOR
+======================================== */
+
+.cadastro-leitor-foto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 11px;
+
+    margin-bottom: 20px;
+
+    cursor: pointer;
+}
+
+
+.cadastro-leitor-foto img,
+.cadastro-leitor-sem-foto {
+    width: 115px;
+    height: 115px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #d2a38a;
+    border-radius: 50%;
+
+    background: #f2dfd1;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.cadastro-leitor-foto img {
+    object-fit: cover;
+}
+
+
+.cadastro-leitor-sem-foto span {
+    color: #8b5135;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 2.8rem;
+    font-weight: 300;
+}
+
+
+.cadastro-leitor-foto:hover img,
+.cadastro-leitor-foto:hover
+.cadastro-leitor-sem-foto {
+    border-color: #a96847;
+
+    transform: translateY(-2px);
+}
+
+
+.cadastro-leitor-foto-acao {
+    color: #9b6043;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+
+.cadastro-leitor-input-foto {
+    display: none;
+}
+
+.cadastro-leitor-ilustracao h2 {
+    margin: 0 0 10px;
+
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+
+.cadastro-leitor-ilustracao p {
+    max-width: 250px;
+
+    margin: 0;
+
+    color: #a06c51;
+
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   FORMULÁRIO
+======================================== */
+
+.cadastro-leitor-formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 48px 55px;
+}
+
+
+.cadastro-leitor-form-topo {
+    margin-bottom: 30px;
+}
+
+
+.cadastro-leitor-form-topo > span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #b9683f;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+}
+
+
+.cadastro-leitor-form-topo h2 {
+    margin: 0 0 7px;
+
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+
+
+.cadastro-leitor-form-topo p {
+    margin: 0;
+
+    color: #a06c51;
+
+    font-size: 0.87rem;
+}
+
+
+/* ========================================
+   CAMPOS
+======================================== */
+
+.cadastro-leitor-campos {
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid #e4c4b2;
+}
+
+
+.cadastro-leitor-campo {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.cadastro-leitor-campo label {
+    color: #825039;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+
+.cadastro-leitor-campo input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid #c28d71;
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #fffdfc;
+
+    color: #6d412a;
+
+    font-family: inherit;
+    font-size: 0.92rem;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.cadastro-leitor-campo input::placeholder {
+    color: #c09279;
+}
+
+
+.cadastro-leitor-campo input:focus {
+    border-color: #8c5336;
+
+    box-shadow:
+        0 0 0 3px rgba(185, 104, 63, 0.1);
+}
+
+
+/* ========================================
+   AÇÕES
+======================================== */
+
+.cadastro-leitor-acoes {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 13px;
+
+    margin-top: 25px;
+}
+
+
+.btn-cancelar-leitor,
+.btn-cadastrar-leitor {
+    min-width: 155px;
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 18px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+.btn-cancelar-leitor {
+    border: 1px solid #bd8065;
+
+    background: #ffffff;
+
+    color: #925038;
+}
+
+
+.btn-cancelar-leitor:hover {
+    background: #fff5ef;
+}
+
+
+.btn-cadastrar-leitor {
+    border: 1px solid #794329;
+
+    background: #794329;
+
+    color: #ffffff;
+}
+
+
+.btn-cadastrar-leitor:hover {
+    background: #633821;
+}
+
+
+.btn-cadastrar-leitor:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   ERRO
+======================================== */
+
+.cadastro-leitor-erro {
+    padding: 14px 18px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background: #fff0ed;
+
+    color: #a23d34;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 800px) {
+
+    .cadastro-leitor-card {
+        grid-template-columns: 1fr;
+    }
+
+
+    .cadastro-leitor-ilustracao {
+        border-right: none;
+        border-bottom: 1px solid #e4c4b2;
+    }
+
+
+    .cadastro-leitor-formulario {
+        padding: 40px 30px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .cadastro-leitor-acoes {
+        flex-direction: column;
+    }
+
+
+    .btn-cancelar-leitor,
+    .btn-cadastrar-leitor {
+        width: 100%;
+    }
+}

@@ -1,7 +1,10 @@
 from fastapi import (
     APIRouter,
     Depends,
-    HTTPException
+    HTTPException,
+    Form,
+    File,
+    UploadFile
 )
 
 from sqlmodel import Session
@@ -53,16 +56,28 @@ def buscar_leitor(
 
 
 @router.post("/")
-def criar_leitor(
-    dados: LeitorBase,
+async def criar_leitor(
+    nome: str = Form(...),
+    email: str = Form(...),
+    foto: UploadFile | None = File(default=None),
     session: Session = Depends(get_session)
 ):
 
-    return leitor_service.criar_leitor(
-        session=session,
-        nome=dados.nome,
-        email=dados.email
-    )
+    try:
+
+        return await leitor_service.criar_leitor(
+            session=session,
+            nome=nome,
+            email=email,
+            foto=foto
+        )
+
+    except ValueError as erro:
+
+        raise HTTPException(
+            status_code=400,
+            detail=str(erro)
+        )
 
 
 @router.put("/{leitor_id}")

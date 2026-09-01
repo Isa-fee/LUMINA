@@ -14,6 +14,10 @@ import "../styles/Livros.css"
 
 import { API_URL } from "../services/api"
 
+import iconeDetalhes from "../assets/icons/detalhes.png"
+import iconeEditar from "../assets/icons/editar.png"
+import iconeExcluir from "../assets/icons/excluir.png"
+
 
 function Livros() {
 
@@ -383,9 +387,12 @@ function Livros() {
                                 className="acao-livro"
                             >
                                 <span className="acao-icone">
-                                    ◉
+                                    <img
+                                        src={iconeDetalhes}
+                                        alt=""
+                                    />
                                 </span>
-                    
+                                                    
                                 <span>
                                     Detalhes
                                 </span>
@@ -397,7 +404,10 @@ function Livros() {
                                 className="acao-livro"
                             >
                                 <span className="acao-icone">
-                                    ✎
+                                    <img
+                                        src={iconeEditar}
+                                        alt=""
+                                    />
                                 </span>
                     
                                 <span>
@@ -414,7 +424,10 @@ function Livros() {
                                 }
                             >
                                 <span className="acao-icone">
-                                    ♲
+                                    <img
+                                        src={iconeExcluir}
+                                        alt=""
+                                    />
                                 </span>
 
                                 <span>

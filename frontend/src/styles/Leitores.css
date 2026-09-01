@@ -2,7 +2,7 @@
    PÁGINA
 ======================================== */
 
-.livros-page {
+.leitores-page {
     width: min(1440px, 92%);
 
     margin: 0 auto;
@@ -17,12 +17,12 @@
    CABEÇALHO
 ======================================== */
 
-.livros-cabecalho {
+.leitores-cabecalho {
     margin-bottom: 28px;
 }
 
 
-.livros-cabecalho > span {
+.leitores-cabecalho > span {
     display: block;
 
     margin-bottom: 7px;
@@ -34,7 +34,7 @@
 }
 
 
-.livros-cabecalho h1 {
+.leitores-cabecalho h1 {
     margin: 0 0 8px;
 
     font-family: Georgia, "Times New Roman", serif;
@@ -46,7 +46,7 @@
 }
 
 
-.livros-cabecalho p {
+.leitores-cabecalho p {
     margin: 0;
 
     color: #a26546;
@@ -56,18 +56,17 @@
 
 
 /* ========================================
-   BARRA DE FILTROS
+   BARRA
 ======================================== */
 
-.barra-livros {
+.barra-leitores {
     width: 100%;
 
     display: grid;
 
     grid-template-columns:
         minmax(300px, 1fr)
-        180px
-        200px
+        210px
         175px;
 
     align-items: center;
@@ -87,9 +86,11 @@
 }
 
 
-/* PESQUISA */
+/* ========================================
+   BUSCA
+======================================== */
 
-.busca-livros {
+.busca-leitores {
     height: 44px;
 
     display: flex;
@@ -104,7 +105,7 @@
 }
 
 
-.busca-livros input {
+.busca-leitores input {
     width: 100%;
 
     border: none;
@@ -118,21 +119,23 @@
 }
 
 
-.busca-livros input::placeholder {
+.busca-leitores input::placeholder {
     color: #b66e49;
 }
 
 
-.icone-busca {
+.icone-busca-leitor {
     color: #744027;
 
     font-size: 1.3rem;
 }
 
 
-/* SELECTS */
+/* ========================================
+   SELECT
+======================================== */
 
-.barra-livros select {
+.barra-leitores select {
     height: 44px;
 
     padding: 0 14px;
@@ -152,9 +155,11 @@
 }
 
 
-/* NOVO LIVRO */
+/* ========================================
+   NOVO LEITOR
+======================================== */
 
-.btn-novo-livro {
+.btn-novo-leitor {
     height: 44px;
 
     display: flex;
@@ -176,7 +181,7 @@
 }
 
 
-.btn-novo-livro span {
+.btn-novo-leitor > span {
     width: 19px;
     height: 19px;
 
@@ -186,12 +191,10 @@
 
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
-
-    font-size: 0.9rem;
 }
 
 
-.btn-novo-livro:hover {
+.btn-novo-leitor:hover {
     background: #633821;
 }
 
@@ -200,7 +203,7 @@
    RESULTADO
 ======================================== */
 
-.resultado-livros {
+.resultado-leitores {
     margin-bottom: 22px;
 
     color: #75442c;
@@ -210,37 +213,33 @@
 
 
 /* ========================================
-   GRADE
+   LISTAGEM
 ======================================== */
 
-.grade-livros {
+.lista-leitores {
     display: flex;
     flex-direction: column;
 
     gap: 18px;
-
-    width: 100%;
 }
+
 
 /* ========================================
    CARD
 ======================================== */
 
-.card-livro {
+.card-leitor {
     width: 100%;
-    min-height: 190px;
+    min-height: 155px;
 
     display: grid;
 
     grid-template-columns:
-        130px
-        minmax(250px, 1.5fr)
-        minmax(180px, 0.8fr)
-        minmax(250px, 1fr);
+        minmax(350px, 1.5fr)
+        minmax(190px, 0.65fr)
+        minmax(280px, 0.9fr);
 
-    align-items: center;
-
-    gap: 28px;
+    align-items: stretch;
 
     padding: 20px 30px;
 
@@ -253,216 +252,98 @@
         0 2px 8px rgba(105, 57, 30, 0.04);
 }
 
-.livro-conteudo {
-    display: flex;
-
-    gap: 18px;
-}
-
 
 /* ========================================
-   CAPA
+   IDENTIDADE
 ======================================== */
 
-.livro-capa-area {
-    width: 115px;
-
+.leitor-identidade {
     display: flex;
-    flex-direction: column;
+    align-items: center;
 
-    align-items: stretch;
+    gap: 22px;
 
-    flex-shrink: 0;
+    padding-right: 30px;
+
+    border-right: 1px solid #dfbba7;
 }
 
 
-.livro-capa {
-    width: 115px;
-    height: 145px;
+.leitor-avatar {
+    width: 86px;
+    height: 86px;
+
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 5px;
+    border-radius: 50%;
 
     background: #f2dfd1;
 
-    overflow: hidden;
-}
+    color: #794329;
 
-.livro-capa img {
-    width: 100%;
-    height: 100%;
+    font-family: Georgia, "Times New Roman", serif;
 
-    display: block;
-
-    object-fit: cover;
+    font-size: 2rem;
 }
 
 
-.livro-sem-capa {
-    font-size: 2.8rem;
-}
-
-/* ========================================
-   CATEGORIA
-======================================== */
-
-.categoria-tag {
-    width: 100%;
-
-    display: block;
-
-    margin-top: 7px;
-
-    padding: 3px 8px;
-
-    border-radius: 999px;
-
-    text-align: center;
-
-    font-size: 0.80rem;
-    font-weight: 600;
-
-    color: #ffffff;
-
-    background: #8b765f;
-}
-
-
-/* CORES POR CATEGORIA */
-
-.categoria-fantasia {
-    background: #3f794b;
-}
-
-
-.categoria-romance {
-    background: #c855a2;
-}
-
-
-.categoria-historia {
-    background: #d8a638;
-}
-
-
-.categoria-biografia {
-    background: #a76ac2;
-}
-
-
-.categoria-ficcao {
-    background: #c75a5a;
-}
-
-
-.categoria-ficcao-cientifica {
-    background: #c85261;
-}
-
-
-.categoria-classico,
-.categoria-classicos {
-    background: #c96d3e;
-}
-
-
-.categoria-autoajuda {
-    background: #4a9c8d;
-}
-
-
-.categoria-terror {
-    background: #68465d;
-}
-
-
-.categoria-misterio {
-    background: #68758b;
-}
-
-
-.categoria-aventura {
-    background: #8b7042;
-}
-
-
-.categoria-infantil {
-    background: #d1818e;
-}
-
-
-.categoria-outra {
-    background: #8b765f;
-}
-
-
-/* ========================================
-   INFORMAÇÕES
-======================================== */
-
-.livro-info {
-    align-self: stretch;
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: flex-start;
-
-    padding: 8px 25px 8px 0;
-
-    border-right: 1px solid #dfbba7;
-}
-
-
-.livro-info h2 {
-    margin: 0 0 8px;
+.leitor-dados h2 {
+    margin: 0 0 7px;
 
     color: #75452e;
 
     font-family: Georgia, "Times New Roman", serif;
 
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 500;
 }
 
 
-.livro-autor {
+.leitor-dados p {
     margin: 0;
 
-    color: #8e5c43;
+    color: #9b674d;
 
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 
-.livro-quantidades {
-    align-self: stretch;
+/* ========================================
+   EMPRÉSTIMOS
+======================================== */
 
+.leitor-emprestimos {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
     justify-content: center;
 
-    padding: 8px 25px 8px 0;
+    gap: 10px;
+
+    padding: 10px 30px;
 
     border-right: 1px solid #dfbba7;
 }
 
 
-.livro-quantidades p {
-    margin: 4px 0;
+.leitor-emprestimos span {
+    color: #9b674d;
 
-    color: #825039;
-
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 
-.livro-quantidades strong {
-    color: #69371f;
+.leitor-emprestimos strong {
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 
 
@@ -470,21 +351,37 @@
    AÇÕES
 ======================================== */
 
-.acoes-livro {
+.leitor-acoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    padding-left: 30px;
+}
+
+
+.leitor-acoes-titulo {
+    color: #8a573f;
+
+    font-size: 0.82rem;
+}
+
+
+.leitor-acoes-botoes {
+    width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 
     gap: 18px;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
 }
 
 
-.acao-livro {
+.acao-leitor {
     min-width: 60px;
 
     display: flex;
@@ -502,7 +399,7 @@
     color: #70412a;
 
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
 
     text-decoration: none;
 
@@ -510,7 +407,7 @@
 }
 
 
-.acao-icone {
+.acao-leitor-icone {
     width: 46px;
     height: 46px;
 
@@ -533,7 +430,7 @@
 }
 
 
-.acao-livro:hover .acao-icone {
+.acao-leitor:hover .acao-leitor-icone {
     background: #fff5ef;
 
     transform: translateY(-2px);
@@ -544,8 +441,8 @@
    ESTADOS
 ======================================== */
 
-.livros-estado,
-.livros-vazio {
+.leitores-estado,
+.leitores-vazio {
     min-height: 350px;
 
     display: flex;
@@ -557,7 +454,7 @@
 }
 
 
-.livros-vazio h2 {
+.leitores-vazio h2 {
     margin-bottom: 5px;
 
     font-family: Georgia, "Times New Roman", serif;
@@ -566,7 +463,7 @@
 }
 
 
-.livros-erro {
+.leitores-erro {
     padding: 14px 18px;
 
     margin-bottom: 20px;
@@ -578,7 +475,21 @@
     color: #a23d34;
 }
 
-.acao-icone img {
+.leitor-avatar {
+    overflow: hidden;
+}
+
+
+.leitor-avatar img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.acao-leitor-icone img {
     width: 50px;
     height: 50px;
 
@@ -586,38 +497,40 @@
 
     display: block;
 }
+
 /* ========================================
    RESPONSIVIDADE
 ======================================== */
 
 @media (max-width: 900px) {
 
-    .card-livro {
-        grid-template-columns:
-            110px 1fr;
+    .barra-leitores {
+        grid-template-columns: 1fr;
     }
 
 
-    .livro-info {
+    .card-leitor {
+        grid-template-columns: 1fr;
+    }
+
+
+    .leitor-identidade {
+        padding: 10px 0 25px;
+
         border-right: none;
+        border-bottom: 1px solid #dfbba7;
     }
 
 
-    .livro-quantidades {
-        grid-column: 1 / -1;
+    .leitor-emprestimos {
+        padding: 25px 0;
 
         border-right: none;
-        border-top: 1px solid #dfbba7;
-
-        padding: 15px 0 0;
+        border-bottom: 1px solid #dfbba7;
     }
 
 
-    .acoes-livro {
-        grid-column: 1 / -1;
-
-        padding-top: 15px;
-
-        border-top: 1px solid #dfbba7;
+    .leitor-acoes {
+        padding: 25px 0 5px;
     }
 }

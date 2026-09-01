@@ -11,6 +11,8 @@ import Livros from "./pages/Livros"
 import CadastroLivro from "./pages/CadastroLivro"
 import DetalhesLivro from "./pages/DetalhesLivro"
 import EditarLivro from "./pages/EditarLivro"
+import Leitores from "./pages/Leitores"
+import CadastroLeitor from "./pages/CadastroLeitor"
 
 import Layout from "./components/Layout"
 
@@ -64,6 +66,16 @@ function App() {
                     <Route
                         path="/livros/:id/editar"
                         element={<EditarLivro />}
+                    />
+
+                    <Route
+                        path="/leitores"
+                        element={<Leitores />}
+                    />
+
+                    <Route
+                        path="/leitores/novo"
+                        element={<CadastroLeitor />}
                     />
 
                 </Route>

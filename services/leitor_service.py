@@ -11,14 +11,38 @@ from repositories import (
     livro_repository
 )
 
+import os
+import uuid
+import shutil
 
 def listar_leitores(
     session: Session
 ):
-    return leitor_repository.listar(
+
+    leitores = leitor_repository.listar(
         session
     )
 
+    resultado = []
+
+    for leitor in leitores:
+
+        emprestimos = (
+            emprestimo_repository.listar_por_leitor(
+                session,
+                leitor.id
+            )
+        )
+
+        resultado.append({
+            "id": leitor.id,
+            "nome": leitor.nome,
+            "email": leitor.email,
+            "foto": leitor.foto,
+            "total_emprestimos": len(emprestimos)
+        })
+
+    return resultado
 
 def buscar_leitor(
     session: Session,
@@ -30,16 +54,86 @@ def buscar_leitor(
     )
 
 
-def criar_leitor(
+async def criar_leitor(
     session: Session,
     nome: str,
-    email: str
+    email: str,
+    foto=None
 ):
+
+    caminho_foto = None
+
+
+    if foto:
+
+        extensoes_permitidas = {
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".webp"
+        }
+
+
+        _, extensao = os.path.splitext(
+            foto.filename
+        )
+
+        extensao = extensao.lower()
+
+
+        if extensao not in extensoes_permitidas:
+
+            raise ValueError(
+                "Formato de imagem não permitido."
+            )
+
+
+        nome_arquivo = (
+            f"{uuid.uuid4()}{extensao}"
+        )
+
+
+        pasta_fotos = os.path.join(
+            "static",
+            "uploads",
+            "leitores"
+        )
+
+
+        os.makedirs(
+            pasta_fotos,
+            exist_ok=True
+        )
+
+
+        caminho_arquivo = os.path.join(
+            pasta_fotos,
+            nome_arquivo
+        )
+
+
+        with open(
+            caminho_arquivo,
+            "wb"
+        ) as arquivo:
+
+            shutil.copyfileobj(
+                foto.file,
+                arquivo
+            )
+
+
+        caminho_foto = (
+            f"uploads/leitores/{nome_arquivo}"
+        )
+
 
     leitor = Leitor(
         nome=nome,
-        email=email
+        email=email,
+        foto=caminho_foto
     )
+
 
     return leitor_repository.salvar(
         session,
@@ -88,11 +182,28 @@ def excluir_leitor(
             "Leitor não encontrado."
         )
 
+
+    emprestimos = (
+        emprestimo_repository.listar_por_leitor(
+            session,
+            leitor_id
+        )
+    )
+
+
+    if emprestimos:
+
+        raise ValueError(
+            "Não é possível excluir este leitor "
+            "porque existem empréstimos "
+            "registrados para ele."
+        )
+
+
     leitor_repository.deletar(
         session,
         leitor
     )
-
 
 def obter_detalhes_leitor(
     session: Session,

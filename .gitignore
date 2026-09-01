@@ -5,3 +5,7 @@ env/
 venv/
 __pycache__/
 *.pyc
+__pycache__/crud.cpython-314.pyc
+__pycache__/database.cpython-314.pyc
+__pycache__/main.cpython-314.pyc
+__pycache__/models.cpython-314.pyc

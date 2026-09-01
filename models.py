@@ -102,6 +102,7 @@ class Leitor(LeitorBase, table=True):
         primary_key=True
     )
 
+    foto: Optional[str] = None
 
 class LeitorUpdate(SQLModel):
     nome: str
