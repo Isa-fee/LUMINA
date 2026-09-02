@@ -6,6 +6,7 @@ import {
 } from "react-router-dom"
 
 import Login from "./pages/Login"
+import Cadastro from "./pages/Cadastro"
 import Home from "./pages/Home"
 import Livros from "./pages/Livros"
 import CadastroLivro from "./pages/CadastroLivro"
@@ -39,7 +40,11 @@ function App() {
                     path="/login"
                     element={<Login />}
                 />
-
+                
+                <Route
+                    path="/cadastro"
+                    element={<Cadastro />}
+                />
 
                 <Route element={<Layout />}>
 
