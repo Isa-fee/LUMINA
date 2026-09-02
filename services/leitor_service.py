@@ -58,6 +58,8 @@ async def criar_leitor(
     session: Session,
     nome: str,
     email: str,
+    telefone: str | None = None,
+    endereco: str | None = None,
     foto=None
 ):
 
@@ -131,6 +133,8 @@ async def criar_leitor(
     leitor = Leitor(
         nome=nome,
         email=email,
+        telefone=telefone,
+        endereco=endereco,
         foto=caminho_foto
     )
 
@@ -220,6 +224,7 @@ def obter_detalhes_leitor(
             "Leitor não encontrado."
         )
 
+
     emprestimos = (
         emprestimo_repository.listar_por_leitor(
             session,
@@ -227,9 +232,12 @@ def obter_detalhes_leitor(
         )
     )
 
+
+    emprestimos_atuais = []
     historico = []
 
     hoje = date.today()
+
 
     for emprestimo in emprestimos:
 
@@ -238,26 +246,101 @@ def obter_detalhes_leitor(
             emprestimo.livro_id
         )
 
-        status = "No prazo"
 
-        if (
-            emprestimo.data_devolucao
-            and hoje > emprestimo.data_devolucao
-        ):
-            status = "Atrasado"
-
-        historico.append({
+        dados_emprestimo = {
             "id": emprestimo.id,
             "livro_id": emprestimo.livro_id,
-            "livro": livro.titulo if livro else "Livro não encontrado",
-            "data_emprestimo": emprestimo.data_emprestimo,
-            "data_devolucao": emprestimo.data_devolucao,
-            "status": status
-        })
+            "livro": (
+                livro.titulo
+                if livro
+                else "Livro não encontrado"
+            ),
+            "capa": (
+                livro.capa
+                if livro
+                else None
+            ),
+            "data_emprestimo":
+                emprestimo.data_emprestimo,
+            "data_prevista_devolucao":
+                emprestimo.data_prevista_devolucao,
+            "data_devolucao":
+                emprestimo.data_devolucao
+        }
+
+
+        # Ainda não foi devolvido
+        if emprestimo.data_devolucao is None:
+
+            if (
+                emprestimo.data_prevista_devolucao
+                and hoje >
+                emprestimo.data_prevista_devolucao
+            ):
+                dados_emprestimo["status"] = "Atrasado"
+
+            else:
+                dados_emprestimo["status"] = "No prazo"
+
+
+            emprestimos_atuais.append(
+                dados_emprestimo
+            )
+
+
+        # Já foi devolvido
+        else:
+
+            dados_emprestimo["status"] = "Devolvido"
+
+            historico.append(
+                dados_emprestimo
+            )
+
+
+    # Próxima devolução
+    datas_previstas = [
+        emprestimo.data_prevista_devolucao
+
+        for emprestimo in emprestimos
+
+        if (
+            emprestimo.data_devolucao is None
+            and
+            emprestimo.data_prevista_devolucao
+            is not None
+        )
+    ]
+
+
+    proxima_devolucao = (
+        min(datas_previstas)
+        if datas_previstas
+        else None
+    )
+
 
     return {
         "id": leitor.id,
         "nome": leitor.nome,
         "email": leitor.email,
-        "emprestimos": historico
+        "telefone": leitor.telefone,
+        "endereco": leitor.endereco,
+        "data_cadastro": leitor.data_cadastro,
+        "foto": leitor.foto,
+
+        "total_emprestimos":
+            len(emprestimos),
+
+        "total_devolucoes":
+            len(historico),
+
+        "proxima_devolucao":
+            proxima_devolucao,
+
+        "emprestimos_atuais":
+            emprestimos_atuais,
+
+        "historico":
+            historico
     }

@@ -73,13 +73,11 @@ class Emprestimo(EmprestimoBase, table=True):
         default=None,
         primary_key=True
     )
-
     data_emprestimo: date = Field(
         default_factory=date.today
     )
-
+    data_prevista_devolucao: Optional[date] = None
     data_devolucao: Optional[date] = None
-
 
 class EmprestimoUpdate(SQLModel):
     leitor_id: Optional[int] = None
@@ -94,6 +92,8 @@ class EmprestimoUpdate(SQLModel):
 class LeitorBase(SQLModel):
     nome: str
     email: str
+    telefone: Optional[str] = None
+    endereco: Optional[str] = None
 
 
 class Leitor(LeitorBase, table=True):
@@ -104,9 +104,15 @@ class Leitor(LeitorBase, table=True):
 
     foto: Optional[str] = None
 
+    data_cadastro: date = Field(
+        default_factory=date.today
+    )
+
 class LeitorUpdate(SQLModel):
     nome: str
     email: str
+    telefone: Optional[str] = None
+    endereco: Optional[str] = None
 
 
 ####################### específicos de auth ############################

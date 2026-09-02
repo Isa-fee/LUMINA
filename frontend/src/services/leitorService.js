@@ -53,7 +53,16 @@ export async function cadastrarLeitor(dados) {
         "email",
         dados.email
     )
-
+    
+    formData.append(
+        "telefone",
+        dados.telefone || ""
+    )
+    
+    formData.append(
+        "endereco",
+        dados.endereco || ""
+    )
 
     if (dados.foto) {
 
@@ -99,4 +108,20 @@ export async function cadastrarLeitor(dados) {
 
 
     return resultado
+}
+
+export async function buscarDetalhesLeitor(id) {
+    const response = await apiFetch(
+        `/api/leitores/${id}/detalhes`
+    )
+    const dados = await response.json()
+
+    if (!response.ok) {
+        throw new Error(
+            dados.detail ||
+            "Não foi possível carregar os detalhes do leitor."
+        )
+    }
+
+    return dados
 }

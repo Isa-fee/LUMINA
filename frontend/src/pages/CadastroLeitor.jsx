@@ -22,6 +22,8 @@ function CadastroLeitor() {
     const [formulario, setFormulario] = useState({
         nome: "",
         email: "",
+        telefone: "",
+        endereco: "",
         foto: null
     })
     
@@ -275,10 +277,41 @@ function CadastroLeitor() {
                             />
 
                         </div>
+                        <div className="cadastro-leitor-campo-linha">
+                            <div className="cadastro-leitor-campo">
+                                <label htmlFor="telefone">
+                                    Telefone
+                                </label>
+                                <input
+                                    id="telefone"
+                                    name="telefone"
+                                    type="tel"
+                                    placeholder="(00) 00000-0000"
+                                    value={formulario.telefone}
+                                    onChange={alterarCampo}
+                                />
 
+                            </div>
+
+                            <div className="cadastro-leitor-campo">
+
+                                <label htmlFor="endereco">
+                                    Endereço
+                                </label>
+
+                                <input
+                                    id="endereco"
+                                    name="endereco"
+                                    type="text"
+                                    placeholder="Digite o endereço"
+                                    value={formulario.endereco}
+                                    onChange={alterarCampo}
+                                />
+
+                            </div>
+
+                        </div>
                     </div>
-
-
                     <div className="cadastro-leitor-acoes">
 
                         <Link

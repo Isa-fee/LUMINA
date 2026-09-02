@@ -59,26 +59,25 @@ def buscar_leitor(
 async def criar_leitor(
     nome: str = Form(...),
     email: str = Form(...),
+    telefone: str | None = Form(default=None),
+    endereco: str | None = Form(default=None),
     foto: UploadFile | None = File(default=None),
     session: Session = Depends(get_session)
 ):
-
     try:
-
         return await leitor_service.criar_leitor(
             session=session,
             nome=nome,
             email=email,
+            telefone=telefone,
+            endereco=endereco,
             foto=foto
         )
-
     except ValueError as erro:
-
         raise HTTPException(
             status_code=400,
             detail=str(erro)
         )
-
 
 @router.put("/{leitor_id}")
 def atualizar_leitor(
