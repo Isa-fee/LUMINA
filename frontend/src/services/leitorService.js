@@ -171,6 +171,26 @@ export async function editarLeitor(
 
     return resultado
 }
+
+export async function excluirLeitor(id) {
+    const response = await apiFetch(
+        `/api/leitores/${id}`,
+        {
+            method: "DELETE"
+        }
+    )
+
+    const resultado = await response.json()
+
+    if (!response.ok) {
+        throw new Error(
+            resultado.detail ||
+            "Não foi possível excluir o leitor."
+        )
+    }
+
+    return resultado
+}
 export async function buscarDetalhesLeitor(id) {
     const response = await apiFetch(
         `/api/leitores/${id}/detalhes`

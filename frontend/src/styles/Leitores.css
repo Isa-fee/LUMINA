@@ -534,3 +534,149 @@
         padding: 25px 0 5px;
     }
 }
+
+/* ========================================
+   MODAL DE EXCLUSÃO
+======================================== */
+
+.modal-excluir-fundo {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(65, 37, 24, 0.35);
+
+    backdrop-filter: blur(3px);
+}
+
+
+.modal-excluir {
+    width: min(430px, 100%);
+
+    padding: 36px;
+
+    border: 1px solid #d7a88f;
+    border-radius: 20px;
+
+    background: #fffdfb;
+
+    box-shadow:
+        0 18px 50px rgba(77, 41, 23, 0.18);
+
+    text-align: center;
+}
+
+
+.modal-excluir-icone {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #f5dfd3;
+
+    color: #934c32;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem;
+}
+
+
+.modal-excluir h2 {
+    margin: 0 0 12px;
+
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+}
+
+
+.modal-excluir p {
+    margin: 0;
+
+    color: #986149;
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+
+.modal-excluir p strong {
+    color: #713b20;
+}
+
+
+.modal-excluir-acoes {
+    display: flex;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+
+.modal-btn-cancelar,
+.modal-btn-confirmar {
+    min-width: 135px;
+    height: 42px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 0.87rem;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.modal-btn-cancelar {
+    border: 1px solid #bd8065;
+
+    background: #ffffff;
+
+    color: #925038;
+}
+
+
+.modal-btn-cancelar:hover {
+    background: #fff5ef;
+}
+
+
+.modal-btn-confirmar {
+    border: 1px solid #8a432d;
+
+    background: #8a432d;
+
+    color: #ffffff;
+}
+
+
+.modal-btn-confirmar:hover {
+    background: #713622;
+}
+
+
+.modal-btn-cancelar:disabled,
+.modal-btn-confirmar:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}

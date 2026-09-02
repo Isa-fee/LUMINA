@@ -6,7 +6,8 @@ import {
 import { Link } from "react-router-dom"
 
 import {
-    listarLeitores
+    listarLeitores,
+    excluirLeitor
 } from "../services/leitorService"
 
 import "../styles/Leitores.css"
@@ -29,6 +30,12 @@ function Leitores() {
 
     const [erro, setErro] =
         useState("")
+
+    const [leitorExcluir, setLeitorExcluir] =
+        useState(null)
+    
+    const [excluindo, setExcluindo] =
+        useState(false)
 
 
     useEffect(() => {
@@ -55,6 +62,44 @@ function Leitores() {
         carregarLeitores()
 
     }, [])
+
+    async function confirmarExclusao() {
+        if (!leitorExcluir) {
+            return
+        }
+    
+        try {
+    
+            setExcluindo(true)
+            setErro("")
+    
+            await excluirLeitor(
+                leitorExcluir.id
+            )
+    
+            setLeitores(
+                (anteriores) =>
+                    anteriores.filter(
+                        (leitor) =>
+                            leitor.id !== leitorExcluir.id
+                    )
+            )
+    
+            setLeitorExcluir(null)
+    
+        } catch (erro) {
+    
+            setErro(
+                erro.message
+            )
+    
+            setLeitorExcluir(null)
+    
+        } finally {
+    
+            setExcluindo(false)
+        }
+    }
 
 
     const leitoresFiltrados = leitores
@@ -376,6 +421,9 @@ function Leitores() {
                                 <button
                                     type="button"
                                     className="acao-leitor"
+                                    onClick={() =>
+                                        setLeitorExcluir(leitor)
+                                    }
                                 >
 
                                     <span className="acao-leitor-icone">
@@ -401,6 +449,69 @@ function Leitores() {
                 )}
 
             </section>
+                    {/* MODAL DE EXCLUSÃO */}
+
+                    {leitorExcluir && (
+
+                <div className="modal-excluir-fundo">
+
+                    <div className="modal-excluir">
+
+                        <div className="modal-excluir-icone">
+                            !
+                        </div>
+
+
+                        <h2>
+                            Excluir leitor?
+                        </h2>
+
+
+                        <p>
+                            Você está prestes a excluir
+
+                            <strong>
+                                {" "}{leitorExcluir.nome}
+                            </strong>.
+
+                            Essa ação não poderá ser desfeita.
+                        </p>
+
+
+                        <div className="modal-excluir-acoes">
+
+                            <button
+                                type="button"
+                                className="modal-btn-cancelar"
+                                onClick={() =>
+                                    setLeitorExcluir(null)
+                                }
+                                disabled={excluindo}
+                            >
+                                Cancelar
+                            </button>
+
+
+                            <button
+                                type="button"
+                                className="modal-btn-confirmar"
+                                onClick={confirmarExclusao}
+                                disabled={excluindo}
+                            >
+                                {excluindo
+                                    ? "Excluindo..."
+                                    : "Sim, excluir"
+                                }
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                )}
+
 
         </main>
     )
