@@ -15,6 +15,7 @@ import EditarLivro from "./pages/EditarLivro"
 import Leitores from "./pages/Leitores"
 import CadastroLeitor from "./pages/CadastroLeitor"
 import DetalhesLeitor from "./pages/DetalhesLeitor"
+import EditarLeitor from "./pages/EditarLeitor"
 
 import Layout from "./components/Layout"
 
@@ -87,6 +88,11 @@ function App() {
                     <Route
                         path="/leitores/:id"
                         element={<DetalhesLeitor />}
+                    />
+                    
+                    <Route
+                        path="/leitores/:id/editar"
+                        element={<EditarLeitor />}
                     />
 
                 </Route>

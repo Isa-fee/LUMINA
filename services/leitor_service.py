@@ -145,11 +145,14 @@ async def criar_leitor(
     )
 
 
-def atualizar_leitor(
+async def atualizar_leitor(
     session: Session,
     leitor_id: int,
     nome: str,
-    email: str
+    email: str,
+    telefone: str | None = None,
+    endereco: str | None = None,
+    foto=None
 ):
 
     leitor = leitor_repository.buscar_por_id(
@@ -162,8 +165,96 @@ def atualizar_leitor(
             "Leitor não encontrado."
         )
 
+
     leitor.nome = nome
     leitor.email = email
+    leitor.telefone = telefone
+    leitor.endereco = endereco
+
+
+    # =====================================
+    # NOVA FOTO
+    # =====================================
+
+    if foto:
+
+        extensoes_permitidas = {
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".webp"
+        }
+
+
+        _, extensao = os.path.splitext(
+            foto.filename
+        )
+
+        extensao = extensao.lower()
+
+
+        if extensao not in extensoes_permitidas:
+
+            raise ValueError(
+                "Formato de imagem não permitido."
+            )
+
+
+        nome_arquivo = (
+            f"{uuid.uuid4()}{extensao}"
+        )
+
+
+        pasta_fotos = os.path.join(
+            "static",
+            "uploads",
+            "leitores"
+        )
+
+
+        os.makedirs(
+            pasta_fotos,
+            exist_ok=True
+        )
+
+
+        caminho_arquivo = os.path.join(
+            pasta_fotos,
+            nome_arquivo
+        )
+
+
+        with open(
+            caminho_arquivo,
+            "wb"
+        ) as arquivo:
+
+            shutil.copyfileobj(
+                foto.file,
+                arquivo
+            )
+
+
+        # Remove a foto antiga, se existir
+        if leitor.foto:
+
+            caminho_foto_antiga = os.path.join(
+                "static",
+                leitor.foto
+            )
+
+            if os.path.exists(
+                caminho_foto_antiga
+            ):
+                os.remove(
+                    caminho_foto_antiga
+                )
+
+
+        leitor.foto = (
+            f"uploads/leitores/{nome_arquivo}"
+        )
+
 
     return leitor_repository.salvar(
         session,

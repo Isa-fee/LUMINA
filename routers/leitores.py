@@ -10,7 +10,7 @@ from fastapi import (
 from sqlmodel import Session
 
 from database import get_session
-from models import LeitorBase, LeitorUpdate
+# from models import LeitorBase, LeitorUpdate
 from services import leitor_service
 
 from dependencies.auth import get_current_user
@@ -80,25 +80,32 @@ async def criar_leitor(
         )
 
 @router.put("/{leitor_id}")
-def atualizar_leitor(
+async def atualizar_leitor(
     leitor_id: int,
-    dados: LeitorUpdate,
+    nome: str = Form(...),
+    email: str = Form(...),
+    telefone: str | None = Form(default=None),
+    endereco: str | None = Form(default=None),
+    foto: UploadFile | None = File(default=None),
     session: Session = Depends(get_session)
 ):
 
     try:
 
-        return leitor_service.atualizar_leitor(
+        return await leitor_service.atualizar_leitor(
             session=session,
             leitor_id=leitor_id,
-            nome=dados.nome,
-            email=dados.email
+            nome=nome,
+            email=email,
+            telefone=telefone,
+            endereco=endereco,
+            foto=foto
         )
 
     except ValueError as erro:
 
         raise HTTPException(
-            status_code=404,
+            status_code=400,
             detail=str(erro)
         )
 

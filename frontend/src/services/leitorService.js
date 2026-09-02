@@ -109,7 +109,68 @@ export async function cadastrarLeitor(dados) {
 
     return resultado
 }
+export async function editarLeitor(
+    id,
+    dados
+) {
+    const formData = new FormData()
 
+    formData.append(
+        "nome",
+        dados.nome
+    )
+
+    formData.append(
+        "email",
+        dados.email
+    )
+
+    formData.append(
+        "telefone",
+        dados.telefone || ""
+    )
+
+    formData.append(
+        "endereco",
+        dados.endereco || ""
+    )
+
+    if (dados.foto) {
+        formData.append(
+            "foto",
+            dados.foto
+        )
+    }
+
+    const response = await apiFetch(
+        `/api/leitores/${id}`,
+        {
+            method: "PUT",
+            body: formData
+        }
+    )
+
+    const resultado = await response.json()
+
+    if (!response.ok) {
+        if (Array.isArray(resultado.detail)) {
+            const mensagens =
+                resultado.detail.map(
+                    (erro) => erro.msg
+                )
+            throw new Error(
+                mensagens.join(" | ")
+            )
+        }
+
+        throw new Error(
+            resultado.detail ||
+            "Não foi possível atualizar o leitor."
+        )
+    }
+
+    return resultado
+}
 export async function buscarDetalhesLeitor(id) {
     const response = await apiFetch(
         `/api/leitores/${id}/detalhes`
