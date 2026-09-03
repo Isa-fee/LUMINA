@@ -13,6 +13,8 @@ import CadastroLivro from "./pages/CadastroLivro"
 import DetalhesLivro from "./pages/DetalhesLivro"
 import EditarLivro from "./pages/EditarLivro"
 import Emprestimos from "./pages/Emprestimos"
+import NovoEmprestimo from "./pages/NovoEmprestimo"
+import EditarEmprestimo from "./pages/EditarEmprestimo"
 import Leitores from "./pages/Leitores"
 import CadastroLeitor from "./pages/CadastroLeitor"
 import DetalhesLeitor from "./pages/DetalhesLeitor"
@@ -79,6 +81,14 @@ function App() {
                     <Route
                         path="/emprestimos"
                         element={<Emprestimos />}
+                    />
+                    <Route
+                        path="/emprestimos/novo"
+                        element={<NovoEmprestimo />}
+                    />
+                    <Route
+                        path="/emprestimos/:id/editar"
+                        element={<EditarEmprestimo />}
                     />
                     <Route
                         path="/leitores"

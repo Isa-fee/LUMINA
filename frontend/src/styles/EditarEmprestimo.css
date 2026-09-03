@@ -1,0 +1,803 @@
+/* =========================================
+   PÁGINA
+========================================= */
+
+.editar-emprestimo-page {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 42px 55px 70px;
+
+    background: #fdfcfb;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.editar-emprestimo-cabecalho {
+    margin-bottom: 26px;
+}
+
+.editar-emprestimo-cabecalho > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #b9683f;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.editar-emprestimo-cabecalho h1 {
+    margin: 0 0 8px;
+
+    color: #5d321f;
+
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.editar-emprestimo-cabecalho p {
+    margin: 0;
+
+    color: #8c7b71;
+
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   VOLTAR
+========================================= */
+
+.editar-emprestimo-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 28px;
+
+    color: #7a4a31;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.editar-emprestimo-voltar span {
+    font-size: 18px;
+}
+
+.editar-emprestimo-voltar:hover {
+    color: #b9683f;
+    transform: translateX(-2px);
+}
+
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.editar-emprestimo-form {
+    width: 100%;
+    max-width: 1180px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+/* =========================================
+   BLOCOS
+========================================= */
+
+.editar-emprestimo-bloco {
+    width: 100%;
+
+    padding: 30px 32px;
+
+    background: #ffffff;
+
+    border: 1px solid #eadfd8;
+    border-radius: 17px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 4px 18px rgba(91, 57, 38, 0.04);
+}
+
+
+/* =========================================
+   CABEÇALHO DO BLOCO
+========================================= */
+
+.editar-bloco-cabecalho {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.editar-numero {
+    width: 35px;
+    height: 35px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f2e5dc;
+
+    color: #9c5735;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.editar-bloco-cabecalho h2 {
+    margin: 1px 0 5px;
+
+    color: #633923;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.editar-bloco-cabecalho p {
+    margin: 0;
+
+    color: #9a8980;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   BUSCA
+========================================= */
+
+.editar-busca {
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+.editar-busca input {
+    width: 100%;
+    height: 47px;
+
+    padding: 0 48px 0 17px;
+
+    border: 1px solid #e1d6cf;
+    border-radius: 10px;
+
+    background: #fdfcfb;
+
+    color: #60483c;
+
+    font-size: 14px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.editar-busca input::placeholder {
+    color: #b1a49d;
+}
+
+.editar-busca input:focus {
+    border-color: #b9683f;
+
+    box-shadow:
+        0 0 0 3px rgba(185, 104, 63, 0.09);
+}
+
+.editar-busca > span {
+    position: absolute;
+
+    top: 50%;
+    right: 17px;
+
+    transform: translateY(-50%);
+
+    color: #9c7b6b;
+
+    font-size: 21px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   LISTA DE OPÇÕES
+========================================= */
+
+.editar-lista-opcoes {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    max-height: 350px;
+
+    padding-right: 5px;
+
+    overflow-y: auto;
+}
+
+
+/* scrollbar */
+
+.editar-lista-opcoes::-webkit-scrollbar {
+    width: 6px;
+}
+
+.editar-lista-opcoes::-webkit-scrollbar-track {
+    background: #f6f0ec;
+    border-radius: 10px;
+}
+
+.editar-lista-opcoes::-webkit-scrollbar-thumb {
+    background: #d6b8a7;
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   OPÇÃO
+========================================= */
+
+.editar-opcao {
+    width: 100%;
+    min-height: 82px;
+
+    padding: 12px 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    border: 1px solid #eadfd8;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.editar-opcao:hover:not(:disabled) {
+    border-color: #c89477;
+
+    background: #fffaf7;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px rgba(111, 65, 42, 0.06);
+}
+
+
+/* selecionado */
+
+.editar-opcao-selecionada {
+    border-color: #b9683f;
+
+    background: #fff7f2;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(185, 104, 63, 0.08);
+}
+
+
+/* indisponível */
+
+.editar-opcao:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   AVATAR DO LEITOR
+========================================= */
+
+.editar-leitor-avatar {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #f0e2d8;
+
+    color: #7b4930;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.editar-leitor-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   CAPA DO LIVRO
+========================================= */
+
+.editar-livro-capa {
+    width: 45px;
+    height: 61px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+
+    background: #eee5df;
+
+    color: #8b654f;
+
+    font-size: 20px;
+
+    box-shadow:
+        0 2px 7px rgba(70, 42, 27, 0.12);
+}
+
+.editar-livro-capa img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   INFORMAÇÕES DA OPÇÃO
+========================================= */
+
+.editar-opcao-info {
+    min-width: 0;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.editar-opcao-info strong {
+    color: #573423;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.editar-opcao-info span {
+    color: #95847a;
+
+    font-size: 12px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.editar-opcao-info small {
+    margin-top: 2px;
+
+    color: #b9683f;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   RADIO
+========================================= */
+
+.editar-radio {
+    width: 22px;
+    height: 22px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d9c9c0;
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.editar-opcao-selecionada
+.editar-radio {
+    border-color: #b9683f;
+    background: #b9683f;
+}
+
+
+/* =========================================
+   ITEM SELECIONADO
+========================================= */
+
+.editar-selecionado {
+    margin-top: 20px;
+
+    padding: 14px 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-radius: 10px;
+
+    background: #f7eee8;
+}
+
+.editar-selecionado span {
+    color: #9b7b6a;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.editar-selecionado strong {
+    color: #6d412a;
+
+    font-size: 13px;
+
+    text-align: right;
+}
+
+
+/* =========================================
+   RESUMO
+========================================= */
+
+.editar-emprestimo-resumo {
+    width: 100%;
+
+    padding: 28px 32px;
+
+    background: #f5ece6;
+
+    border: 1px solid #ead8cc;
+    border-radius: 17px;
+
+    box-sizing: border-box;
+}
+
+.editar-resumo-rotulo {
+    display: block;
+
+    margin-bottom: 20px;
+
+    color: #a25f3d;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.editar-resumo-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 25px;
+}
+
+.editar-resumo-grid > div {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.editar-resumo-grid span {
+    color: #9c8476;
+
+    font-size: 12px;
+}
+
+.editar-resumo-grid strong {
+    color: #5e3926;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   AVISO DE EMPRÉSTIMO DEVOLVIDO
+========================================= */
+
+.editar-emprestimo-aviso {
+    width: 100%;
+    max-width: 1180px;
+
+    margin-bottom: 24px;
+    padding: 17px 20px;
+
+    border: 1px solid #dcc8bc;
+    border-radius: 11px;
+
+    background: #f7eee8;
+
+    box-sizing: border-box;
+}
+
+.editar-emprestimo-aviso strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #7a4930;
+
+    font-size: 14px;
+}
+
+.editar-emprestimo-aviso p {
+    margin: 0;
+
+    color: #9a7968;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   ERRO
+========================================= */
+
+.editar-emprestimo-erro {
+    width: 100%;
+    max-width: 1180px;
+
+    margin-bottom: 20px;
+    padding: 14px 17px;
+
+    border: 1px solid #e2b5aa;
+    border-radius: 9px;
+
+    background: #fff2ef;
+
+    color: #9d4637;
+
+    font-size: 13px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   CARREGANDO
+========================================= */
+
+.editar-emprestimo-estado {
+    padding: 50px 0;
+
+    color: #8e796e;
+
+    font-size: 15px;
+}
+
+
+/* =========================================
+   AÇÕES
+========================================= */
+
+.editar-emprestimo-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 5px;
+}
+
+
+/* cancelar */
+
+.editar-btn-cancelar {
+    min-width: 125px;
+    height: 46px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d9c8be;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #775342;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    box-sizing: border-box;
+
+    transition: 0.2s ease;
+}
+
+.editar-btn-cancelar:hover {
+    background: #f8f2ee;
+    border-color: #c9ad9d;
+}
+
+
+/* salvar */
+
+.editar-btn-salvar {
+    min-width: 170px;
+    height: 46px;
+
+    padding: 0 23px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #713b20;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.editar-btn-salvar:hover:not(:disabled) {
+    background: #5f301a;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(113, 59, 32, 0.18);
+}
+
+.editar-btn-salvar:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 1050px) {
+
+    .editar-lista-opcoes {
+        grid-template-columns: 1fr;
+    }
+
+    .editar-resumo-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media (max-width: 750px) {
+
+    .editar-emprestimo-page {
+        padding: 30px 22px 50px;
+    }
+
+    .editar-emprestimo-cabecalho h1 {
+        font-size: 28px;
+    }
+
+    .editar-emprestimo-bloco,
+    .editar-emprestimo-resumo {
+        padding: 23px 20px;
+    }
+
+    .editar-resumo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .editar-emprestimo-acoes {
+        flex-direction: column-reverse;
+    }
+
+    .editar-btn-cancelar,
+    .editar-btn-salvar {
+        width: 100%;
+    }
+}
