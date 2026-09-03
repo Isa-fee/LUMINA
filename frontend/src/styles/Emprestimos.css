@@ -1,0 +1,906 @@
+/* ========================================
+   PÁGINA
+======================================== */
+
+.emprestimos-page {
+    width: min(1250px, 92%);
+    margin: 0 auto;
+    padding: 40px 0 80px;
+
+    color: #6d412a;
+}
+
+
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+.emprestimos-cabecalho {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 34px;
+}
+
+
+.emprestimos-cabecalho > div > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #b9683f;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+.emprestimos-cabecalho h1 {
+    margin: 0 0 8px;
+
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+
+.emprestimos-cabecalho p {
+    margin: 0;
+
+    color: #a26546;
+
+    font-size: 1rem;
+}
+
+
+/* ========================================
+   NOVO EMPRÉSTIMO
+======================================== */
+
+.btn-novo-emprestimo {
+    min-width: 190px;
+    height: 47px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 0 20px;
+
+    border: 1px solid #794329;
+    border-radius: 10px;
+
+    background: #794329;
+
+    color: #ffffff;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-novo-emprestimo span {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+
+.btn-novo-emprestimo:hover {
+    background: #633821;
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   BARRA DE FILTROS
+======================================== */
+
+.barra-emprestimos {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 1fr)
+        190px
+        190px;
+
+    gap: 14px;
+
+    margin-bottom: 17px;
+}
+
+
+/* ========================================
+   BUSCA
+======================================== */
+
+.busca-emprestimos {
+    position: relative;
+}
+
+
+.busca-emprestimos input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 48px 0 16px;
+
+    border: 1px solid #c99579;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #6d412a;
+
+    font-family: inherit;
+    font-size: 0.9rem;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.busca-emprestimos input::placeholder {
+    color: #bc8a70;
+}
+
+
+.busca-emprestimos input:focus {
+    border-color: #8c5336;
+
+    box-shadow:
+        0 0 0 3px rgba(185, 104, 63, 0.1);
+}
+
+
+.busca-emprestimos > span {
+    position: absolute;
+
+    top: 50%;
+    right: 17px;
+
+    transform: translateY(-50%);
+
+    color: #8f5940;
+
+    font-size: 1.25rem;
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   SELECTS
+======================================== */
+
+.barra-emprestimos select {
+    height: 46px;
+
+    padding: 0 13px;
+
+    border: 1px solid #c99579;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #79472f;
+
+    font-family: inherit;
+    font-size: 0.87rem;
+
+    cursor: pointer;
+}
+
+
+.barra-emprestimos select:focus {
+    border-color: #8c5336;
+
+    box-shadow:
+        0 0 0 3px rgba(185, 104, 63, 0.1);
+}
+
+
+/* ========================================
+   RESULTADO
+======================================== */
+
+.resultado-emprestimos {
+    margin-bottom: 22px;
+
+    color: #a06c51;
+
+    font-size: 0.86rem;
+}
+
+
+.resultado-emprestimos strong {
+    margin-right: 4px;
+
+    color: #74442e;
+}
+
+
+/* ========================================
+   LISTAGEM
+======================================== */
+
+.lista-emprestimos {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* ========================================
+   CARD
+======================================== */
+
+.card-emprestimo {
+    display: grid;
+
+    grid-template-columns:
+        minmax(300px, 1.6fr)
+        minmax(140px, 0.8fr)
+        minmax(115px, 0.65fr)
+        minmax(140px, 0.8fr)
+        minmax(105px, 0.55fr)
+        auto;
+
+    align-items: center;
+
+    gap: 22px;
+
+    min-height: 128px;
+
+    padding: 18px 22px;
+
+    border: 1px solid #d4a58c;
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 3px 13px rgba(105, 57, 30, 0.045);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.card-emprestimo:hover {
+    border-color: #bd8061;
+
+    box-shadow:
+        0 6px 18px rgba(105, 57, 30, 0.07);
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   LIVRO
+======================================== */
+
+.emprestimo-livro {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.emprestimo-capa {
+    width: 65px;
+    height: 91px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #f0ddd1;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 3px 8px rgba(83, 45, 25, 0.12);
+}
+
+
+.emprestimo-capa img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.emprestimo-capa > span {
+    font-size: 1.6rem;
+}
+
+
+.emprestimo-livro-info {
+    min-width: 0;
+}
+
+
+.emprestimo-categoria {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    color: #b9683f;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+}
+
+
+.emprestimo-livro-info h2 {
+    margin: 0 0 5px;
+
+    overflow: hidden;
+
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.emprestimo-livro-info p {
+    margin: 0;
+
+    overflow: hidden;
+
+    color: #9b674d;
+
+    font-size: 0.82rem;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   COLUNAS
+======================================== */
+
+.emprestimo-coluna {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.emprestimo-rotulo {
+    color: #b07a5e;
+
+    font-size: 0.72rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+}
+
+
+.emprestimo-coluna strong {
+    overflow: hidden;
+
+    color: #74442e;
+
+    font-size: 0.86rem;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+.emprestimo-status-area {
+    display: flex;
+    justify-content: center;
+}
+
+
+.emprestimo-status {
+    min-width: 91px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    font-size: 0.76rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.emprestimo-status-bolinha {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+}
+
+
+/* ATIVO */
+
+.status-ativo {
+    border: 1px solid #b7c8a6;
+
+    background: #f1f6ed;
+
+    color: #637b50;
+}
+
+
+/* ATRASADO */
+
+.status-atrasado {
+    border: 1px solid #e0aea3;
+
+    background: #fff0ed;
+
+    color: #b45648;
+}
+
+
+/* DEVOLVIDO */
+
+.status-devolvido {
+    border: 1px solid #c8b5a9;
+
+    background: #f6f1ee;
+
+    color: #826b5e;
+}
+
+
+/* ========================================
+   AÇÕES
+======================================== */
+
+.emprestimo-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 7px;
+}
+
+
+.btn-devolver-emprestimo,
+.btn-editar-emprestimo,
+.btn-excluir-emprestimo {
+    height: 35px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 0.76rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* DEVOLVER */
+
+.btn-devolver-emprestimo {
+    padding: 0 12px;
+
+    border: 1px solid #a8b994;
+
+    background: #f6faf3;
+
+    color: #647a51;
+}
+
+
+.btn-devolver-emprestimo:hover {
+    background: #edf4e8;
+}
+
+
+/* EDITAR */
+
+.btn-editar-emprestimo {
+    padding: 0 12px;
+
+    border: 1px solid #bd8065;
+
+    background: #ffffff;
+
+    color: #925038;
+}
+
+
+.btn-editar-emprestimo:hover {
+    background: #fff5ef;
+}
+
+
+/* EXCLUIR */
+
+.btn-excluir-emprestimo {
+    width: 35px;
+
+    padding: 0;
+
+    border: 1px solid #dfaaa0;
+
+    background: #ffffff;
+
+    color: #b85448;
+
+    font-size: 1.15rem;
+}
+
+
+.btn-excluir-emprestimo:hover {
+    background: #fff0ed;
+}
+
+
+/* ========================================
+   ESTADOS
+======================================== */
+
+.emprestimos-estado,
+.emprestimos-vazio {
+    padding: 55px 25px;
+
+    border: 1px solid #dfb7a1;
+    border-radius: 18px;
+
+    background: #ffffff;
+
+    color: #9a654b;
+
+    text-align: center;
+}
+
+
+.emprestimos-vazio h2 {
+    margin: 0 0 8px;
+
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+}
+
+
+.emprestimos-vazio p {
+    margin: 0;
+}
+
+
+.emprestimos-erro {
+    padding: 14px 18px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background: #fff0ed;
+
+    color: #a23d34;
+}
+
+
+/* ========================================
+   MODAL
+======================================== */
+
+.modal-emprestimo-fundo {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(65, 38, 24, 0.42);
+
+    backdrop-filter: blur(2px);
+}
+
+
+.modal-emprestimo {
+    width: min(430px, 100%);
+
+    padding: 34px;
+
+    border: 1px solid #d5a58b;
+    border-radius: 20px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 18px 50px rgba(67, 35, 20, 0.2);
+
+    text-align: center;
+}
+
+
+.modal-emprestimo-icone {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 17px;
+
+    border-radius: 50%;
+
+    background: #edf4e8;
+
+    color: #647a51;
+
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+
+.modal-emprestimo-icone.perigo {
+    background: #fff0ed;
+
+    color: #b85448;
+}
+
+
+.modal-emprestimo h2 {
+    margin: 0 0 12px;
+
+    color: #713b20;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+}
+
+
+.modal-emprestimo p {
+    margin: 0;
+
+    color: #966047;
+
+    font-size: 0.88rem;
+    line-height: 1.65;
+}
+
+
+.modal-emprestimo p strong {
+    color: #713b20;
+}
+
+
+.modal-emprestimo-acoes {
+    display: flex;
+    justify-content: center;
+
+    gap: 11px;
+
+    margin-top: 27px;
+}
+
+
+.modal-emprestimo-acoes button {
+    min-width: 145px;
+    height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+    font-size: 0.84rem;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.modal-emprestimo-cancelar {
+    border: 1px solid #bd8065;
+
+    background: #ffffff;
+
+    color: #925038;
+}
+
+
+.modal-emprestimo-confirmar {
+    border: 1px solid #667b55;
+
+    background: #667b55;
+
+    color: #ffffff;
+}
+
+
+.modal-emprestimo-excluir {
+    border: 1px solid #a74e43;
+
+    background: #a74e43;
+
+    color: #ffffff;
+}
+
+
+.modal-emprestimo-acoes button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 1150px) {
+
+    .card-emprestimo {
+        grid-template-columns:
+            minmax(280px, 1.5fr)
+            minmax(130px, 0.8fr)
+            minmax(120px, 0.7fr)
+            minmax(110px, 0.65fr);
+
+        gap: 18px;
+    }
+
+
+    .emprestimo-status-area {
+        justify-content: flex-start;
+    }
+
+
+    .emprestimo-acoes {
+        justify-content: flex-start;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .emprestimos-cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .barra-emprestimos {
+        grid-template-columns: 1fr;
+    }
+
+
+    .card-emprestimo {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .emprestimo-livro {
+        grid-column: 1 / -1;
+    }
+
+
+    .emprestimo-acoes {
+        grid-column: 1 / -1;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .emprestimos-page {
+        width: 90%;
+    }
+
+
+    .emprestimos-cabecalho h1 {
+        font-size: 2rem;
+    }
+
+
+    .btn-novo-emprestimo {
+        width: 100%;
+    }
+
+
+    .card-emprestimo {
+        grid-template-columns: 1fr;
+    }
+
+
+    .emprestimo-livro,
+    .emprestimo-acoes {
+        grid-column: auto;
+    }
+
+
+    .emprestimo-acoes {
+        flex-wrap: wrap;
+    }
+
+
+    .modal-emprestimo-acoes {
+        flex-direction: column;
+    }
+
+
+    .modal-emprestimo-acoes button {
+        width: 100%;
+    }
+}

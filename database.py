@@ -5,13 +5,13 @@ from sqlmodel import (
 )
 
 
-# DATABASE_URL = (
-#     "mysql+pymysql://root:admin@localhost/lumina"
-# )
-
 DATABASE_URL = (
-    "mysql+pymysql://root:@localhost/lumina"
+    "mysql+pymysql://root:admin@localhost/lumina"
 )
+
+# DATABASE_URL = (
+#     "mysql+pymysql://root:@localhost/lumina"
+# )
 
 
 engine = create_engine(

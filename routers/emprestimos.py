@@ -75,7 +75,7 @@ def criar_emprestimo(
         )
 
 
-@router.delete("/{emprestimo_id}")
+@router.put("/{emprestimo_id}/devolver")
 def devolver_livro(
     emprestimo_id: int,
     session: Session = Depends(get_session)
@@ -83,37 +83,9 @@ def devolver_livro(
 
     try:
 
-        emprestimo_service.devolver_livro(
+        return emprestimo_service.devolver_livro(
             session,
             emprestimo_id
-        )
-
-        return {
-            "mensagem": "Livro devolvido com sucesso."
-        }
-
-    except ValueError as erro:
-
-        raise HTTPException(
-            status_code=404,
-            detail=str(erro)
-        )
-
-
-@router.put("/{emprestimo_id}")
-def atualizar_emprestimo(
-    emprestimo_id: int,
-    dados: EmprestimoUpdate,
-    session: Session = Depends(get_session)
-):
-
-    try:
-
-        return emprestimo_service.atualizar_emprestimo(
-            session=session,
-            emprestimo_id=emprestimo_id,
-            leitor_id=dados.leitor_id,
-            livro_id=dados.livro_id
         )
 
     except ValueError as erro:
@@ -127,6 +99,52 @@ def atualizar_emprestimo(
                 detail=mensagem
             )
 
+        raise HTTPException(
+            status_code=400,
+            detail=mensagem
+        )
+
+
+@router.delete("/{emprestimo_id}")
+def excluir_emprestimo(
+    emprestimo_id: int,
+    session: Session = Depends(get_session)
+):
+    try:
+        emprestimo_service.excluir_emprestimo(
+            session,
+            emprestimo_id
+        )
+        return {
+            "mensagem":
+                "Empréstimo excluído com sucesso."
+        }
+    except ValueError as erro:
+        raise HTTPException(
+            status_code=404,
+            detail=str(erro)
+        )
+
+@router.put("/{emprestimo_id}")
+def atualizar_emprestimo(
+    emprestimo_id: int,
+    dados: EmprestimoUpdate,
+    session: Session = Depends(get_session)
+):
+    try:
+        return emprestimo_service.atualizar_emprestimo(
+            session=session,
+            emprestimo_id=emprestimo_id,
+            leitor_id=dados.leitor_id,
+            livro_id=dados.livro_id
+        )
+    except ValueError as erro:
+        mensagem = str(erro)
+        if mensagem == "Empréstimo não encontrado.":
+            raise HTTPException(
+                status_code=404,
+                detail=mensagem
+            )
         raise HTTPException(
             status_code=400,
             detail=mensagem
