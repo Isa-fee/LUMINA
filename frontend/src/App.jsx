@@ -12,6 +12,7 @@ import Livros from "./pages/Livros"
 import CadastroLivro from "./pages/CadastroLivro"
 import DetalhesLivro from "./pages/DetalhesLivro"
 import EditarLivro from "./pages/EditarLivro"
+import Emprestimos from "./pages/Emprestimos"
 import Leitores from "./pages/Leitores"
 import CadastroLeitor from "./pages/CadastroLeitor"
 import DetalhesLeitor from "./pages/DetalhesLeitor"
@@ -74,7 +75,11 @@ function App() {
                         path="/livros/:id/editar"
                         element={<EditarLivro />}
                     />
-
+                    
+                    <Route
+                        path="/emprestimos"
+                        element={<Emprestimos />}
+                    />
                     <Route
                         path="/leitores"
                         element={<Leitores />}
