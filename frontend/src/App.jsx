@@ -7,6 +7,7 @@ import {
 
 import Login from "./pages/Login"
 import Cadastro from "./pages/Cadastro"
+import RecuperarSenha from "./pages/Recuperarsenha"
 import Home from "./pages/Home"
 import Livros from "./pages/Livros"
 import CadastroLivro from "./pages/CadastroLivro"
@@ -49,6 +50,11 @@ function App() {
                 <Route
                     path="/cadastro"
                     element={<Cadastro />}
+                />
+
+                <Route
+                    path="/recuperar-senha"
+                    element={<RecuperarSenha />}
                 />
 
                 <Route element={<Layout />}>

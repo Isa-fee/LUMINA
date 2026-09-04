@@ -113,6 +113,11 @@ function Login() {
 
                         </div>
 
+                        <div className="login-esqueceu">
+                            <Link to="/recuperar-senha">
+                                Esqueceu sua senha?
+                            </Link>
+                        </div>
 
                         {mensagem && (
                             <p className="login-erro">
