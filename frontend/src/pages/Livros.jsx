@@ -381,7 +381,32 @@ function Livros() {
                     
                     
                         <div className="acoes-livro">
-                    
+                            
+                            <Link
+                                to={`/emprestimos/novo?livro=${livro.id}`}
+                                className={
+                                    livro.quantidade_disponivel > 0
+                                        ? "acao-livro"
+                                        : "acao-livro acao-livro-desabilitada"
+                                }
+                                onClick={
+                                    livro.quantidade_disponivel <= 0
+                                        ? (event) => event.preventDefault()
+                                        : undefined
+                                }
+                            >
+                                <span className="acao-icone">
+                                    📚
+                                </span>
+
+                                <span>
+                                    {livro.quantidade_disponivel > 0
+                                        ? "Emprestar"
+                                        : "Indisponível"
+                                    }
+                                </span>
+                            </Link>
+
                             <Link
                                 to={`/livros/${livro.id}`}
                                 className="acao-livro"

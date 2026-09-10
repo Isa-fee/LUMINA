@@ -319,10 +319,33 @@ function DetalhesLivro() {
 
                     </div>
 
-
                     {/* AÇÕES */}
 
                     <div className="detalhes-acoes">
+
+                        {disponivel ? (
+
+                            <Link
+                                to={`/emprestimos/novo?livro=${livro.id}`}
+                                className="btn-emprestar-detalhes"
+                            >
+                                <span>↗</span>
+
+                                Realizar empréstimo
+                            </Link>
+
+                        ) : (
+
+                            <button
+                                type="button"
+                                className="btn-emprestar-detalhes indisponivel"
+                                disabled
+                            >
+                                Livro indisponível
+                            </button>
+
+                        )}
+
 
                         <Link
                             to={`/livros/${livro.id}/editar`}
@@ -341,6 +364,7 @@ function DetalhesLivro() {
                         >
                             Excluir livro
                         </button>
+
                     </div>
 
                 </div>

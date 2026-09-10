@@ -586,6 +586,17 @@
 
     display: block;
 }
+
+.acao-livro-desabilitada {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: auto;
+}
+
+.acao-livro-desabilitada:hover {
+    transform: none;
+}
+
 /* ========================================
    RESPONSIVIDADE
 ======================================== */

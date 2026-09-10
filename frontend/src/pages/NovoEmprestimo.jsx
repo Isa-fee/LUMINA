@@ -6,7 +6,8 @@ import {
 
 import {
     Link,
-    useNavigate
+    useNavigate,
+    useSearchParams
 } from "react-router-dom"
 
 import {
@@ -29,7 +30,10 @@ import "../styles/NovoEmprestimo.css"
 function NovoEmprestimo() {
 
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
 
+    const livroIdInicial =
+        searchParams.get("livro")
 
     // ========================================
     // DADOS
@@ -107,6 +111,25 @@ function NovoEmprestimo() {
                     dadosLivros
                 )
 
+                if (livroIdInicial) {
+
+                    const livroEncontrado =
+                        dadosLivros.find(
+                            (livro) =>
+                                String(livro.id) ===
+                                String(livroIdInicial)
+                        )
+
+                    if (
+                        livroEncontrado &&
+                        livroEncontrado.quantidade_disponivel > 0
+                    ) {
+                        setLivroSelecionado(
+                            livroEncontrado
+                        )
+                    }
+                }
+
             } catch (erro) {
 
                 setErro(
@@ -121,7 +144,7 @@ function NovoEmprestimo() {
 
         carregarDados()
 
-    }, [])
+    }, [livroIdInicial])
 
 
     // ========================================
