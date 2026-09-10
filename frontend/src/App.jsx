@@ -22,7 +22,7 @@ import DetalhesLeitor from "./pages/DetalhesLeitor"
 import EditarLeitor from "./pages/EditarLeitor"
 
 import Layout from "./components/Layout"
-
+import ProtectedRoute from "./components/ProtectedRoute"
 
 function App() {
 
@@ -57,7 +57,13 @@ function App() {
                     element={<RecuperarSenha />}
                 />
 
-                <Route element={<Layout />}>
+                <Route
+                    element={
+                        <ProtectedRoute>
+                            <Layout />
+                        </ProtectedRoute>
+                    }
+                >
 
                     <Route
                         path="/home"
