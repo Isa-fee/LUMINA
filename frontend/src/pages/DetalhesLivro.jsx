@@ -55,25 +55,26 @@ function DetalhesLivro() {
 
     }, [id])
 
+
     async function confirmarExclusao() {
 
         try {
-    
+
             setExcluindo(true)
             setErro("")
-    
+
             await excluirLivro(id)
-    
+
             navigate("/livros")
-    
+
         } catch (erro) {
-    
+
             setErro(erro.message)
-    
+
             setModalExcluir(false)
-    
+
         } finally {
-    
+
             setExcluindo(false)
         }
     }
@@ -225,7 +226,7 @@ function DetalhesLivro() {
                     <div className="detalhes-divisor" />
 
 
-                    {/* DADOS */}
+                    {/* DADOS BIBLIOGRÁFICOS */}
 
                     <div className="detalhes-informacoes">
 
@@ -236,7 +237,7 @@ function DetalhesLivro() {
                             </span>
 
                             <strong>
-                                {livro.isbn}
+                                {livro.isbn || "Não informado"}
                             </strong>
 
                         </div>
@@ -249,7 +250,59 @@ function DetalhesLivro() {
                             </span>
 
                             <strong>
-                                {livro.categoria}
+                                {livro.categoria || "Não informado"}
+                            </strong>
+
+                        </div>
+
+
+                        <div className="detalhes-info-item">
+
+                            <span>
+                                Editora
+                            </span>
+
+                            <strong>
+                                {livro.editora || "Não informado"}
+                            </strong>
+
+                        </div>
+
+
+                        <div className="detalhes-info-item">
+
+                            <span>
+                                Ano de publicação
+                            </span>
+
+                            <strong>
+                                {livro.ano_publicacao || "Não informado"}
+                            </strong>
+
+                        </div>
+
+
+                        <div className="detalhes-info-item">
+
+                            <span>
+                                Edição
+                            </span>
+
+                            <strong>
+                                {livro.edicao || "Não informado"}
+                            </strong>
+
+                        </div>
+
+
+                        <div className="detalhes-info-item">
+
+                            <span>
+                                Número de páginas
+                            </span>
+
+                            <strong>
+                                {livro.numero_paginas || "Não informado"}
                             </strong>
 
                         </div>
@@ -281,6 +334,25 @@ function DetalhesLivro() {
                         </div>
 
                     </div>
+
+
+                    {/* DESCRIÇÃO */}
+
+                    {livro.descricao && (
+
+                        <div className="detalhes-descricao">
+
+                            <span className="detalhes-descricao-titulo">
+                                Descrição
+                            </span>
+
+                            <p>
+                                {livro.descricao}
+                            </p>
+
+                        </div>
+
+                    )}
 
 
                     {/* DISPONIBILIDADE */}
@@ -318,6 +390,7 @@ function DetalhesLivro() {
                         </div>
 
                     </div>
+
 
                     {/* AÇÕES */}
 
@@ -370,6 +443,9 @@ function DetalhesLivro() {
                 </div>
 
             </section>
+
+
+            {/* MODAL DE EXCLUSÃO */}
 
             {modalExcluir && (
 
@@ -426,7 +502,7 @@ function DetalhesLivro() {
 
                 </div>
 
-                )}
+            )}
 
         </main>
     )

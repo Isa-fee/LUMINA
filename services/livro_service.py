@@ -32,6 +32,11 @@ async def criar_livro(
     categoria,
     isbn,
     quantidade_total,
+    editora=None,
+    ano_publicacao=None,
+    edicao=None,
+    numero_paginas=None,
+    descricao=None,
     capa=None
 ):
 
@@ -108,14 +113,21 @@ async def criar_livro(
 
 
     novo_livro = Livro(
-        titulo=titulo,
-        autor=autor,
-        categoria=categoria,
-        isbn=isbn,
-        quantidade_total=quantidade_total,
-        quantidade_disponivel=quantidade_total,
-        capa=caminho_capa
-    )
+    titulo=titulo,
+    autor=autor,
+    categoria=categoria,
+    isbn=isbn,
+
+    editora=editora,
+    ano_publicacao=ano_publicacao,
+    edicao=edicao,
+    numero_paginas=numero_paginas,
+    descricao=descricao,
+
+    quantidade_total=quantidade_total,
+    quantidade_disponivel=quantidade_total,
+    capa=caminho_capa
+)
 
 
     session.add(novo_livro)
@@ -167,7 +179,12 @@ def atualizar_livro(
     autor: str,
     categoria: str,
     isbn: str,
-    quantidade_total: int
+    quantidade_total: int,
+    editora: str | None = None,
+    ano_publicacao: int | None = None,
+    edicao: str | None = None,
+    numero_paginas: int | None = None,
+    descricao: str | None = None
 ):
 
     livro = livro_repository.buscar_por_id(
@@ -201,14 +218,20 @@ def atualizar_livro(
     livro.categoria = categoria
     livro.isbn = isbn
 
+    livro.editora = editora
+    livro.ano_publicacao = ano_publicacao
+    livro.edicao = edicao
+    livro.numero_paginas = numero_paginas
+    livro.descricao = descricao
+
     livro.quantidade_total = quantidade_total
 
     livro.quantidade_disponivel = (
-        quantidade_total
-        - quantidade_emprestada
+    quantidade_total
+    - quantidade_emprestada
     )
 
     return livro_repository.salvar(
-        session,
-        livro
+    session,
+    livro
     )
