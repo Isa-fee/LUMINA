@@ -61,8 +61,14 @@ async def criar_livro(
     categoria: str = Form(...),
     isbn: str = Form(...),
     quantidade_total: int = Form(...),
+    editora: str | None = Form(default=None),
+    ano_publicacao: int | None = Form(default=None),
+    edicao: str | None = Form(default=None),
+    numero_paginas: int | None = Form(default=None),
+    descricao: str | None = Form(default=None),
     capa: UploadFile | None = File(default=None),
     session: Session = Depends(get_session)
+
 ):
 
     try:
@@ -74,6 +80,11 @@ async def criar_livro(
             categoria=categoria,
             isbn=isbn,
             quantidade_total=quantidade_total,
+            editora=editora,
+            ano_publicacao=ano_publicacao,
+            edicao=edicao,
+            numero_paginas=numero_paginas,
+            descricao=descricao,
             capa=capa
         )
 
@@ -102,7 +113,12 @@ def atualizar_livro(
             autor=dados.autor,
             categoria=dados.categoria,
             isbn=dados.isbn,
-            quantidade_total=dados.quantidade_total
+            quantidade_total=dados.quantidade_total,
+            editora=dados.editora,
+            ano_publicacao=dados.ano_publicacao,
+            edicao=dados.edicao,
+            numero_paginas=dados.numero_paginas,
+            descricao=dados.descricao
         )
 
         return livro

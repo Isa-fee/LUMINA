@@ -32,6 +32,11 @@ class LivroBase(SQLModel):
     categoria: str
     isbn: str
     quantidade_total: int
+    editora: Optional[str] = None
+    ano_publicacao: Optional[int] = None
+    edicao: Optional[str] = None
+    numero_paginas: Optional[int] = None
+    descricao: Optional[str] = None
 
 
 class Livro(LivroBase, table=True):
@@ -57,6 +62,13 @@ class LivroUpdate(SQLModel):
     categoria: str
     isbn: str
     quantidade_total: int
+
+    # Informações adicionais
+    editora: Optional[str] = None
+    ano_publicacao: Optional[int] = None
+    edicao: Optional[str] = None
+    numero_paginas: Optional[int] = None
+    descricao: Optional[str] = None
 
 
 # =====================

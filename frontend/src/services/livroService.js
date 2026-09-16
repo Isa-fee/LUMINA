@@ -24,16 +24,79 @@ export async function cadastrarLivro(dados) {
 
     const formData = new FormData()
 
-    formData.append("titulo", dados.titulo)
-    formData.append("autor", dados.autor)
-    formData.append("categoria", dados.categoria)
-    formData.append("isbn", dados.isbn)
+    // =========================
+    // INFORMAÇÕES PRINCIPAIS
+    // =========================
+
+    formData.append(
+        "titulo",
+        dados.titulo
+    )
+
+    formData.append(
+        "autor",
+        dados.autor
+    )
+
+    formData.append(
+        "categoria",
+        dados.categoria
+    )
+
+    formData.append(
+        "isbn",
+        dados.isbn
+    )
 
     formData.append(
         "quantidade_total",
         String(dados.quantidade_total)
     )
 
+
+    // =========================
+    // INFORMAÇÕES ADICIONAIS
+    // =========================
+
+    if (dados.editora) {
+        formData.append(
+            "editora",
+            dados.editora
+        )
+    }
+
+    if (dados.ano_publicacao) {
+        formData.append(
+            "ano_publicacao",
+            String(dados.ano_publicacao)
+        )
+    }
+
+    if (dados.edicao) {
+        formData.append(
+            "edicao",
+            dados.edicao
+        )
+    }
+
+    if (dados.numero_paginas) {
+        formData.append(
+            "numero_paginas",
+            String(dados.numero_paginas)
+        )
+    }
+
+    if (dados.descricao) {
+        formData.append(
+            "descricao",
+            dados.descricao
+        )
+    }
+
+
+    // =========================
+    // CAPA
+    // =========================
 
     if (dados.capa) {
 
@@ -43,6 +106,10 @@ export async function cadastrarLivro(dados) {
         )
     }
 
+
+    // =========================
+    // REQUISIÇÃO
+    // =========================
 
     const response = await apiFetch(
         "/api/livros/",
@@ -86,7 +153,9 @@ export async function cadastrarLivro(dados) {
     return resultado
 }
 
+
 export async function buscarLivro(id) {
+
     const response = await apiFetch(
         `/api/livros/${id}`
     )
@@ -103,7 +172,11 @@ export async function buscarLivro(id) {
     return dados
 }
 
-export async function atualizarLivro(id, dados) {
+
+export async function atualizarLivro(
+    id,
+    dados
+) {
 
     const response = await apiFetch(
         `/api/livros/${id}`,
@@ -111,12 +184,35 @@ export async function atualizarLivro(id, dados) {
             method: "PUT",
 
             body: JSON.stringify({
+
+                // Informações principais
                 titulo: dados.titulo,
                 autor: dados.autor,
                 categoria: dados.categoria,
                 isbn: dados.isbn,
+
                 quantidade_total:
-                    Number(dados.quantidade_total)
+                    Number(dados.quantidade_total),
+
+                // Informações adicionais
+                editora:
+                    dados.editora || null,
+
+                ano_publicacao:
+                    dados.ano_publicacao
+                        ? Number(dados.ano_publicacao)
+                        : null,
+
+                edicao:
+                    dados.edicao || null,
+
+                numero_paginas:
+                    dados.numero_paginas
+                        ? Number(dados.numero_paginas)
+                        : null,
+
+                descricao:
+                    dados.descricao || null
             })
         }
     )
@@ -148,6 +244,7 @@ export async function atualizarLivro(id, dados) {
 
     return resultado
 }
+
 
 export async function excluirLivro(id) {
 

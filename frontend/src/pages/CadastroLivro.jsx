@@ -22,7 +22,13 @@ function CadastroLivro() {
         autor: "",
         categoria: "",
         isbn: "",
-        quantidade_total: 1
+        quantidade_total: 1,
+
+        editora: "",
+        ano_publicacao: "",
+        edicao: "",
+        numero_paginas: "",
+        descricao: ""
     })
 
     const [capa, setCapa] = useState(null)
@@ -219,6 +225,8 @@ function CadastroLivro() {
                     </h2>
 
 
+                    {/* TÍTULO */}
+
                     <div className="campo-livro campo-livro-grande">
 
                         <label htmlFor="titulo">
@@ -237,6 +245,8 @@ function CadastroLivro() {
 
                     </div>
 
+
+                    {/* AUTOR E CATEGORIA */}
 
                     <div className="campos-livro-linha">
 
@@ -279,6 +289,8 @@ function CadastroLivro() {
 
                     </div>
 
+
+                    {/* ISBN E QUANTIDADE */}
 
                     <div className="campos-livro-linha">
 
@@ -324,6 +336,114 @@ function CadastroLivro() {
                     </div>
 
 
+                    {/* EDITORA E ANO DE PUBLICAÇÃO */}
+
+                    <div className="campos-livro-linha">
+
+                        <div className="campo-livro">
+
+                            <label htmlFor="editora">
+                                Editora
+                            </label>
+
+                            <input
+                                id="editora"
+                                name="editora"
+                                type="text"
+                                placeholder="Ex.: Galera Record"
+                                value={formulario.editora}
+                                onChange={alterarCampo}
+                            />
+
+                        </div>
+
+
+                        <div className="campo-livro">
+
+                            <label htmlFor="ano_publicacao">
+                                Ano de publicação
+                            </label>
+
+                            <input
+                                id="ano_publicacao"
+                                name="ano_publicacao"
+                                type="number"
+                                min="1"
+                                placeholder="Ex.: 2013"
+                                value={formulario.ano_publicacao}
+                                onChange={alterarCampo}
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* EDIÇÃO E NÚMERO DE PÁGINAS */}
+
+                    <div className="campos-livro-linha">
+
+                        <div className="campo-livro">
+
+                            <label htmlFor="edicao">
+                                Edição
+                            </label>
+
+                            <input
+                                id="edicao"
+                                name="edicao"
+                                type="text"
+                                placeholder="Ex.: 1ª edição"
+                                value={formulario.edicao}
+                                onChange={alterarCampo}
+                            />
+
+                        </div>
+
+
+                        <div className="campo-livro">
+
+                            <label htmlFor="numero_paginas">
+                                Número de páginas
+                            </label>
+
+                            <input
+                                id="numero_paginas"
+                                name="numero_paginas"
+                                type="number"
+                                min="1"
+                                placeholder="Ex.: 392"
+                                value={formulario.numero_paginas}
+                                onChange={alterarCampo}
+                            />
+
+                        </div>
+
+                    </div>
+
+
+                    {/* DESCRIÇÃO */}
+
+                    <div className="campo-livro campo-livro-grande">
+
+                        <label htmlFor="descricao">
+                            Descrição / Sinopse
+                        </label>
+
+                        <textarea
+                            id="descricao"
+                            name="descricao"
+                            placeholder="Digite uma breve descrição da obra"
+                            value={formulario.descricao}
+                            onChange={alterarCampo}
+                            rows="5"
+                        />
+
+                    </div>
+
+
+                    {/* ERRO */}
+
                     {erro && (
 
                         <div className="cadastro-livro-erro">
@@ -332,6 +452,8 @@ function CadastroLivro() {
 
                     )}
 
+
+                    {/* AÇÕES */}
 
                     <div className="cadastro-livro-acoes">
 
