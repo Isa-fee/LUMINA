@@ -1,197 +1,115 @@
-import {
-    useState
-} from "react"
+import { useState } from 'react';
 
-import {
-    Link,
-    useNavigate
-} from "react-router-dom"
+import { Link, useNavigate } from 'react-router-dom';
 
-import {
-    cadastrarLeitor
-} from "../services/leitorService"
+import { cadastrarLeitor } from '../services/leitorService';
 
-import "../styles/CadastroLeitor.css"
-
+import '../styles/CadastroLeitor.css';
 
 function CadastroLeitor() {
-
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
 
     const [formulario, setFormulario] = useState({
-        nome: "",
-        email: "",
-        telefone: "",
-        endereco: "",
-        foto: null
-    })
-    
-    
-    const [previewFoto, setPreviewFoto] =
-        useState(null)
+        nome: '',
+        email: '',
+        telefone: '',
+        endereco: '',
+        foto: null,
+    });
 
+    const [previewFoto, setPreviewFoto] = useState(null);
 
-    const [salvando, setSalvando] =
-        useState(false)
+    const [salvando, setSalvando] = useState(false);
 
-    const [erro, setErro] =
-        useState("")
-
+    const [erro, setErro] = useState('');
 
     function alterarCampo(event) {
+        const { name, value } = event.target;
 
-        const {
-            name,
-            value
-        } = event.target
+        setFormulario((anterior) => ({
+            ...anterior,
 
-
-        setFormulario(
-            (anterior) => ({
-                ...anterior,
-
-                [name]: value
-            })
-        )
+            [name]: value,
+        }));
     }
 
     function alterarFoto(event) {
+        const arquivo = event.target.files[0];
 
-        const arquivo =
-            event.target.files[0]
-    
-    
         if (!arquivo) {
-            return
+            return;
         }
-    
-    
-        setFormulario(
-            (anterior) => ({
-                ...anterior,
-                foto: arquivo
-            })
-        )
-    
-    
-        const preview =
-            URL.createObjectURL(arquivo)
-    
-        setPreviewFoto(preview)
-    }
 
+        setFormulario((anterior) => ({
+            ...anterior,
+            foto: arquivo,
+        }));
+
+        const preview = URL.createObjectURL(arquivo);
+
+        setPreviewFoto(preview);
+    }
 
     async function enviarFormulario(event) {
+        event.preventDefault();
 
-        event.preventDefault()
-
-        setErro("")
-        setSalvando(true)
-
+        setErro('');
+        setSalvando(true);
 
         try {
+            await cadastrarLeitor(formulario);
 
-            await cadastrarLeitor(
-                formulario
-            )
-
-            navigate("/leitores")
-
+            navigate('/leitores');
         } catch (erro) {
-
-            setErro(erro.message)
-
+            setErro(erro.message);
         } finally {
-
-            setSalvando(false)
+            setSalvando(false);
         }
     }
-
 
     return (
         <main className="cadastro-leitor-page">
-
             {/* CABEÇALHO */}
 
             <section className="cadastro-leitor-cabecalho">
+                <span>Leitores</span>
 
-                <span>
-                    Leitores
-                </span>
+                <h1>Cadastrar leitor</h1>
 
-                <h1>
-                    Cadastrar leitor
-                </h1>
-
-                <p>
-                    Adicione um novo leitor
-                    à biblioteca.
-                </p>
-
+                <p>Adicione um novo leitor à biblioteca.</p>
             </section>
-
 
             {/* VOLTAR */}
 
-            <Link
-                to="/leitores"
-                className="cadastro-leitor-voltar"
-            >
+            <Link to="/leitores" className="cadastro-leitor-voltar">
                 <span>←</span>
-
                 Voltar para leitores
             </Link>
 
-
             {/* ERRO */}
 
-            {erro && (
-
-                <div className="cadastro-leitor-erro">
-                    {erro}
-                </div>
-
-            )}
-
+            {erro && <div className="cadastro-leitor-erro">{erro}</div>}
 
             {/* CARD */}
 
             <section className="cadastro-leitor-card">
-
                 <div className="cadastro-leitor-ilustracao">
-
-                    <label
-                        htmlFor="foto"
-                        className="cadastro-leitor-foto"
-                    >
-
+                    <label htmlFor="foto" className="cadastro-leitor-foto">
                         {previewFoto ? (
-
                             <img
                                 src={previewFoto}
                                 alt="Prévia da foto do leitor"
                             />
-
                         ) : (
-
                             <div className="cadastro-leitor-sem-foto">
-
-                                <span>
-                                    +
-                                </span>
-
+                                <span>+</span>
                             </div>
-
                         )}
-
 
                         <span className="cadastro-leitor-foto-acao">
                             Escolher foto
                         </span>
-
                     </label>
-
 
                     <input
                         id="foto"
@@ -201,51 +119,31 @@ function CadastroLeitor() {
                         className="cadastro-leitor-input-foto"
                     />
 
-
-                    <h2>
-                        Novo leitor
-                    </h2>
+                    <h2>Novo leitor</h2>
 
                     <p>
-                        Cadastre as informações
-                        básicas do leitor para que
-                        ele possa realizar empréstimos
-                        na biblioteca.
+                        Cadastre as informações básicas do leitor para que ele
+                        possa realizar empréstimos na biblioteca.
                     </p>
-
                 </div>
-
 
                 <form
                     className="cadastro-leitor-formulario"
                     onSubmit={enviarFormulario}
                 >
-
                     <div className="cadastro-leitor-form-topo">
+                        <span>Informações pessoais</span>
 
-                        <span>
-                            Informações pessoais
-                        </span>
-
-                        <h2>
-                            Dados do leitor
-                        </h2>
+                        <h2>Dados do leitor</h2>
 
                         <p>
-                            Preencha os campos abaixo
-                            para realizar o cadastro.
+                            Preencha os campos abaixo para realizar o cadastro.
                         </p>
-
                     </div>
 
-
                     <div className="cadastro-leitor-campos">
-
                         <div className="cadastro-leitor-campo">
-
-                            <label htmlFor="nome">
-                                Nome completo
-                            </label>
+                            <label htmlFor="nome">Nome completo</label>
 
                             <input
                                 id="nome"
@@ -256,15 +154,10 @@ function CadastroLeitor() {
                                 onChange={alterarCampo}
                                 required
                             />
-
                         </div>
 
-
                         <div className="cadastro-leitor-campo">
-
-                            <label htmlFor="email">
-                                E-mail
-                            </label>
+                            <label htmlFor="email">E-mail</label>
 
                             <input
                                 id="email"
@@ -275,13 +168,10 @@ function CadastroLeitor() {
                                 onChange={alterarCampo}
                                 required
                             />
-
                         </div>
                         <div className="cadastro-leitor-campo-linha">
                             <div className="cadastro-leitor-campo">
-                                <label htmlFor="telefone">
-                                    Telefone
-                                </label>
+                                <label htmlFor="telefone">Telefone</label>
                                 <input
                                     id="telefone"
                                     name="telefone"
@@ -290,14 +180,10 @@ function CadastroLeitor() {
                                     value={formulario.telefone}
                                     onChange={alterarCampo}
                                 />
-
                             </div>
 
                             <div className="cadastro-leitor-campo">
-
-                                <label htmlFor="endereco">
-                                    Endereço
-                                </label>
+                                <label htmlFor="endereco">Endereço</label>
 
                                 <input
                                     id="endereco"
@@ -307,41 +193,26 @@ function CadastroLeitor() {
                                     value={formulario.endereco}
                                     onChange={alterarCampo}
                                 />
-
                             </div>
-
                         </div>
                     </div>
                     <div className="cadastro-leitor-acoes">
-
-                        <Link
-                            to="/leitores"
-                            className="btn-cancelar-leitor"
-                        >
+                        <Link to="/leitores" className="btn-cancelar-leitor">
                             Cancelar
                         </Link>
-
 
                         <button
                             type="submit"
                             className="btn-cadastrar-leitor"
                             disabled={salvando}
                         >
-                            {salvando
-                                ? "Cadastrando..."
-                                : "Cadastrar leitor"
-                            }
+                            {salvando ? 'Cadastrando...' : 'Cadastrar leitor'}
                         </button>
-
                     </div>
-
                 </form>
-
             </section>
-
         </main>
-    )
+    );
 }
 
-
-export default CadastroLeitor
+export default CadastroLeitor;

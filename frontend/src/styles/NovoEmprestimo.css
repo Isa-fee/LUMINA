@@ -9,7 +9,6 @@
     color: #713b20;
 }
 
-
 /* =========================================================
    CABEÇALHO
 ========================================================= */
@@ -34,7 +33,7 @@
 
     color: #713b20;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 36px;
     font-weight: 400;
     line-height: 1.1;
@@ -47,7 +46,6 @@
 
     font-size: 14px;
 }
-
 
 /* =========================================================
    VOLTAR
@@ -79,7 +77,6 @@
     transform: translateX(-2px);
 }
 
-
 /* =========================================================
    ERRO
 ========================================================= */
@@ -98,7 +95,6 @@
     font-size: 13px;
 }
 
-
 /* =========================================================
    CARD PRINCIPAL
 ========================================================= */
@@ -111,10 +107,8 @@
 
     background: #fff;
 
-    box-shadow:
-        0 8px 28px rgba(113, 59, 32, 0.05);
+    box-shadow: 0 8px 28px rgba(113, 59, 32, 0.05);
 }
-
 
 /* =========================================================
    SEÇÕES
@@ -157,7 +151,7 @@
 
     color: #713b20;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 23px;
     font-weight: 400;
 }
@@ -170,7 +164,6 @@
     font-size: 12px;
 }
 
-
 /* =========================================================
    DIVISOR
 ========================================================= */
@@ -182,7 +175,6 @@
 
     background: #efd3c2;
 }
-
 
 /* =========================================================
    BUSCAS
@@ -223,8 +215,7 @@
 .emprestimo-busca input:focus {
     border-color: #a65e3b;
 
-    box-shadow:
-        0 0 0 3px rgba(185, 104, 63, 0.08);
+    box-shadow: 0 0 0 3px rgba(185, 104, 63, 0.08);
 }
 
 .emprestimo-busca > span {
@@ -242,7 +233,6 @@
     pointer-events: none;
 }
 
-
 /* =========================================================
    RESULTADOS
 ========================================================= */
@@ -254,7 +244,6 @@
 
     margin-left: 54px;
 }
-
 
 /* =========================================================
    RESULTADO LEITOR
@@ -290,8 +279,7 @@
 
     transform: translateY(-1px);
 
-    box-shadow:
-        0 4px 12px rgba(113, 59, 32, 0.06);
+    box-shadow: 0 4px 12px rgba(113, 59, 32, 0.06);
 }
 
 .resultado-leitor-avatar {
@@ -313,7 +301,7 @@
 
     color: #914b29;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 19px;
 }
 
@@ -356,7 +344,6 @@
     white-space: nowrap;
 }
 
-
 /* =========================================================
    RESULTADO LIVRO
 ========================================================= */
@@ -395,8 +382,7 @@
 
     transform: translateY(-1px);
 
-    box-shadow:
-        0 4px 12px rgba(113, 59, 32, 0.06);
+    box-shadow: 0 4px 12px rgba(113, 59, 32, 0.06);
 }
 
 .resultado-livro-capa {
@@ -417,7 +403,7 @@
 
     color: #914b29;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 19px;
 }
 
@@ -477,7 +463,6 @@
     font-weight: 700;
 }
 
-
 /* =========================================================
    RESULTADO VAZIO
 ========================================================= */
@@ -497,7 +482,6 @@
     text-align: center;
     font-size: 12px;
 }
-
 
 /* =========================================================
    ITEM SELECIONADO
@@ -536,7 +520,7 @@
 
     color: #914b29;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 22px;
 }
 
@@ -570,7 +554,7 @@
 .emprestimo-selecionado-info strong {
     color: #713b20;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 18px;
     font-weight: 400;
 }
@@ -599,7 +583,6 @@
     font-weight: 700;
 }
 
-
 /* =========================================================
    CAPA DO LIVRO SELECIONADO
 ========================================================= */
@@ -622,7 +605,7 @@
 
     color: #914b29;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 21px;
 }
 
@@ -632,7 +615,6 @@
 
     object-fit: cover;
 }
-
 
 /* =========================================================
    ALTERAR SELEÇÃO
@@ -662,7 +644,6 @@
 .btn-alterar-selecao:hover {
     background: #f3dfd2;
 }
-
 
 /* =========================================================
    DATAS
@@ -699,7 +680,7 @@
 .emprestimo-datas > div strong {
     color: #713b20;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 19px;
     font-weight: 400;
 }
@@ -709,7 +690,6 @@
 
     font-size: 22px;
 }
-
 
 /* =========================================================
    AÇÕES
@@ -789,7 +769,6 @@
     opacity: 0.7;
 }
 
-
 /* =========================================================
    CARREGAMENTO
 ========================================================= */
@@ -806,13 +785,11 @@
     font-size: 14px;
 }
 
-
 /* =========================================================
    RESPONSIVO
 ========================================================= */
 
 @media (max-width: 850px) {
-
     .novo-emprestimo-page {
         width: min(100% - 30px, 1180px);
         padding-top: 30px;
@@ -843,9 +820,7 @@
     }
 }
 
-
 @media (max-width: 600px) {
-
     .novo-emprestimo-cabecalho h1 {
         font-size: 30px;
     }

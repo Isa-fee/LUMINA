@@ -1,199 +1,120 @@
-import {
-    useEffect,
-    useState
-} from "react"
+import { useEffect, useState } from 'react';
 
-import {
-    Link,
-    useNavigate
-} from "react-router-dom"
+import { Link, useNavigate } from 'react-router-dom';
 
-import { cadastrarLivro } from "../services/livroService"
+import { cadastrarLivro } from '../services/livroService';
 
-import "../styles/CadastroLivro.css"
-
+import '../styles/CadastroLivro.css';
 
 function CadastroLivro() {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [formulario, setFormulario] = useState({
-        titulo: "",
-        autor: "",
-        categoria: "",
-        isbn: "",
+        titulo: '',
+        autor: '',
+        categoria: '',
+        isbn: '',
         quantidade_total: 1,
 
-        editora: "",
-        ano_publicacao: "",
-        edicao: "",
-        numero_paginas: "",
-        descricao: ""
-    })
+        editora: '',
+        ano_publicacao: '',
+        edicao: '',
+        numero_paginas: '',
+        descricao: '',
+    });
 
-    const [capa, setCapa] = useState(null)
-    const [preview, setPreview] = useState(null)
+    const [capa, setCapa] = useState(null);
+    const [preview, setPreview] = useState(null);
 
-    const [erro, setErro] = useState("")
-    const [salvando, setSalvando] = useState(false)
-
+    const [erro, setErro] = useState('');
+    const [salvando, setSalvando] = useState(false);
 
     useEffect(() => {
-
         return () => {
-
             if (preview) {
-                URL.revokeObjectURL(preview)
+                URL.revokeObjectURL(preview);
             }
-        }
-
-    }, [preview])
-
+        };
+    }, [preview]);
 
     function alterarCampo(event) {
-
-        const {
-            name,
-            value
-        } = event.target
-
+        const { name, value } = event.target;
 
         setFormulario({
             ...formulario,
-            [name]: value
-        })
+            [name]: value,
+        });
     }
-
 
     function selecionarCapa(event) {
-
-        const arquivo = event.target.files[0]
-
+        const arquivo = event.target.files[0];
 
         if (!arquivo) {
-            return
+            return;
         }
-
 
         if (preview) {
-            URL.revokeObjectURL(preview)
+            URL.revokeObjectURL(preview);
         }
 
+        setCapa(arquivo);
 
-        setCapa(arquivo)
-
-        setPreview(
-            URL.createObjectURL(arquivo)
-        )
+        setPreview(URL.createObjectURL(arquivo));
     }
-
 
     async function enviarFormulario(event) {
+        event.preventDefault();
 
-        event.preventDefault()
-
-        setErro("")
-        setSalvando(true)
-
+        setErro('');
+        setSalvando(true);
 
         try {
-
             await cadastrarLivro({
                 ...formulario,
-                capa
-            })
+                capa,
+            });
 
-
-            navigate("/livros")
-
+            navigate('/livros');
         } catch (erro) {
-
-            setErro(erro.message)
-
+            setErro(erro.message);
         } finally {
-
-            setSalvando(false)
+            setSalvando(false);
         }
     }
-
 
     return (
         <main className="cadastro-livro-page">
-
             <div className="cadastro-livro-topo">
-
                 <div>
+                    <span className="cadastro-identificacao">Acervo</span>
 
-                    <span className="cadastro-identificacao">
-                        Acervo
-                    </span>
+                    <h1>Cadastrar novo livro</h1>
 
-                    <h1>
-                        Cadastrar novo livro
-                    </h1>
-
-                    <p>
-                        Adicione um novo título ao
-                        acervo da biblioteca.
-                    </p>
-
+                    <p>Adicione um novo título ao acervo da biblioteca.</p>
                 </div>
 
-
-                <Link
-                    to="/livros"
-                    className="cadastro-voltar"
-                >
+                <Link to="/livros" className="cadastro-voltar">
                     ← Voltar para livros
                 </Link>
-
             </div>
 
-
-            <form
-                className="cadastro-livro-form"
-                onSubmit={enviarFormulario}
-            >
-
+            <form className="cadastro-livro-form" onSubmit={enviarFormulario}>
                 <section className="cadastro-capa">
+                    <h2>Capa do livro</h2>
 
-                    <h2>
-                        Capa do livro
-                    </h2>
-
-
-                    <label
-                        className="upload-capa"
-                        htmlFor="capa"
-                    >
-
+                    <label className="upload-capa" htmlFor="capa">
                         {preview ? (
-
-                            <img
-                                src={preview}
-                                alt="Pré-visualização da capa"
-                            />
-
+                            <img src={preview} alt="Pré-visualização da capa" />
                         ) : (
-
                             <div className="capa-placeholder">
-
                                 <span>+</span>
 
-                                <strong>
-                                    Adicionar capa
-                                </strong>
+                                <strong>Adicionar capa</strong>
 
-                                <small>
-                                    JPG, PNG ou WEBP
-                                </small>
-
+                                <small>JPG, PNG ou WEBP</small>
                             </div>
-
                         )}
-
                     </label>
-
 
                     <input
                         id="capa"
@@ -203,35 +124,20 @@ function CadastroLivro() {
                         hidden
                     />
 
-
                     {preview && (
-
-                        <label
-                            htmlFor="capa"
-                            className="trocar-capa"
-                        >
+                        <label htmlFor="capa" className="trocar-capa">
                             Trocar imagem
                         </label>
-
                     )}
-
                 </section>
 
-
                 <section className="cadastro-dados">
-
-                    <h2>
-                        Informações do livro
-                    </h2>
-
+                    <h2>Informações do livro</h2>
 
                     {/* TÍTULO */}
 
                     <div className="campo-livro campo-livro-grande">
-
-                        <label htmlFor="titulo">
-                            Título
-                        </label>
+                        <label htmlFor="titulo">Título</label>
 
                         <input
                             id="titulo"
@@ -242,19 +148,13 @@ function CadastroLivro() {
                             onChange={alterarCampo}
                             required
                         />
-
                     </div>
-
 
                     {/* AUTOR E CATEGORIA */}
 
                     <div className="campos-livro-linha">
-
                         <div className="campo-livro">
-
-                            <label htmlFor="autor">
-                                Autor
-                            </label>
+                            <label htmlFor="autor">Autor</label>
 
                             <input
                                 id="autor"
@@ -265,15 +165,10 @@ function CadastroLivro() {
                                 onChange={alterarCampo}
                                 required
                             />
-
                         </div>
 
-
                         <div className="campo-livro">
-
-                            <label htmlFor="categoria">
-                                Categoria
-                            </label>
+                            <label htmlFor="categoria">Categoria</label>
 
                             <input
                                 id="categoria"
@@ -284,21 +179,14 @@ function CadastroLivro() {
                                 onChange={alterarCampo}
                                 required
                             />
-
                         </div>
-
                     </div>
-
 
                     {/* ISBN E QUANTIDADE */}
 
                     <div className="campos-livro-linha">
-
                         <div className="campo-livro">
-
-                            <label htmlFor="isbn">
-                                ISBN
-                            </label>
+                            <label htmlFor="isbn">ISBN</label>
 
                             <input
                                 id="isbn"
@@ -309,42 +197,28 @@ function CadastroLivro() {
                                 onChange={alterarCampo}
                                 required
                             />
-
                         </div>
 
-
                         <div className="campo-livro">
-
-                            <label htmlFor="quantidade_total">
-                                Quantidade
-                            </label>
+                            <label htmlFor="quantidade_total">Quantidade</label>
 
                             <input
                                 id="quantidade_total"
                                 name="quantidade_total"
                                 type="number"
                                 min="1"
-                                value={
-                                    formulario.quantidade_total
-                                }
+                                value={formulario.quantidade_total}
                                 onChange={alterarCampo}
                                 required
                             />
-
                         </div>
-
                     </div>
-
 
                     {/* EDITORA E ANO DE PUBLICAÇÃO */}
 
                     <div className="campos-livro-linha">
-
                         <div className="campo-livro">
-
-                            <label htmlFor="editora">
-                                Editora
-                            </label>
+                            <label htmlFor="editora">Editora</label>
 
                             <input
                                 id="editora"
@@ -354,12 +228,9 @@ function CadastroLivro() {
                                 value={formulario.editora}
                                 onChange={alterarCampo}
                             />
-
                         </div>
 
-
                         <div className="campo-livro">
-
                             <label htmlFor="ano_publicacao">
                                 Ano de publicação
                             </label>
@@ -373,21 +244,14 @@ function CadastroLivro() {
                                 value={formulario.ano_publicacao}
                                 onChange={alterarCampo}
                             />
-
                         </div>
-
                     </div>
-
 
                     {/* EDIÇÃO E NÚMERO DE PÁGINAS */}
 
                     <div className="campos-livro-linha">
-
                         <div className="campo-livro">
-
-                            <label htmlFor="edicao">
-                                Edição
-                            </label>
+                            <label htmlFor="edicao">Edição</label>
 
                             <input
                                 id="edicao"
@@ -397,12 +261,9 @@ function CadastroLivro() {
                                 value={formulario.edicao}
                                 onChange={alterarCampo}
                             />
-
                         </div>
 
-
                         <div className="campo-livro">
-
                             <label htmlFor="numero_paginas">
                                 Número de páginas
                             </label>
@@ -416,19 +277,13 @@ function CadastroLivro() {
                                 value={formulario.numero_paginas}
                                 onChange={alterarCampo}
                             />
-
                         </div>
-
                     </div>
-
 
                     {/* DESCRIÇÃO */}
 
                     <div className="campo-livro campo-livro-grande">
-
-                        <label htmlFor="descricao">
-                            Descrição / Sinopse
-                        </label>
+                        <label htmlFor="descricao">Descrição / Sinopse</label>
 
                         <textarea
                             id="descricao"
@@ -438,53 +293,31 @@ function CadastroLivro() {
                             onChange={alterarCampo}
                             rows="5"
                         />
-
                     </div>
-
 
                     {/* ERRO */}
 
-                    {erro && (
-
-                        <div className="cadastro-livro-erro">
-                            {erro}
-                        </div>
-
-                    )}
-
+                    {erro && <div className="cadastro-livro-erro">{erro}</div>}
 
                     {/* AÇÕES */}
 
                     <div className="cadastro-livro-acoes">
-
-                        <Link
-                            to="/livros"
-                            className="btn-cancelar-cadastro"
-                        >
+                        <Link to="/livros" className="btn-cancelar-cadastro">
                             Cancelar
                         </Link>
-
 
                         <button
                             type="submit"
                             className="btn-salvar-livro"
                             disabled={salvando}
                         >
-                            {salvando
-                                ? "Salvando..."
-                                : "Cadastrar livro"
-                            }
+                            {salvando ? 'Salvando...' : 'Cadastrar livro'}
                         </button>
-
                     </div>
-
                 </section>
-
             </form>
-
         </main>
-    )
+    );
 }
 
-
-export default CadastroLivro
+export default CadastroLivro;

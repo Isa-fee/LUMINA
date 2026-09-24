@@ -12,7 +12,6 @@
     color: #6d412a;
 }
 
-
 /* ========================================
    CABEÇALHO
 ======================================== */
@@ -20,7 +19,6 @@
 .cadastro-leitor-cabecalho {
     margin-bottom: 24px;
 }
-
 
 .cadastro-leitor-cabecalho > span {
     display: block;
@@ -33,18 +31,16 @@
     font-weight: 600;
 }
 
-
 .cadastro-leitor-cabecalho h1 {
     margin: 0 0 8px;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
     color: #713b20;
 
     font-size: 2.5rem;
     font-weight: 400;
 }
-
 
 .cadastro-leitor-cabecalho p {
     margin: 0;
@@ -86,11 +82,9 @@
     text-decoration: none;
 }
 
-
 .cadastro-leitor-voltar:hover {
     color: #b9683f;
 }
-
 
 /* ========================================
    CARD
@@ -110,12 +104,10 @@
 
     background: #ffffff;
 
-    box-shadow:
-        0 4px 18px rgba(105, 57, 30, 0.06);
+    box-shadow: 0 4px 18px rgba(105, 57, 30, 0.06);
 
     overflow: hidden;
 }
-
 
 /* ========================================
    LADO ESQUERDO
@@ -136,7 +128,6 @@
     text-align: center;
 }
 
-
 /* ========================================
    FOTO DO LEITOR
 ======================================== */
@@ -152,7 +143,6 @@
 
     cursor: pointer;
 }
-
 
 .cadastro-leitor-foto img,
 .cadastro-leitor-sem-foto {
@@ -175,30 +165,25 @@
         border-color 0.2s ease;
 }
 
-
 .cadastro-leitor-foto img {
     object-fit: cover;
 }
 
-
 .cadastro-leitor-sem-foto span {
     color: #8b5135;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
     font-size: 2.8rem;
     font-weight: 300;
 }
 
-
 .cadastro-leitor-foto:hover img,
-.cadastro-leitor-foto:hover
-.cadastro-leitor-sem-foto {
+.cadastro-leitor-foto:hover .cadastro-leitor-sem-foto {
     border-color: #a96847;
 
     transform: translateY(-2px);
 }
-
 
 .cadastro-leitor-foto-acao {
     color: #9b6043;
@@ -206,7 +191,6 @@
     font-size: 0.8rem;
     font-weight: 600;
 }
-
 
 .cadastro-leitor-input-foto {
     display: none;
@@ -217,12 +201,11 @@
 
     color: #713b20;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
     font-size: 1.5rem;
     font-weight: 400;
 }
-
 
 .cadastro-leitor-ilustracao p {
     max-width: 250px;
@@ -234,7 +217,6 @@
     font-size: 0.85rem;
     line-height: 1.6;
 }
-
 
 /* ========================================
    FORMULÁRIO
@@ -248,11 +230,9 @@
     padding: 48px 55px;
 }
 
-
 .cadastro-leitor-form-topo {
     margin-bottom: 30px;
 }
-
 
 .cadastro-leitor-form-topo > span {
     display: block;
@@ -269,18 +249,16 @@
     letter-spacing: 0.08em;
 }
 
-
 .cadastro-leitor-form-topo h2 {
     margin: 0 0 7px;
 
     color: #713b20;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
     font-size: 1.8rem;
     font-weight: 400;
 }
-
 
 .cadastro-leitor-form-topo p {
     margin: 0;
@@ -289,7 +267,6 @@
 
     font-size: 0.87rem;
 }
-
 
 /* ========================================
    CAMPOS
@@ -306,7 +283,6 @@
     border-bottom: 1px solid #e4c4b2;
 }
 
-
 .cadastro-leitor-campo {
     display: flex;
     flex-direction: column;
@@ -314,14 +290,12 @@
     gap: 8px;
 }
 
-
 .cadastro-leitor-campo label {
     color: #825039;
 
     font-size: 0.85rem;
     font-weight: 600;
 }
-
 
 .cadastro-leitor-campo input {
     width: 100%;
@@ -346,19 +320,15 @@
         box-shadow 0.2s ease;
 }
 
-
 .cadastro-leitor-campo input::placeholder {
     color: #c09279;
 }
 
-
 .cadastro-leitor-campo input:focus {
     border-color: #8c5336;
 
-    box-shadow:
-        0 0 0 3px rgba(185, 104, 63, 0.1);
+    box-shadow: 0 0 0 3px rgba(185, 104, 63, 0.1);
 }
-
 
 /* ========================================
    AÇÕES
@@ -372,7 +342,6 @@
 
     margin-top: 25px;
 }
-
 
 .btn-cancelar-leitor,
 .btn-cadastrar-leitor {
@@ -396,7 +365,6 @@
     cursor: pointer;
 }
 
-
 .btn-cancelar-leitor {
     border: 1px solid #bd8065;
 
@@ -405,11 +373,9 @@
     color: #925038;
 }
 
-
 .btn-cancelar-leitor:hover {
     background: #fff5ef;
 }
-
 
 .btn-cadastrar-leitor {
     border: 1px solid #794329;
@@ -419,18 +385,15 @@
     color: #ffffff;
 }
 
-
 .btn-cadastrar-leitor:hover {
     background: #633821;
 }
-
 
 .btn-cadastrar-leitor:disabled {
     opacity: 0.65;
 
     cursor: not-allowed;
 }
-
 
 /* ========================================
    ERRO
@@ -448,40 +411,33 @@
     color: #a23d34;
 }
 
-
 /* ========================================
    RESPONSIVIDADE
 ======================================== */
 
 @media (max-width: 800px) {
-
     .cadastro-leitor-card {
         grid-template-columns: 1fr;
     }
-
 
     .cadastro-leitor-ilustracao {
         border-right: none;
         border-bottom: 1px solid #e4c4b2;
     }
 
-
     .cadastro-leitor-formulario {
         padding: 40px 30px;
     }
-    
+
     .cadastro-leitor-campo-linha {
         grid-template-columns: 1fr;
     }
 }
 
-
 @media (max-width: 500px) {
-
     .cadastro-leitor-acoes {
         flex-direction: column;
     }
-
 
     .btn-cancelar-leitor,
     .btn-cadastrar-leitor {

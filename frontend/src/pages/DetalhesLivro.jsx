@@ -1,414 +1,254 @@
-import {
-    useEffect,
-    useState
-} from "react"
+import { useEffect, useState } from 'react';
 
-import {
-    Link,
-    useNavigate,
-    useParams
-} from "react-router-dom"
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import {
-    buscarLivro,
-    excluirLivro
-} from "../services/livroService"
+import { buscarLivro, excluirLivro } from '../services/livroService';
 
-import { API_URL } from "../services/api"
+import { API_URL } from '../services/api';
 
-import "../styles/DetalhesLivro.css"
-
+import '../styles/DetalhesLivro.css';
 
 function DetalhesLivro() {
+    const { id } = useParams();
+    const navigate = useNavigate();
 
-    const { id } = useParams()
-    const navigate = useNavigate()
-
-    const [livro, setLivro] = useState(null)
-    const [carregando, setCarregando] = useState(true)
-    const [erro, setErro] = useState("")
-    const [modalExcluir, setModalExcluir] = useState(false)
-    const [excluindo, setExcluindo] = useState(false)
-
+    const [livro, setLivro] = useState(null);
+    const [carregando, setCarregando] = useState(true);
+    const [erro, setErro] = useState('');
+    const [modalExcluir, setModalExcluir] = useState(false);
+    const [excluindo, setExcluindo] = useState(false);
 
     useEffect(() => {
-
         async function carregarLivro() {
-
             try {
+                const dados = await buscarLivro(id);
 
-                const dados = await buscarLivro(id)
-
-                setLivro(dados)
-
+                setLivro(dados);
             } catch (erro) {
-
-                setErro(erro.message)
-
+                setErro(erro.message);
             } finally {
-
-                setCarregando(false)
+                setCarregando(false);
             }
         }
 
-        carregarLivro()
-
-    }, [id])
-
+        carregarLivro();
+    }, [id]);
 
     async function confirmarExclusao() {
-
         try {
+            setExcluindo(true);
+            setErro('');
 
-            setExcluindo(true)
-            setErro("")
+            await excluirLivro(id);
 
-            await excluirLivro(id)
-
-            navigate("/livros")
-
+            navigate('/livros');
         } catch (erro) {
+            setErro(erro.message);
 
-            setErro(erro.message)
-
-            setModalExcluir(false)
-
+            setModalExcluir(false);
         } finally {
-
-            setExcluindo(false)
+            setExcluindo(false);
         }
     }
 
-
     if (carregando) {
-
         return (
             <main className="detalhes-livro-page">
-
-                <div className="detalhes-estado">
-                    Carregando livro...
-                </div>
-
+                <div className="detalhes-estado">Carregando livro...</div>
             </main>
-        )
+        );
     }
-
 
     if (erro) {
-
         return (
             <main className="detalhes-livro-page">
+                <div className="detalhes-erro">{erro}</div>
 
-                <div className="detalhes-erro">
-                    {erro}
-                </div>
-
-                <Link
-                    to="/livros"
-                    className="detalhes-voltar"
-                >
+                <Link to="/livros" className="detalhes-voltar">
                     ← Voltar para livros
                 </Link>
-
             </main>
-        )
+        );
     }
-
 
     if (!livro) {
-        return null
+        return null;
     }
 
-
-    const disponivel =
-        livro.quantidade_disponivel > 0
-
+    const disponivel = livro.quantidade_disponivel > 0;
 
     return (
         <main className="detalhes-livro-page">
-
             {/* CABEÇALHO */}
 
             <section className="detalhes-cabecalho">
+                <span>Acervo</span>
 
-                <span>
-                    Acervo
-                </span>
+                <h1>Detalhes do livro</h1>
 
-                <h1>
-                    Detalhes do livro
-                </h1>
-
-                <p>
-                    Consulte as informações e a
-                    disponibilidade da obra.
-                </p>
-
+                <p>Consulte as informações e a disponibilidade da obra.</p>
             </section>
-
 
             {/* VOLTAR */}
 
-            <Link
-                to="/livros"
-                className="detalhes-voltar"
-            >
+            <Link to="/livros" className="detalhes-voltar">
                 <span>←</span>
-
                 Voltar para o acervo
             </Link>
-
 
             {/* CONTEÚDO */}
 
             <section className="detalhes-card">
-
                 {/* CAPA */}
 
                 <div className="detalhes-capa-coluna">
-
                     <div className="detalhes-capa">
-
                         {livro.capa ? (
-
                             <img
-                                src={
-                                    `${API_URL}/static/${livro.capa}`
-                                }
+                                src={`${API_URL}/static/${livro.capa}`}
                                 alt={`Capa de ${livro.titulo}`}
                             />
-
                         ) : (
-
-                            <span className="detalhes-sem-capa">
-                                📖
-                            </span>
-
+                            <span className="detalhes-sem-capa">📖</span>
                         )}
-
                     </div>
 
-
                     <span
-                        className={
-                            `detalhes-categoria categoria-${normalizarCategoria(
-                                livro.categoria
-                            )}`
-                        }
+                        className={`detalhes-categoria categoria-${normalizarCategoria(
+                            livro.categoria,
+                        )}`}
                     >
                         {livro.categoria}
                     </span>
-
                 </div>
-
 
                 {/* INFORMAÇÕES */}
 
                 <div className="detalhes-conteudo">
-
                     <div className="detalhes-titulo-area">
-
                         <span className="detalhes-rotulo">
                             Informações da obra
                         </span>
 
-                        <h2>
-                            {livro.titulo}
-                        </h2>
+                        <h2>{livro.titulo}</h2>
 
-                        <p>
-                            {livro.autor}
-                        </p>
-
+                        <p>{livro.autor}</p>
                     </div>
 
-
                     <div className="detalhes-divisor" />
-
 
                     {/* DADOS BIBLIOGRÁFICOS */}
 
                     <div className="detalhes-informacoes">
-
                         <div className="detalhes-info-item">
+                            <span>ISBN</span>
 
-                            <span>
-                                ISBN
-                            </span>
-
-                            <strong>
-                                {livro.isbn || "Não informado"}
-                            </strong>
-
+                            <strong>{livro.isbn || 'Não informado'}</strong>
                         </div>
 
-
                         <div className="detalhes-info-item">
-
-                            <span>
-                                Categoria
-                            </span>
+                            <span>Categoria</span>
 
                             <strong>
-                                {livro.categoria || "Não informado"}
+                                {livro.categoria || 'Não informado'}
                             </strong>
-
                         </div>
-
 
                         <div className="detalhes-info-item">
+                            <span>Editora</span>
 
-                            <span>
-                                Editora
-                            </span>
-
-                            <strong>
-                                {livro.editora || "Não informado"}
-                            </strong>
-
+                            <strong>{livro.editora || 'Não informado'}</strong>
                         </div>
-
 
                         <div className="detalhes-info-item">
-
-                            <span>
-                                Ano de publicação
-                            </span>
+                            <span>Ano de publicação</span>
 
                             <strong>
-                                {livro.ano_publicacao || "Não informado"}
+                                {livro.ano_publicacao || 'Não informado'}
                             </strong>
-
                         </div>
-
 
                         <div className="detalhes-info-item">
+                            <span>Edição</span>
 
-                            <span>
-                                Edição
-                            </span>
-
-                            <strong>
-                                {livro.edicao || "Não informado"}
-                            </strong>
-
+                            <strong>{livro.edicao || 'Não informado'}</strong>
                         </div>
-
 
                         <div className="detalhes-info-item">
-
-                            <span>
-                                Número de páginas
-                            </span>
+                            <span>Número de páginas</span>
 
                             <strong>
-                                {livro.numero_paginas || "Não informado"}
+                                {livro.numero_paginas || 'Não informado'}
                             </strong>
-
                         </div>
-
 
                         <div className="detalhes-info-item">
+                            <span>Total de exemplares</span>
 
-                            <span>
-                                Total de exemplares
-                            </span>
-
-                            <strong>
-                                {livro.quantidade_total}
-                            </strong>
-
+                            <strong>{livro.quantidade_total}</strong>
                         </div>
-
 
                         <div className="detalhes-info-item">
+                            <span>Exemplares disponíveis</span>
 
-                            <span>
-                                Exemplares disponíveis
-                            </span>
-
-                            <strong>
-                                {livro.quantidade_disponivel}
-                            </strong>
-
+                            <strong>{livro.quantidade_disponivel}</strong>
                         </div>
-
                     </div>
-
 
                     {/* DESCRIÇÃO */}
 
                     {livro.descricao && (
-
                         <div className="detalhes-descricao">
-
                             <span className="detalhes-descricao-titulo">
                                 Descrição
                             </span>
 
-                            <p>
-                                {livro.descricao}
-                            </p>
-
+                            <p>{livro.descricao}</p>
                         </div>
-
                     )}
-
 
                     {/* DISPONIBILIDADE */}
 
                     <div
                         className={
                             disponivel
-                                ? "detalhes-disponibilidade disponivel"
-                                : "detalhes-disponibilidade indisponivel"
+                                ? 'detalhes-disponibilidade disponivel'
+                                : 'detalhes-disponibilidade indisponivel'
                         }
                     >
-
                         <span className="status-bolinha" />
 
                         <div>
-
                             <strong>
                                 {disponivel
-                                    ? "Livro disponível"
-                                    : "Livro indisponível"
-                                }
+                                    ? 'Livro disponível'
+                                    : 'Livro indisponível'}
                             </strong>
 
                             <p>
                                 {disponivel
                                     ? `${livro.quantidade_disponivel} ${
-                                        livro.quantidade_disponivel === 1
-                                            ? "exemplar disponível"
-                                            : "exemplares disponíveis"
-                                    } para empréstimo.`
-                                    : "Todos os exemplares estão emprestados."
-                                }
+                                          livro.quantidade_disponivel === 1
+                                              ? 'exemplar disponível'
+                                              : 'exemplares disponíveis'
+                                      } para empréstimo.`
+                                    : 'Todos os exemplares estão emprestados.'}
                             </p>
-
                         </div>
-
                     </div>
-
 
                     {/* AÇÕES */}
 
                     <div className="detalhes-acoes">
-
                         {disponivel ? (
-
                             <Link
                                 to={`/emprestimos/novo?livro=${livro.id}`}
                                 className="btn-emprestar-detalhes"
                             >
                                 <span>↗</span>
-
                                 Realizar empréstimo
                             </Link>
-
                         ) : (
-
                             <button
                                 type="button"
                                 className="btn-emprestar-detalhes indisponivel"
@@ -416,19 +256,15 @@ function DetalhesLivro() {
                             >
                                 Livro indisponível
                             </button>
-
                         )}
-
 
                         <Link
                             to={`/livros/${livro.id}/editar`}
                             className="btn-editar-detalhes"
                         >
                             <span>✎</span>
-
                             Editar livro
                         </Link>
-
 
                         <button
                             type="button"
@@ -437,52 +273,34 @@ function DetalhesLivro() {
                         >
                             Excluir livro
                         </button>
-
                     </div>
-
                 </div>
-
             </section>
-
 
             {/* MODAL DE EXCLUSÃO */}
 
             {modalExcluir && (
-
                 <div className="modal-excluir-fundo">
-
                     <div className="modal-excluir">
+                        <div className="modal-excluir-icone">!</div>
 
-                        <div className="modal-excluir-icone">
-                            !
-                        </div>
-
-                        <h2>
-                            Excluir livro?
-                        </h2>
+                        <h2>Excluir livro?</h2>
 
                         <p>
                             Você está prestes a excluir
-                            <strong>
-                                {" "}{livro.titulo}
-                            </strong>.
-                            Essa ação não poderá ser desfeita.
+                            <strong> {livro.titulo}</strong>. Essa ação não
+                            poderá ser desfeita.
                         </p>
 
-
                         <div className="modal-excluir-acoes">
-
                             <button
                                 type="button"
                                 className="modal-btn-cancelar"
-                                onClick={
-                                    () => setModalExcluir(false)
-                                }
+                                onClick={() => setModalExcluir(false)}
                                 disabled={excluindo}
                             >
                                 Cancelar
                             </button>
-
 
                             <button
                                 type="button"
@@ -490,37 +308,26 @@ function DetalhesLivro() {
                                 onClick={confirmarExclusao}
                                 disabled={excluindo}
                             >
-                                {excluindo
-                                    ? "Excluindo..."
-                                    : "Sim, excluir"
-                                }
+                                {excluindo ? 'Excluindo...' : 'Sim, excluir'}
                             </button>
-
                         </div>
-
                     </div>
-
                 </div>
-
             )}
-
         </main>
-    )
+    );
 }
 
-
 function normalizarCategoria(categoria) {
-
     if (!categoria) {
-        return "outra"
+        return 'outra';
     }
 
     return categoria
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase()
-        .replace(/\s+/g, "-")
+        .replace(/\s+/g, '-');
 }
 
-
-export default DetalhesLivro
+export default DetalhesLivro;

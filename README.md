@@ -305,6 +305,109 @@ deactivate
 ```
 ---
 
+## Testes Automatizados
+
+O LUMINA utiliza **Vitest** e **React Testing Library** para realizar testes automatizados no frontend React.
+
+Os testes têm como objetivo verificar o funcionamento dos componentes, identificar possíveis erros durante o desenvolvimento e garantir que alterações no código não comprometam funcionalidades existentes.
+
+### 1. Tecnologias utilizadas
+
+- **Vitest:** ferramenta para executar os testes automatizados.
+- **React Testing Library:** biblioteca para testar a interação do usuário com os componentes React.
+- **Jest DOM:** disponibiliza verificações específicas para elementos HTML.
+- **jsdom:** simula o ambiente do navegador durante a execução dos testes.
+
+### 2. Instalar as dependências
+
+No terminal, entre na pasta do frontend:
+
+```bash
+cd frontend
+```
+
+Caso as dependências ainda não estejam instaladas, execute:
+
+```bash
+npm install
+```
+
+Para instalar individualmente as dependências de testes, utilize:
+
+```bash
+npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom
+```
+
+As dependências de teste já estão configuradas no projeto. Portanto, normalmente, basta executar `npm install` após clonar o repositório.
+
+### 3. Organização dos testes
+
+Os testes estão organizados na pasta `frontend/src/tests`:
+
+```text
+frontend/
+├── src/
+│   ├── pages/
+│   │   ├── Login.jsx
+│   │   ├── CadastroLivro.jsx
+│   │   ├── CadastroLeitor.jsx
+│   │   └── NovoEmprestimo.jsx
+│   │
+│   └── tests/
+│       ├── Login.test.jsx
+│       ├── CadastroLivro.test.jsx
+│       ├── CadastroLeitor.test.jsx
+│       └── NovoEmprestimo.test.jsx
+│
+├── vitest.config.js
+└── vitest.setup.js
+```
+
+Cada arquivo de teste corresponde a uma funcionalidade do sistema.
+
+### 4. Executar os testes
+
+Abra um terminal na pasta `frontend`.
+
+Para iniciar os testes em modo de observação, execute:
+
+```bash
+npm run test
+```
+
+Nesse modo, o Vitest acompanha as alterações realizadas nos arquivos e executa novamente os testes relacionados. Ele é recomendado durante o desenvolvimento.
+
+Para executar todos os testes uma única vez:
+
+```bash
+npm run test:run
+```
+
+Esse comando é recomendado antes de realizar commits, enviar alterações ao repositório ou apresentar o projeto.
+
+**Não é necessário iniciar o backend ou o MySQL para executar os testes atuais**, pois as chamadas aos serviços são simuladas.
+
+### 5. Testes durante o desenvolvimento
+
+A equipe deverá utilizar os testes automatizados durante a implementação e manutenção das funcionalidades do LUMINA.
+
+O processo recomendado é:
+
+1. Definir o comportamento esperado da funcionalidade.
+2. Criar ou atualizar os testes correspondentes.
+3. Implementar ou modificar o código.
+4. Executar os testes para identificar possíveis falhas.
+5. Corrigir os problemas encontrados e executar novamente os testes.
+6. Antes de realizar o commit, executar toda a suíte com `npm run test:run`.
+
+Sempre que uma funcionalidade existente for modificada, seus testes deverão ser executados novamente.
+
+### 6. Limitações dos testes
+
+Os testes implementados utilizam serviços simulados (*mocks*). Dessa forma, verificam o comportamento dos componentes React sem depender de uma conexão real com o backend.
+
+Eles não substituem os testes de integração com o FastAPI e o MySQL, que deverão ser realizados separadamente para verificar o funcionamento completo do sistema.
+
 ## Cronograma do Projeto
 
 ### 1º Bimestre — Base

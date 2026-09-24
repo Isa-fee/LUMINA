@@ -13,7 +13,6 @@
     box-sizing: border-box;
 }
 
-
 /* =========================================
    CABEÇALHO
 ========================================= */
@@ -54,7 +53,6 @@
     line-height: 1.6;
 }
 
-
 /* =========================================
    VOLTAR
 ========================================= */
@@ -85,7 +83,6 @@
     transform: translateX(-2px);
 }
 
-
 /* =========================================
    FORMULÁRIO
 ========================================= */
@@ -99,7 +96,6 @@
 
     gap: 24px;
 }
-
 
 /* =========================================
    BLOCOS
@@ -117,10 +113,8 @@
 
     box-sizing: border-box;
 
-    box-shadow:
-        0 4px 18px rgba(91, 57, 38, 0.04);
+    box-shadow: 0 4px 18px rgba(91, 57, 38, 0.04);
 }
-
 
 /* =========================================
    CABEÇALHO DO BLOCO
@@ -173,7 +167,6 @@
     line-height: 1.5;
 }
 
-
 /* =========================================
    BUSCA
 ========================================= */
@@ -217,8 +210,7 @@
 .editar-busca input:focus {
     border-color: #b9683f;
 
-    box-shadow:
-        0 0 0 3px rgba(185, 104, 63, 0.09);
+    box-shadow: 0 0 0 3px rgba(185, 104, 63, 0.09);
 }
 
 .editar-busca > span {
@@ -236,7 +228,6 @@
     pointer-events: none;
 }
 
-
 /* =========================================
    LISTA DE OPÇÕES
 ========================================= */
@@ -245,8 +236,7 @@
     width: 100%;
 
     display: grid;
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 12px;
 
@@ -256,7 +246,6 @@
 
     overflow-y: auto;
 }
-
 
 /* scrollbar */
 
@@ -273,7 +262,6 @@
     background: #d6b8a7;
     border-radius: 10px;
 }
-
 
 /* =========================================
    OPÇÃO
@@ -315,10 +303,8 @@
 
     transform: translateY(-1px);
 
-    box-shadow:
-        0 4px 12px rgba(111, 65, 42, 0.06);
+    box-shadow: 0 4px 12px rgba(111, 65, 42, 0.06);
 }
-
 
 /* selecionado */
 
@@ -327,10 +313,8 @@
 
     background: #fff7f2;
 
-    box-shadow:
-        inset 0 0 0 1px rgba(185, 104, 63, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(185, 104, 63, 0.08);
 }
-
 
 /* indisponível */
 
@@ -338,7 +322,6 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
-
 
 /* =========================================
    AVATAR DO LEITOR
@@ -373,7 +356,6 @@
     object-fit: cover;
 }
 
-
 /* =========================================
    CAPA DO LIVRO
 ========================================= */
@@ -398,8 +380,7 @@
 
     font-size: 20px;
 
-    box-shadow:
-        0 2px 7px rgba(70, 42, 27, 0.12);
+    box-shadow: 0 2px 7px rgba(70, 42, 27, 0.12);
 }
 
 .editar-livro-capa img {
@@ -408,7 +389,6 @@
 
     object-fit: cover;
 }
-
 
 /* =========================================
    INFORMAÇÕES DA OPÇÃO
@@ -454,7 +434,6 @@
     font-weight: 600;
 }
 
-
 /* =========================================
    RADIO
 ========================================= */
@@ -480,12 +459,10 @@
     font-weight: 700;
 }
 
-.editar-opcao-selecionada
-.editar-radio {
+.editar-opcao-selecionada .editar-radio {
     border-color: #b9683f;
     background: #b9683f;
 }
-
 
 /* =========================================
    ITEM SELECIONADO
@@ -522,7 +499,6 @@
     text-align: right;
 }
 
-
 /* =========================================
    RESUMO
 ========================================= */
@@ -556,8 +532,7 @@
 
 .editar-resumo-grid {
     display: grid;
-    grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
     gap: 25px;
 }
@@ -586,7 +561,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 
 /* =========================================
    AVISO DE EMPRÉSTIMO DEVOLVIDO
@@ -626,7 +600,6 @@
     line-height: 1.5;
 }
 
-
 /* =========================================
    ERRO
 ========================================= */
@@ -650,7 +623,6 @@
     box-sizing: border-box;
 }
 
-
 /* =========================================
    CARREGANDO
 ========================================= */
@@ -662,7 +634,6 @@
 
     font-size: 15px;
 }
-
 
 /* =========================================
    AÇÕES
@@ -677,7 +648,6 @@
 
     padding-top: 5px;
 }
-
 
 /* cancelar */
 
@@ -713,7 +683,6 @@
     border-color: #c9ad9d;
 }
 
-
 /* salvar */
 
 .editar-btn-salvar {
@@ -746,8 +715,7 @@
 
     transform: translateY(-1px);
 
-    box-shadow:
-        0 5px 12px rgba(113, 59, 32, 0.18);
+    box-shadow: 0 5px 12px rgba(113, 59, 32, 0.18);
 }
 
 .editar-btn-salvar:disabled {
@@ -755,26 +723,21 @@
     cursor: not-allowed;
 }
 
-
 /* =========================================
    RESPONSIVIDADE
 ========================================= */
 
 @media (max-width: 1050px) {
-
     .editar-lista-opcoes {
         grid-template-columns: 1fr;
     }
 
     .editar-resumo-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-
 @media (max-width: 750px) {
-
     .editar-emprestimo-page {
         padding: 30px 22px 50px;
     }

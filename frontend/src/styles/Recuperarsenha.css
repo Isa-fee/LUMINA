@@ -8,16 +8,12 @@
     grid-template-columns: 55% 45%;
 
     background:
-        linear-gradient(
-            rgba(70, 37, 18, 0.08),
-            rgba(70, 37, 18, 0.08)
-        ),
-        url("/images/login-background.png");
+        linear-gradient(rgba(70, 37, 18, 0.08), rgba(70, 37, 18, 0.08)),
+        url('/images/login-background.png');
 
     background-size: cover;
     background-position: center;
 }
-
 
 /* ========================================
    IDENTIDADE DO LUMINA
@@ -33,14 +29,12 @@
     padding: 60px;
 }
 
-
 .recuperar-logo {
     width: min(390px, 80%);
     height: auto;
 
     object-fit: contain;
 }
-
 
 /* ========================================
    ÁREA DO FORMULÁRIO
@@ -56,7 +50,6 @@
     padding: 60px 8vw 60px 20px;
 }
 
-
 /* ========================================
    CARD
 ======================================== */
@@ -71,23 +64,20 @@
 
     border-radius: 12px;
 
-    box-shadow:
-        0 8px 25px rgba(50, 25, 10, 0.18);
+    box-shadow: 0 8px 25px rgba(50, 25, 10, 0.18);
 
     color: #75462f;
 }
 
-
 .recuperar-card h1 {
     margin: 0 0 12px;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 1.65rem;
     font-weight: 500;
 
     color: #75462f;
 }
-
 
 /* ========================================
    DESCRIÇÃO
@@ -102,7 +92,6 @@
     line-height: 1.5;
 }
 
-
 /* ========================================
    FORMULÁRIO
 ======================================== */
@@ -114,14 +103,12 @@
     gap: 18px;
 }
 
-
 .recuperar-campo {
     display: flex;
     flex-direction: column;
 
     gap: 8px;
 }
-
 
 .recuperar-campo label {
     font-family: Arial, sans-serif;
@@ -131,7 +118,6 @@
 
     color: #75462f;
 }
-
 
 .recuperar-campo input {
     width: 100%;
@@ -154,14 +140,11 @@
         box-shadow 0.2s ease;
 }
 
-
 .recuperar-campo input:focus {
     border-color: #7d4b31;
 
-    box-shadow:
-        0 0 0 3px rgba(125, 75, 49, 0.10);
+    box-shadow: 0 0 0 3px rgba(125, 75, 49, 0.1);
 }
-
 
 /* ========================================
    BOTÃO
@@ -191,20 +174,17 @@
         background 0.2s ease;
 }
 
-
 .recuperar-card button:hover:not(:disabled) {
     background: #673b27;
 
     transform: translateY(-1px);
 }
 
-
 .recuperar-card button:disabled {
     opacity: 0.7;
 
     cursor: wait;
 }
-
 
 /* ========================================
    MENSAGEM
@@ -225,7 +205,6 @@
     line-height: 1.4;
 }
 
-
 /* ========================================
    VOLTAR
 ======================================== */
@@ -238,7 +217,6 @@
     font-size: 0.82rem;
 }
 
-
 .recuperar-voltar a {
     color: #6d412a;
 
@@ -247,22 +225,18 @@
     text-decoration: none;
 }
 
-
 .recuperar-voltar a:hover {
     text-decoration: underline;
 }
-
 
 /* ========================================
    RESPONSIVIDADE
 ======================================== */
 
 @media (max-width: 850px) {
-
     .recuperar-page {
         grid-template-columns: 1fr;
     }
-
 
     .recuperar-identidade {
         min-height: auto;
@@ -270,11 +244,9 @@
         padding: 50px 30px 10px;
     }
 
-
     .recuperar-logo {
         width: min(300px, 75%);
     }
-
 
     .recuperar-area {
         min-height: auto;
@@ -283,7 +255,6 @@
 
         padding: 20px 25px 60px;
     }
-
 
     .recuperar-card {
         max-width: 420px;

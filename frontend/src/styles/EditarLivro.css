@@ -10,7 +10,6 @@
     color: #6d412a;
 }
 
-
 /* ========================================
    CABEÇALHO
 ======================================== */
@@ -18,7 +17,6 @@
 .editar-cabecalho {
     margin-bottom: 24px;
 }
-
 
 .editar-cabecalho > span {
     display: block;
@@ -30,18 +28,16 @@
     font-weight: 600;
 }
 
-
 .editar-cabecalho h1 {
     margin: 0 0 8px;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
     color: #713b20;
 
     font-size: 2.5rem;
     font-weight: 400;
 }
-
 
 .editar-cabecalho p {
     margin: 0;
@@ -50,7 +46,6 @@
 
     font-size: 1rem;
 }
-
 
 /* ========================================
    VOLTAR
@@ -74,11 +69,9 @@
     text-decoration: none;
 }
 
-
 .editar-voltar:hover {
     color: #b9683f;
 }
-
 
 /* ========================================
    CARD
@@ -98,10 +91,8 @@
 
     background: #ffffff;
 
-    box-shadow:
-        0 4px 18px rgba(105, 57, 30, 0.06);
+    box-shadow: 0 4px 18px rgba(105, 57, 30, 0.06);
 }
-
 
 /* ========================================
    CAPA
@@ -116,7 +107,6 @@
 
     border-right: 1px solid #e4c4b2;
 }
-
 
 .editar-capa-titulo {
     align-self: flex-start;
@@ -133,7 +123,6 @@
     letter-spacing: 0.08em;
 }
 
-
 .editar-capa {
     width: 220px;
     height: 310px;
@@ -148,10 +137,8 @@
 
     overflow: hidden;
 
-    box-shadow:
-        0 8px 22px rgba(83, 43, 23, 0.14);
+    box-shadow: 0 8px 22px rgba(83, 43, 23, 0.14);
 }
-
 
 .editar-capa img {
     width: 100%;
@@ -160,11 +147,9 @@
     object-fit: cover;
 }
 
-
 .editar-capa > span {
     font-size: 4rem;
 }
-
 
 .editar-capa-area p {
     max-width: 220px;
@@ -179,7 +164,6 @@
     text-align: center;
 }
 
-
 /* ========================================
    FORMULÁRIO
 ======================================== */
@@ -191,11 +175,9 @@
     justify-content: center;
 }
 
-
 .editar-form-topo {
     margin-bottom: 27px;
 }
-
 
 .editar-form-topo > span {
     display: block;
@@ -212,18 +194,16 @@
     letter-spacing: 0.08em;
 }
 
-
 .editar-form-topo h2 {
     margin: 0;
 
     color: #713b20;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
     font-size: 1.8rem;
     font-weight: 400;
 }
-
 
 /* ========================================
    CAMPOS
@@ -241,7 +221,6 @@
     border-bottom: 1px solid #e4c4b2;
 }
 
-
 .editar-campo {
     display: flex;
     flex-direction: column;
@@ -249,11 +228,9 @@
     gap: 8px;
 }
 
-
 .editar-campo.campo-grande {
     grid-column: 1 / -1;
 }
-
 
 .editar-campo label {
     color: #825039;
@@ -261,7 +238,6 @@
     font-size: 0.85rem;
     font-weight: 600;
 }
-
 
 .editar-campo input {
     width: 100%;
@@ -286,14 +262,11 @@
         box-shadow 0.2s ease;
 }
 
-
 .editar-campo input:focus {
     border-color: #8c5336;
 
-    box-shadow:
-        0 0 0 3px rgba(185, 104, 63, 0.1);
+    box-shadow: 0 0 0 3px rgba(185, 104, 63, 0.1);
 }
-
 
 /* ========================================
    AÇÕES
@@ -307,7 +280,6 @@
 
     margin-top: 25px;
 }
-
 
 .btn-cancelar-edicao,
 .btn-salvar-edicao {
@@ -331,7 +303,6 @@
     cursor: pointer;
 }
 
-
 .btn-cancelar-edicao {
     border: 1px solid #bd8065;
 
@@ -340,11 +311,9 @@
     color: #925038;
 }
 
-
 .btn-cancelar-edicao:hover {
     background: #fff5ef;
 }
-
 
 .btn-salvar-edicao {
     border: 1px solid #794329;
@@ -354,18 +323,15 @@
     color: #ffffff;
 }
 
-
 .btn-salvar-edicao:hover {
     background: #633821;
 }
-
 
 .btn-salvar-edicao:disabled {
     opacity: 0.65;
 
     cursor: not-allowed;
 }
-
 
 /* ========================================
    ESTADOS
@@ -381,7 +347,6 @@
     color: #8c5c43;
 }
 
-
 .editar-erro {
     padding: 14px 18px;
 
@@ -394,19 +359,16 @@
     color: #a23d34;
 }
 
-
 /* ========================================
    RESPONSIVIDADE
 ======================================== */
 
 @media (max-width: 900px) {
-
     .editar-card {
         grid-template-columns: 1fr;
 
         padding: 35px;
     }
-
 
     .editar-capa-area {
         padding-right: 0;
@@ -417,23 +379,18 @@
     }
 }
 
-
 @media (max-width: 600px) {
-
     .editar-campos {
         grid-template-columns: 1fr;
     }
-
 
     .editar-campo.campo-grande {
         grid-column: auto;
     }
 
-
     .editar-acoes {
         flex-direction: column;
     }
-
 
     .btn-cancelar-edicao,
     .btn-salvar-edicao {
