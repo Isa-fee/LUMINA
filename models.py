@@ -1,5 +1,5 @@
 from typing import Optional
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Column, Text
 from datetime import date
 
 
@@ -36,8 +36,10 @@ class LivroBase(SQLModel):
     ano_publicacao: Optional[int] = None
     edicao: Optional[str] = None
     numero_paginas: Optional[int] = None
-    descricao: Optional[str] = None
-
+    descricao: Optional[str] = Field(
+        default=None,
+        sa_column=Column(Text)
+    )
 
 class Livro(LivroBase, table=True):
     id: Optional[int] = Field(

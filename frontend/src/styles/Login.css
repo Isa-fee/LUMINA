@@ -186,6 +186,29 @@
 }
 
 /* ========================================
+   ESQUECEU A SENHA
+======================================== */
+
+.login-esqueceu {
+    text-align: right;
+
+    font-size: 0.82rem;
+}
+
+.login-esqueceu a {
+    color: #6d412a;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.login-esqueceu a:hover {
+    text-decoration: underline;
+}
+
+
+/* ========================================
    CADASTRO
 ======================================== */
 
@@ -210,7 +233,6 @@
 .login-cadastro a:hover {
     text-decoration: underline;
 }
-
 /* ========================================
    RESPONSIVIDADE
 ======================================== */
