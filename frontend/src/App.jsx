@@ -5,16 +5,14 @@ import Cadastro from './pages/Cadastro';
 import RecuperarSenha from './pages/Recuperarsenha';
 import Home from './pages/Home';
 import Livros from './pages/Livros';
-import CadastroLivro from './pages/CadastroLivro';
+import LivroForm from './pages/LivroForm';
 import DetalhesLivro from './pages/DetalhesLivro';
-import EditarLivro from './pages/EditarLivro';
 import Emprestimos from './pages/Emprestimos';
 import NovoEmprestimo from './pages/NovoEmprestimo';
 import EditarEmprestimo from './pages/EditarEmprestimo';
 import Leitores from './pages/Leitores';
-import CadastroLeitor from './pages/CadastroLeitor';
+import LeitorForm from './pages/LeitorForm';
 import DetalhesLeitor from './pages/DetalhesLeitor';
-import EditarLeitor from './pages/EditarLeitor';
 
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -42,14 +40,11 @@ function App() {
 
                     <Route path="/livros" element={<Livros />} />
 
-                    <Route path="/livros/novo" element={<CadastroLivro />} />
+                    <Route path="/livros/novo" element={<LivroForm />} />
 
                     <Route path="/livros/:id" element={<DetalhesLivro />} />
 
-                    <Route
-                        path="/livros/:id/editar"
-                        element={<EditarLivro />}
-                    />
+                    <Route path="/livros/:id/editar" element={<LivroForm />} />
 
                     <Route path="/emprestimos" element={<Emprestimos />} />
                     <Route
@@ -62,14 +57,11 @@ function App() {
                     />
                     <Route path="/leitores" element={<Leitores />} />
 
-                    <Route path="/leitores/novo" element={<CadastroLeitor />} />
+                    <Route path="/leitores/novo" element={<LeitorForm />} />
 
                     <Route path="/leitores/:id" element={<DetalhesLeitor />} />
 
-                    <Route
-                        path="/leitores/:id/editar"
-                        element={<EditarLeitor />}
-                    />
+                    <Route path="/leitores/:id/editar" element={<LeitorForm />} />
                 </Route>
             </Routes>
         </BrowserRouter>

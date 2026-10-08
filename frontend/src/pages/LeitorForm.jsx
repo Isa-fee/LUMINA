@@ -2,16 +2,22 @@ import { useEffect, useState } from 'react';
 
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { buscarLeitor, editarLeitor } from '../services/leitorService';
+import {
+    cadastrarLeitor,
+    buscarLeitor,
+    editarLeitor,
+} from '../services/leitorService';
 
 import { API_URL } from '../services/api';
 
 import '../styles/CadastroLeitor.css';
 
-function EditarLeitor() {
+function LeitorForm() {
     const { id } = useParams();
 
     const navigate = useNavigate();
+
+    const modoEdicao = Boolean(id);
 
     const [formulario, setFormulario] = useState({
         nome: '',
@@ -25,17 +31,17 @@ function EditarLeitor() {
 
     const [previewFoto, setPreviewFoto] = useState(null);
 
-    const [carregando, setCarregando] = useState(true);
+    const [carregando, setCarregando] = useState(modoEdicao);
 
     const [salvando, setSalvando] = useState(false);
 
     const [erro, setErro] = useState('');
 
-    // ========================================
-    // CARREGAR LEITOR
-    // ========================================
-
     useEffect(() => {
+        if (!modoEdicao) {
+            return;
+        }
+
         async function carregarLeitor() {
             try {
                 setErro('');
@@ -59,50 +65,7 @@ function EditarLeitor() {
         }
 
         carregarLeitor();
-    }, [id]);
-
-    // ========================================
-    // ALTERAR CAMPOS
-    // ========================================
-
-    function alterarCampo(event) {
-        const { name, value } = event.target;
-
-        setFormulario((anterior) => ({
-            ...anterior,
-
-            [name]: value,
-        }));
-    }
-
-    // ========================================
-    // ALTERAR FOTO
-    // ========================================
-
-    function alterarFoto(event) {
-        const arquivo = event.target.files[0];
-
-        if (!arquivo) {
-            return;
-        }
-
-        setFormulario((anterior) => ({
-            ...anterior,
-            foto: arquivo,
-        }));
-
-        if (previewFoto) {
-            URL.revokeObjectURL(previewFoto);
-        }
-
-        const preview = URL.createObjectURL(arquivo);
-
-        setPreviewFoto(preview);
-    }
-
-    // ========================================
-    // LIMPAR PREVIEW
-    // ========================================
+    }, [id, modoEdicao]);
 
     useEffect(() => {
         return () => {
@@ -112,9 +75,33 @@ function EditarLeitor() {
         };
     }, [previewFoto]);
 
-    // ========================================
-    // ENVIAR FORMULÁRIO
-    // ========================================
+    function alterarCampo(event) {
+        const { name, value } = event.target;
+
+        setFormulario((anterior) => ({
+            ...anterior,
+            [name]: value,
+        }));
+    }
+
+    function alterarFoto(event) {
+        const arquivo = event.target.files[0];
+
+        if (!arquivo) {
+            return;
+        }
+
+        if (previewFoto) {
+            URL.revokeObjectURL(previewFoto);
+        }
+
+        setFormulario((anterior) => ({
+            ...anterior,
+            foto: arquivo,
+        }));
+
+        setPreviewFoto(URL.createObjectURL(arquivo));
+    }
 
     async function enviarFormulario(event) {
         event.preventDefault();
@@ -123,9 +110,15 @@ function EditarLeitor() {
         setSalvando(true);
 
         try {
-            await editarLeitor(id, formulario);
+            if (modoEdicao) {
+                await editarLeitor(id, formulario);
 
-            navigate(`/leitores/${id}`);
+                navigate(`/leitores/${id}`);
+            } else {
+                await cadastrarLeitor(formulario);
+
+                navigate('/leitores');
+            }
         } catch (erro) {
             setErro(erro.message);
         } finally {
@@ -133,64 +126,72 @@ function EditarLeitor() {
         }
     }
 
-    // ========================================
-    // CARREGANDO
-    // ========================================
-
     if (carregando) {
         return (
             <main className="cadastro-leitor-page">
-                <div className="leitores-estado">Carregando leitor...</div>
+                <div className="leitores-estado">
+                    Carregando leitor...
+                </div>
             </main>
         );
     }
 
-    // ========================================
-    // PÁGINA
-    // ========================================
-
     return (
         <main className="cadastro-leitor-page">
-            {/* ========================================
-                CABEÇALHO
-            ======================================== */}
 
             <section className="cadastro-leitor-cabecalho">
+
                 <span>Leitores</span>
 
-                <h1>Editar leitor</h1>
+                <h1>
+                    {modoEdicao
+                        ? 'Editar leitor'
+                        : 'Cadastrar leitor'}
+                </h1>
 
-                <p>Atualize as informações do leitor.</p>
+                <p>
+                    {modoEdicao
+                        ? 'Atualize as informações do leitor.'
+                        : 'Adicione um novo leitor à biblioteca.'}
+                </p>
+
             </section>
 
-            {/* ========================================
-                VOLTAR
-            ======================================== */}
-
-            <Link to={`/leitores/${id}`} className="cadastro-leitor-voltar">
+            <Link
+                to={
+                    modoEdicao
+                        ? `/leitores/${id}`
+                        : '/leitores'
+                }
+                className="cadastro-leitor-voltar"
+            >
                 <span>←</span>
-                Voltar para detalhes
+
+                {modoEdicao
+                    ? 'Voltar para detalhes'
+                    : 'Voltar para leitores'}
             </Link>
 
-            {/* ========================================
-                ERRO
-            ======================================== */}
-
-            {erro && <div className="cadastro-leitor-erro">{erro}</div>}
-
-            {/* ========================================
-                CARD
-            ======================================== */}
+            {erro && (
+                <div className="cadastro-leitor-erro">
+                    {erro}
+                </div>
+            )}
 
             <section className="cadastro-leitor-card">
-                {/* ====================================
-                    FOTO
-                ==================================== */}
 
                 <div className="cadastro-leitor-ilustracao">
-                    <label htmlFor="foto" className="cadastro-leitor-foto">
+
+                    <label
+                        htmlFor="foto"
+                        className="cadastro-leitor-foto"
+                    >
+
                         {previewFoto ? (
-                            <img src={previewFoto} alt="Prévia da nova foto" />
+                            <img
+                                src={previewFoto}
+                                alt="Prévia da foto do leitor"
+                            />
                         ) : fotoAtual ? (
                             <img
                                 src={`${API_URL}/static/${fotoAtual}`}
@@ -198,13 +199,18 @@ function EditarLeitor() {
                             />
                         ) : (
                             <div className="cadastro-leitor-sem-foto">
-                                <span>{obterInicial(formulario.nome)}</span>
+                                <span>
+                                    {obterInicial(formulario.nome)}
+                                </span>
                             </div>
                         )}
 
                         <span className="cadastro-leitor-foto-acao">
-                            Alterar foto
+                            {modoEdicao
+                                ? 'Alterar foto'
+                                : 'Escolher foto'}
                         </span>
+
                     </label>
 
                     <input
@@ -215,43 +221,46 @@ function EditarLeitor() {
                         className="cadastro-leitor-input-foto"
                     />
 
-                    <h2>{formulario.nome}</h2>
+                    <h2>
+                        {modoEdicao
+                            ? formulario.nome
+                            : 'Novo leitor'}
+                    </h2>
 
                     <p>
-                        Atualize os dados pessoais do leitor sempre que
-                        necessário.
+                        {modoEdicao
+                            ? 'Atualize os dados pessoais do leitor sempre que necessário.'
+                            : 'Cadastre as informações básicas do leitor para que ele possa realizar empréstimos na biblioteca.'}
                     </p>
-                </div>
 
-                {/* ====================================
-                    FORMULÁRIO
-                ==================================== */}
+                </div>
 
                 <form
                     className="cadastro-leitor-formulario"
                     onSubmit={enviarFormulario}
                 >
-                    {/* TOPO */}
 
                     <div className="cadastro-leitor-form-topo">
+
                         <span>Informações pessoais</span>
 
                         <h2>Dados do leitor</h2>
 
                         <p>
-                            Altere os campos desejados e salve as modificações.
+                            {modoEdicao
+                                ? 'Altere os campos desejados e salve as modificações.'
+                                : 'Preencha os campos abaixo para realizar o cadastro.'}
                         </p>
+
                     </div>
 
-                    {/* =================================
-                        CAMPOS
-                    ================================= */}
-
                     <div className="cadastro-leitor-campos">
-                        {/* NOME */}
 
                         <div className="cadastro-leitor-campo">
-                            <label htmlFor="nome">Nome completo</label>
+
+                            <label htmlFor="nome">
+                                Nome completo
+                            </label>
 
                             <input
                                 id="nome"
@@ -262,12 +271,14 @@ function EditarLeitor() {
                                 onChange={alterarCampo}
                                 required
                             />
+
                         </div>
 
-                        {/* EMAIL */}
-
                         <div className="cadastro-leitor-campo">
-                            <label htmlFor="email">E-mail</label>
+
+                            <label htmlFor="email">
+                                E-mail
+                            </label>
 
                             <input
                                 id="email"
@@ -278,13 +289,16 @@ function EditarLeitor() {
                                 onChange={alterarCampo}
                                 required
                             />
+
                         </div>
 
-                        {/* TELEFONE + ENDEREÇO */}
-
                         <div className="cadastro-leitor-campo-linha">
+
                             <div className="cadastro-leitor-campo">
-                                <label htmlFor="telefone">Telefone</label>
+
+                                <label htmlFor="telefone">
+                                    Telefone
+                                </label>
 
                                 <input
                                     id="telefone"
@@ -294,10 +308,14 @@ function EditarLeitor() {
                                     value={formulario.telefone}
                                     onChange={alterarCampo}
                                 />
+
                             </div>
 
                             <div className="cadastro-leitor-campo">
-                                <label htmlFor="endereco">Endereço</label>
+
+                                <label htmlFor="endereco">
+                                    Endereço
+                                </label>
 
                                 <input
                                     id="endereco"
@@ -307,17 +325,21 @@ function EditarLeitor() {
                                     value={formulario.endereco}
                                     onChange={alterarCampo}
                                 />
+
                             </div>
+
                         </div>
+
                     </div>
 
-                    {/* =================================
-                        AÇÕES
-                    ================================= */}
-
                     <div className="cadastro-leitor-acoes">
+
                         <Link
-                            to={`/leitores/${id}`}
+                            to={
+                                modoEdicao
+                                    ? `/leitores/${id}`
+                                    : '/leitores'
+                            }
                             className="btn-cancelar-leitor"
                         >
                             Cancelar
@@ -328,18 +350,22 @@ function EditarLeitor() {
                             className="btn-cadastrar-leitor"
                             disabled={salvando}
                         >
-                            {salvando ? 'Salvando...' : 'Salvar alterações'}
+                            {salvando
+                                ? 'Salvando...'
+                                : modoEdicao
+                                    ? 'Salvar alterações'
+                                    : 'Cadastrar leitor'}
                         </button>
+
                     </div>
+
                 </form>
+
             </section>
+
         </main>
     );
 }
-
-// ========================================
-// INICIAL DO LEITOR
-// ========================================
 
 function obterInicial(nome) {
     if (!nome) {
@@ -349,4 +375,4 @@ function obterInicial(nome) {
     return nome.trim().charAt(0).toUpperCase();
 }
 
-export default EditarLeitor;
+export default LeitorForm;
