@@ -329,6 +329,42 @@
     cursor: not-allowed;
 }
 
+
+/* DESCRIÇÃO DO LIVRO */
+
+.campo-livro textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px 14px;
+
+    border: 1px solid #c28d71;
+    border-radius: 9px;
+
+    outline: none;
+    background: #fffdfc;
+    color: #6d412a;
+
+    font-family: inherit;
+    font-size: 0.92rem;
+    line-height: 1.5;
+
+    resize: vertical;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.campo-livro textarea:focus {
+    border-color: #8c5336;
+    box-shadow: 0 0 0 3px rgba(185, 104, 63, 0.1);
+}
+
+.campo-livro textarea::placeholder {
+    color: #a88b7b;
+}
+
+
 /* RESPONSIVO */
 
 @media (max-width: 800px) {

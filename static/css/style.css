@@ -1,576 +1,421 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-body{
-    background:#efe5d1;
+body {
+    background: #efe5d1;
 }
 
-.erro{
-    background:#ffd6d6;
-    color:#b30000;
-    padding:10px;
-    margin-bottom:20px;
-    border-radius:8px;
+.erro {
+    background: #ffd6d6;
+    color: #b30000;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
 }
 
 /* HEADER */
 
-header{
-    background:#b0653f;
-    padding:18px 40px;
+header {
+    background: #b0653f;
+    padding: 18px 40px;
 }
 
-nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.logo{
-    width:60px;
+.logo {
+    width: 60px;
 }
 
-nav a{
-    color:white;
-    text-decoration:none;
-    font-size:22px;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
 }
 
-nav input{
-
-    width:220px;
-    height:35px;
-
-    border:none;
-    border-radius:20px;
-
-    background:#efe5d1;
-
-    padding:10px;
+nav input {
+    width: 220px;
+    height: 35px;
+    border: none;
+    border-radius: 20px;
+    background: #efe5d1;
+    padding: 10px;
 }
 
 /* MAIN */
 
-main{
-
-    width:95%;
-    margin:auto;
-
-    padding:40px 0;
-
-    color:#6d412a;
+main {
+    width: 95%;
+    margin: auto;
+    padding: 40px 0;
+    color: #6d412a;
 }
 
-main h1{
-
-    font-size:42px;
-    font-weight:normal;
+main h1 {
+    font-size: 42px;
+    font-weight: normal;
 }
 
-hr{
-
-    margin:30px 0;
-
-    border:1px solid #9d6b4d;
+hr {
+    margin: 30px 0;
+    border: 1px solid #9d6b4d;
 }
 
 /* CARDS */
 
-.cards{
-
-    display:flex;
-    justify-content:space-evenly;
-
-    text-align:center;
+.cards {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
 }
 
-.card img{
-
-    width:110px;
-    margin-bottom:15px;
+.card img {
+    width: 110px;
+    margin-bottom: 15px;
 }
 
-.card p{
-
-    font-size:22px;
+.card p {
+    font-size: 22px;
 }
 
 /* BOTÕES */
 
-.botoes{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:100px;
-
-    margin-top:60px;
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 60px;
 }
 
-.botoes button{
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    padding:18px 35px;
-
-    border-radius:8px;
-
-    font-size:18px;
-
-    cursor:pointer;
+.botoes button {
+    background: #7b472d;
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
 }
 
-.botoes button:hover{
-
-    background:#643822;
+.botoes button:hover {
+    background: #643822;
 }
 
 /* FOOTER */
 
-footer{
+footer {
     position: fixed;
-
     bottom: 0;
     left: 0;
     width: 100%;
-
-    background:#b0653f;
-
-    color:white;
-
-    text-align:center;
-
-    padding:30px;
-
-    margin-top:80px;
+    background: #b0653f;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 80px;
 }
 
 /* ===========================
    CADASTRO DE LIVRO
 =========================== */
 
-.livro-main{
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    min-height:72vh;
+.livro-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 72vh;
 }
 
-.livro-card{
-
+.livro-card {
     width: 330px;
-
-    background:#b0653f;
-
-    border-radius:22px;
-
-    padding:28px 26px;
-
-    box-shadow:0 4px 10px rgba(0,0,0,.25);
-
-    color:#fff;
+    background: #b0653f;
+    border-radius: 22px;
+    padding: 28px 26px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .25);
+    color: #fff;
 }
 
-.livro-card h2{
-
-    font-size:18px;
-
-    font-weight:normal;
-
-    text-align:center;
-
-    margin-bottom:25px;
+.livro-card h2 {
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-.livro-card form{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:16px;
+.livro-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.campo{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:20px;
+.campo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.campo label{
-
-    width:90px;
-
-    font-size:15px;
-
-    color:#f6e7d3;
+.campo label {
+    width: 90px;
+    font-size: 15px;
+    color: #f6e7d3;
 }
 
-.campo input{
+.campo input {
+    width: 180px;
+    height: 28px;
+    background: #a45d38;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 8px;
+}
 
+.campo input:focus {
+    outline: none;
+}
+
+
+.campo textarea {
     width:180px;
-
-    height:28px;
-
+    height:80px;
     background:#a45d38;
-
     border:none;
-
     border-radius:8px;
-
     color:white;
-
-    padding:8px;
+    padding:6px 8px;
+    font-family:sans-serif;
+    font-size:14px;
+    resize:vertical;
 }
 
-.campo input:focus{
-
+.campo textarea:focus {
     outline:none;
 }
 
-.upload{
 
-    margin-top:12px;
-
-    border:1px solid rgba(255,255,255,.25);
-
-    border-radius:10px;
-
-    padding:18px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    color:#f5e6d2;
+.upload {
+    margin-top: 12px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #f5e6d2;
 }
 
-.botoes-livro{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:10px;
+.botoes-livro {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-.botoes-livro button{
-
-    width:118px;
-
-    height:30px;
-
-    background:#7b472d;
-
-    border:none;
-
-    border-radius:8px;
-
-    color:white;
-
-    font-size:14px;
-
-    cursor:pointer;
+.botoes-livro button {
+    width: 118px;
+    height: 30px;
+    background: #7b472d;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-.botoes-livro button:hover{
-
-    background:#633821;
+.botoes-livro button:hover {
+    background: #633821;
 }
-
 
 /* ===========================
    PÁGINA LIVROS
 =========================== */
 
-.topo-livros{
-
-    width:80%;
-    margin:20px auto 40px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.topo-livros {
+    width: 80%;
+    margin: 20px auto 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.pesquisa{
-
-    display:flex;
-    align-items:center;
+.pesquisa {
+    display: flex;
+    align-items: center;
 }
 
-.pesquisa input{
-
-    width:430px;
-    padding:12px 18px;
-
-    border:1px solid #a26b4d;
-    border-radius:25px 0 0 25px;
-
-    background:#f5f2ec;
+.pesquisa input {
+    width: 430px;
+    padding: 12px 18px;
+    border: 1px solid #a26b4d;
+    border-radius: 25px 0 0 25px;
+    background: #f5f2ec;
 }
 
-.pesquisa button{
-
-    width:45px;
-    height:45px;
-
-    border:none;
-
-    background:#6d412a;
-
-    color:white;
-
-    border-radius:0 25px 25px 0;
-
-    cursor:pointer;
-
-    font-size:18px;
+.pesquisa button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: #6d412a;
+    color: white;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-.novo-livro{
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:25px;
-
-    padding:14px 40px;
-
-    cursor:pointer;
-
-    font-size:18px;
+.novo-livro {
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 14px 40px;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-.lista-livros{
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    gap:35px;
-
-    margin-bottom:120px;
+.lista-livros {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    margin-bottom: 120px;
 }
 
-.livro{
-
-    width:760px;
-
-    background:transparent;
-
-    border:1px solid #b38467;
-
-    border-radius:25px;
-
-    padding:25px;
-
-    display:flex;
-
-    gap:25px;
+.livro {
+    width: 760px;
+    background: transparent;
+    border: 1px solid #b38467;
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    gap: 25px;
 }
 
-.capa{
-
-    width:130px;
-
-    height:170px;
-
-    background:#b0653f;
-
-    color:white;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    font-size:32px;
+.capa {
+    width: 130px;
+    height: 170px;
+    background: #b0653f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
 }
 
-.dados{
-
-    display:flex;
-    flex-direction:column;
-
-    gap:12px;
-
-    color:#6d412a;
-
-    font-size:20px;
+.dados {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #6d412a;
+    font-size: 20px;
 }
 
-.acoes{
-
-    margin-top:12px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
+.acoes {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.acoes button{
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:8px;
-
-    padding:8px 24px;
-
-    cursor:pointer;
+.acoes button {
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 24px;
+    cursor: pointer;
 }
 
-.acoes button:hover{
-
-    background:#633821;
+.acoes button:hover {
+    background: #633821;
 }
 
 /* ===========================
    CADASTRO DE LEITOR
 =========================== */
 
-.leitor-main{
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    min-height:72vh;
+.leitor-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 72vh;
 }
 
-.leitor-card{
-
-    width:500px;
-
-    background:#b56a3f;
-
-    border-radius:22px;
-
-    padding:35px;
-
-    color:white;
-
-    box-shadow:0 5px 12px rgba(0,0,0,.25);
+.leitor-card {
+    width: 500px;
+    background: #b56a3f;
+    border-radius: 22px;
+    padding: 35px;
+    color: white;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, .25);
 }
 
-.leitor-card h2{
-
-    text-align:center;
-
-    font-size:34px;
-
-    font-weight:normal;
-
-    margin-bottom:35px;
+.leitor-card h2 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: normal;
+    margin-bottom: 35px;
 }
 
-.leitor-card form{
-
-    display:flex;
-    flex-direction:column;
-
-    gap:18px;
+.leitor-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-.leitor-card .campo{
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.leitor-card .campo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.leitor-card label{
-
-    width:120px;
-
-    text-align:right;
-
-    color:#f8e8d4;
-
-    font-size:22px;
+.leitor-card label {
+    width: 120px;
+    text-align: right;
+    color: #f8e8d4;
+    font-size: 22px;
 }
 
-.leitor-card input{
-
-    width:250px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#a45d38;
-
-    padding:10px;
-
-    color:white;
-
-    font-size:18px;
+.leitor-card input {
+    width: 250px;
+    border: none;
+    border-radius: 10px;
+    background: #a45d38;
+    padding: 10px;
+    color: white;
+    font-size: 18px;
 }
 
-.leitor-card input:focus{
-
-    outline:none;
+.leitor-card input:focus {
+    outline: none;
 }
 
-.botoes-leitor{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:20px;
+.botoes-leitor {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
-.botoes-leitor button{
-
-    width:180px;
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:10px;
-
-    padding:12px;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    box-shadow:0 0 10px rgba(255,255,255,.15);
+.botoes-leitor button {
+    width: 180px;
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, .15);
 }
 
-.botoes-leitor button:hover{
-
-    background:#633821;
+.botoes-leitor button:hover {
+    background: #633821;
 }
 
 
@@ -578,238 +423,154 @@ footer{
    LEITORES
 =========================== */
 
-.topo-leitores{
-
-    width:80%;
-
-    margin:20px auto 40px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
+.topo-leitores {
+    width: 80%;
+    margin: 20px auto 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.topo-leitores h1{
-
-    color:#6d412a;
-
-    font-weight:normal;
-
-    font-size:40px;
+.topo-leitores h1 {
+    color: #6d412a;
+    font-weight: normal;
+    font-size: 40px;
 }
 
-.novo-leitor{
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:25px;
-
-    padding:14px 40px;
-
-    cursor:pointer;
-
-    font-size:18px;
+.novo-leitor {
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 14px 40px;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-.novo-leitor:hover{
-
-    background:#633821;
+.novo-leitor:hover {
+    background: #633821;
 }
 
-.lista-leitores{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:25px;
-
-    margin-bottom:120px;
+.lista-leitores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 120px;
 }
 
-.leitor{
-
-    width:760px;
-
-    border:1px solid #b38467;
-
-    border-radius:22px;
-
-    padding:25px;
-
-    background:transparent;
+.leitor {
+    width: 760px;
+    border: 1px solid #b38467;
+    border-radius: 22px;
+    padding: 25px;
+    background: transparent;
 }
 
-.leitor .dados{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:14px;
-
-    color:#6d412a;
-
-    font-size:20px;
+.leitor .dados {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: #6d412a;
+    font-size: 20px;
 }
 
-.leitor .acoes{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-
-    margin-top:10px;
+.leitor .acoes {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
 }
 
-.leitor .acoes button{
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:8px;
-
-    padding:8px 22px;
-
-    cursor:pointer;
+.leitor .acoes button {
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 22px;
+    cursor: pointer;
 }
 
-.leitor .acoes button:hover{
-
-    background:#633821;
+.leitor .acoes button:hover {
+    background: #633821;
 }
-
 
 
 /* ===========================
    PÁGINA EMPRÉSTIMOS
 =========================== */
 
-.topo-emprestimos{
-
-    width:62%;
-
-    margin:15px auto 70px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
+.topo-emprestimos {
+    width: 62%;
+    margin: 15px auto 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.novo-emprestimo{
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:25px;
-
-    padding:12px 28px;
-
-    font-size:18px;
-
-    cursor:pointer;
-
-    box-shadow:0 0 0 2px #d5a17e inset;
+.novo-emprestimo {
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 28px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 0 0 2px #d5a17e inset;
 }
 
-.novo-emprestimo:hover{
-
-    background:#633821;
+.novo-emprestimo:hover {
+    background: #633821;
 }
 
 /* TABELA */
 
-.tabela-emprestimos{
-
-    display:flex;
-
-    justify-content:center;
-
-    margin-bottom:140px;
+.tabela-emprestimos {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 140px;
 }
 
-.tabela-emprestimos table{
-
-    width:85%;
-
-    border-collapse:collapse;
-
-    text-align:center;
-
-    color:#6d412a;
+.tabela-emprestimos table {
+    width: 85%;
+    border-collapse: collapse;
+    text-align: center;
+    color: #6d412a;
 }
 
-.tabela-emprestimos th{
-
-    background:#7b4a30;
-
-    color:#f8f0df;
-
-    padding:18px;
-
-    border:2px solid #b56a3f;
-
-    font-size:18px;
+.tabela-emprestimos th {
+    background: #7b4a30;
+    color: #f8f0df;
+    padding: 18px;
+    border: 2px solid #b56a3f;
+    font-size: 18px;
 }
 
-.tabela-emprestimos td{
-
-    border:2px solid #b56a3f;
-
-    padding:14px;
-
-    height:50px;
-
-    font-size:18px;
+.tabela-emprestimos td {
+    border: 2px solid #b56a3f;
+    padding: 14px;
+    height: 50px;
+    font-size: 18px;
 }
 
-.status{
-
-    color:red;
-
-    font-weight:bold;
+.status {
+    color: red;
+    font-weight: bold;
 }
 
-.tabela-emprestimos td button{
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:8px;
-
-    padding:7px 15px;
-
-    cursor:pointer;
-
-    margin:0 3px;
-
-    font-size:15px;
+.tabela-emprestimos td button {
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 15px;
+    cursor: pointer;
+    margin: 0 3px;
+    font-size: 15px;
 }
 
-.tabela-emprestimos td button:hover{
-
-    background:#633821;
+.tabela-emprestimos td button:hover {
+    background: #633821;
 }
 
 
@@ -817,121 +578,79 @@ footer{
       CADASTRO DE EMPRÉSTIMO
 ====================================*/
 
-.emprestimo-main{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    min-height:72vh;
+.emprestimo-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 72vh;
 }
 
-.emprestimo-card{
-
-    width:340px;
-
-    background:#b0653f;
-
-    border-radius:22px;
-
-    padding:30px;
-
-    color:white;
-
-    box-shadow:0 4px 10px rgba(0,0,0,.25);
+.emprestimo-card {
+    width: 340px;
+    background: #b0653f;
+    border-radius: 22px;
+    padding: 30px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .25);
 }
 
-.emprestimo-card h2{
-
-    text-align:center;
-
-    font-size:18px;
-
-    font-weight:normal;
-
-    margin-bottom:25px;
+.emprestimo-card h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 25px;
 }
 
-.emprestimo-card form{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:16px;
+.emprestimo-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.emprestimo-card .campo{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
+.emprestimo-card .campo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.emprestimo-card label{
-
-    width:90px;
-
-    color:#f6e7d3;
-
-    font-size:15px;
+.emprestimo-card label {
+    width: 90px;
+    color: #f6e7d3;
+    font-size: 15px;
 }
 
-.emprestimo-card input{
-
-    width:180px;
-
-    height:30px;
-
-    background:#a45d38;
-
-    border:none;
-
-    border-radius:8px;
-
-    color:white;
-
-    padding:8px;
+.emprestimo-card input {
+    width: 180px;
+    height: 30px;
+    background: #a45d38;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 8px;
 }
 
-.emprestimo-card input:focus{
-
-    outline:none;
+.emprestimo-card input:focus {
+    outline: none;
 }
 
-.botoes-emprestimo{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:10px;
+.botoes-emprestimo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-.botoes-emprestimo button{
-
-    width:120px;
-
-    height:30px;
-
-    background:#7b472d;
-
-    color:white;
-
-    border:none;
-
-    border-radius:8px;
-
-    cursor:pointer;
+.botoes-emprestimo button {
+    width: 120px;
+    height: 30px;
+    background: #7b472d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.botoes-emprestimo button:hover{
-
-    background:#633821;
+.botoes-emprestimo button:hover {
+    background: #633821;
 }
 
 
@@ -940,13 +659,13 @@ footer{
    DETALHES DO LEITOR
 =========================== */
 
-.lista-leitores h2{
+.lista-leitores h2 {
 
-    color:#6d412a;
+    color: #6d412a;
 
-    font-size:32px;
+    font-size: 32px;
 
-    font-weight:normal;
+    font-weight: normal;
 
-    margin:15px 0 10px;
+    margin: 15px 0 10px;
 }
